@@ -183,14 +183,14 @@ const Solutions: React.FC = () => {
                                 {
                                     title: "Custom Software Engineering",
                                     desc: "Bespoke digital foundations engineered with military precision. We build high-performance, resilient ecosystems tailored to unique enterprise architecture.",
-                                    image: "assets/Custom Software Engineering.png",
+                                    image: "/assets/Custom Software Engineering.png",
                                     points: ["Next-Gen Web & Mobile Platforms", "Mission-Critical Enterprise Systems", "High-Throughput API Orchestration"],
                                     reverse: false
                                 },
                                 {
                                     title: "Technology Strategy & Consulting",
                                     desc: "Navigate the complexity of digital evolution with elite technical advisory. We optimize your technology stack to maximize speed, security, and market impact.",
-                                    image: "assets/Technology Strategy & Consulting.png",
+                                    image: "/assets/Technology Strategy & Consulting.png",
                                     points: ["Global Digital Roadmap Planning", "Architectural Integrity Audits", "Scalability & Performance Strategy"],
                                     reverse: true
                                 }

@@ -42,7 +42,7 @@ const Home: React.FC = () => {
                     <div className="flex justify-between items-center h-20">
                         <div className="flex items-center">
                             <div className="flex-shrink-0 hover:opacity-80 transition-opacity">
-                                <img src="./assets/2.png" alt="Echoes Software Technologies" width="160" height="45" />
+                                <img src="/assets/2.png" alt="Echoes Software Technologies" width="160" height="45" />
                             </div>
                         </div>
                         <nav className="hidden md:flex items-center gap-12">
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
                     {/* Drawer */}
                     <div className="absolute top-0 right-0 w-3/4 h-full bg-white shadow-2xl animate-slide-in-right flex flex-col">
                         <div className="p-8 flex justify-between items-center border-b border-gray-200">
-                            <img src="./assets/2.png" alt="Echoes Logo" className="h-8 w-auto" />
+                            <img src="/assets/2.png" alt="Echoes Logo" className="h-8 w-auto" />
                             <button
                                 onClick={toggleMobileMenu}
                                 className="w-12 h-12 flex items-center justify-center rounded-2xl bg-gray-100 text-navy-900 hover:bg-gray-200 active:rotate-90 transition-all duration-300"
@@ -323,7 +323,7 @@ const Home: React.FC = () => {
 
                                         {/* IMAGE LAYER */}
                                         <img
-                                            src="assets/hero_img.png"
+                                            src="/assets/hero_img.png"
                                             alt="Enterprise software solutions"
                                             className="relative w-full max-w-md rounded-[3.2rem] object-cover"
                                             style={{
@@ -400,7 +400,7 @@ const Home: React.FC = () => {
                                 {
                                     title: "Scalable Cloud Architecture",
                                     desc: "Built on enterprise-grade cloud infrastructure that scales seamlessly from startup to Fortune 500, ensuring peak performance.",
-                                    image: "assets/cloud.png",
+                                    image: "/assets/cloud.png",
                                     features: ["Auto-scaling capabilities", "99.99% uptime guarantee", "Global CDN distribution"],
                                     accent: "blue",
                                     color: "brand-blue"
@@ -408,7 +408,7 @@ const Home: React.FC = () => {
                                 {
                                     title: "Advanced Security Framework",
                                     desc: "Military-grade encryption and protocol standards that protect your most sensitive data and ensure total regulatory compliance.",
-                                    image: "assets/framework.png",
+                                    image: "/assets/framework.png",
                                     features: ["End-to-end encryption", "SOC 2 Type II compliant", "Advanced Identity Mgmt"],
                                     accent: "green",
                                     color: "green"
@@ -416,7 +416,7 @@ const Home: React.FC = () => {
                                 {
                                     title: "Intelligent Analytics",
                                     desc: "AI-powered analytics and real-time insights that transform raw data into actionable business intelligence for strategic growth.",
-                                    image: "assets/intelligent.png",
+                                    image: "/assets/intelligent.png",
                                     features: ["Real-time dashboards", "Predictive modeling", "Deep-reporting engine"],
                                     accent: "purple",
                                     color: "purple"
@@ -486,7 +486,7 @@ const Home: React.FC = () => {
                             <div className="relative">
                                 <div className="absolute -inset-16 bg-gradient-to-br from-blue-100/40 to-purple-100/40 rounded-full blur-[120px] z-0"></div>
                                 <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-700">
-                                    <img src="assets\image.png" alt="Business impact" width="800" height="600" className="w-full object-cover" loading="lazy" />
+                                    <img src="/assets/image.png" alt="Business impact" width="800" height="600" className="w-full object-cover" loading="lazy" />
                                 </div>
                             </div>
                         </div>
@@ -499,7 +499,7 @@ const Home: React.FC = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                             {/* Company Info */}
                             <div className="space-y-6">
-                                <img src="assets/3.png" alt="Echoes Software Technologies" className="h-10" />
+                                <img src="/3.png" alt="Echoes Software Technologies" className="h-10" />
                                 <p className="text-navy-300 text-sm leading-relaxed">
                                     Precision-built enterprise software solutions driving digital transformation worldwide.
                                 </p>
