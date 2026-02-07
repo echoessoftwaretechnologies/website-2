@@ -84,21 +84,21 @@ const AccountManagement: React.FC = () => {
                     </div>
                 )}
 
-                <div className="flex justify-between items-center">
-                    <h2 className="text-3xl font-black tracking-tight">Account Management</h2>
-                    <div className="flex gap-3">
-                        <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight">Account Management</h2>
+                    <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+                        <button onClick={() => setShowAddModal(true)} className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
                             <Plus className="w-5 h-5" />
                             Add Transaction
                         </button>
-                        <button onClick={handleGenerateReport} className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
+                        <button onClick={handleGenerateReport} className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
                             <FileText className="w-5 h-5" />
                             Generate Report
                         </button>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {[
                         { label: 'Total Revenue', value: `₹${(totalRevenue / 100000).toFixed(1)}L`, icon: '💰', bgColor: 'bg-green-50', iconBg: 'bg-green-100', textColor: 'text-green-600' },
                         { label: 'Total Expenses', value: `₹${(totalExpenses / 100000).toFixed(1)}L`, icon: '💸', bgColor: 'bg-red-50', iconBg: 'bg-red-100', textColor: 'text-red-600' },
@@ -116,8 +116,8 @@ const AccountManagement: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8">
-                        <h3 className="text-2xl font-black mb-6">Revenue vs Expenses</h3>
+                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-black mb-6">Revenue vs Expenses</h3>
                         <div className="space-y-4">
                             <div>
                                 <div className="flex justify-between mb-2">
@@ -140,8 +140,8 @@ const AccountManagement: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8">
-                        <h3 className="text-2xl font-black mb-6">Financial Summary</h3>
+                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-black mb-6">Financial Summary</h3>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between p-4 bg-green-50 rounded-2xl">
                                 <div className="flex items-center gap-3">
@@ -172,11 +172,11 @@ const AccountManagement: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-8 border-b border-gray-200">
-                        <h3 className="text-2xl font-black">Recent Transactions</h3>
+                    <div className="p-6 md:p-8 border-b border-gray-200">
+                        <h3 className="text-xl md:text-2xl font-black">Recent Transactions</h3>
                     </div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
+                    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200">
+                        <table className="w-full min-w-[600px]">
                             <thead className="bg-gray-50 border-b border-gray-200">
                                 <tr>
                                     <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Date</th>
@@ -211,14 +211,14 @@ const AccountManagement: React.FC = () => {
             </div>
 
             {showAddModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl">
-                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-6 text-white flex justify-between items-center">
-                            <h3 className="text-2xl font-black">Add New Transaction</h3>
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70] p-4 backdrop-blur-sm overflow-y-auto">
+                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl my-auto">
+                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-5 md:p-6 text-white flex justify-between items-center z-10">
+                            <h3 className="text-xl md:text-2xl font-black">Add New Transaction</h3>
                             <button onClick={() => { setShowAddModal(false); resetForm(); }} className="p-2 hover:bg-white/20 rounded-lg transition-colors"><X className="w-6 h-6" /></button>
                         </div>
-                        <form onSubmit={handleAdd} className="p-6 space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
+                        <form onSubmit={handleAdd} className="p-5 md:p-6 space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-bold text-gray-700 mb-2">Date</label>
                                     <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />

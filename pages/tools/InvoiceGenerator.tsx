@@ -422,7 +422,7 @@ const InvoiceGenerator: React.FC = () => {
                                     </h4>
                                     <p className="text-xs">{bankDetails}</p>
                                 </div>
-                                
+
                                 {/* QR IMAGE */}
                                 <div className="mt-4">
                                     <img

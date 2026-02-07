@@ -267,10 +267,20 @@ const MeetingArrangement: React.FC = () => {
 
                 {/* Upcoming Meetings */}
                 <div className="bg-white rounded-3xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-8 border-b border-gray-200">
-                        <h3 className="text-2xl font-black">Upcoming Meetings</h3>
+                    <div className="p-6 md:p-8 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 className="text-xl md:text-2xl font-black">Upcoming Meetings</h3>
+                            <p className="text-[10px] md:text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Operational Node Scheduling</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <div className="flex bg-gray-50 dark:bg-white/5 border border-navy-100 dark:border-white/5 rounded-2xl p-1">
+                                <button type="button" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))} className="p-2 hover:bg-gray-200 rounded-xl transition-all"><ChevronLeft className="w-5 h-5 text-navy-600 dark:text-navy-400" /></button>
+                                <div className="px-4 py-2 text-xs font-black text-navy-950 dark:text-white uppercase tracking-widest flex items-center">{monthName}</div>
+                                <button type="button" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))} className="p-2 hover:bg-gray-200 rounded-xl transition-all"><ChevronRight className="w-5 h-5 text-navy-600 dark:text-navy-400" /></button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="p-8">
+                    <div className="p-6 md:p-8">
                         {meetings.length === 0 ? (
                             <div className="text-center py-16">
                                 <div className="text-6xl mb-4">📅</div>

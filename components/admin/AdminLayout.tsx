@@ -78,7 +78,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title, subtitle }) 
                                     className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-300 group ${isActive ? 'bg-brand-blue-600/10 text-brand-blue-600 dark:text-brand-blue-400 border border-brand-blue-500/20 shadow-inner' : 'text-navy-600 dark:text-navy-300 hover:text-brand-blue-600 dark:hover:text-white hover:bg-brand-blue-50 dark:hover:bg-white/5 border border-transparent'}`}
                                 >
                                     <Icon className={`w-5 h-5 transition-transform duration-500 group-hover:scale-110 ${isActive ? 'text-brand-blue-600 dark:text-brand-blue-400' : 'text-navy-400 dark:text-navy-400'}`} />
-                                    <span className="font-bold text-sm tracking-wide uppercase">{item.label}</span>
+                                    <span className="font-bold text-sm tracking-wide uppercase text-left">{item.label}</span>
                                 </button>
                             );
                         })}
@@ -107,7 +107,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title, subtitle }) 
             {/* Main Wrapper */}
             <div className={`lg:pl-72 transition-all duration-500 ${isSidebarOpen ? 'blur-sm lg:blur-none' : ''}`}>
                 {/* Header */}
-                <header className="h-20 bg-white/80 dark:bg-navy-950/50 backdrop-blur-xl border-b border-navy-100 dark:border-white/5 sticky top-0 z-50 px-8 flex items-center justify-between">
+                <header className="h-20 bg-white/80 dark:bg-navy-950/50 backdrop-blur-xl border-b border-navy-100 dark:border-white/5 sticky top-0 z-50 px-4 md:px-8 flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden w-10 h-10 rounded-xl bg-navy-50 dark:bg-navy-900 flex items-center justify-center text-navy-900 dark:text-white border border-navy-200 dark:border-white/10">
                             <Menu className="w-5 h-5" />
@@ -134,7 +134,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title, subtitle }) 
                     </div>
                 </header>
 
-                <main className={`p-8 lg:p-12 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <main className={`p-6 md:p-8 lg:p-12 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                     <div className="max-w-[1400px] mx-auto space-y-12">
                         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                             <div className="text-left">

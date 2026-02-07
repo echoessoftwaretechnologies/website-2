@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 import { Globe, Layout, Cloud, TrendingUp, HelpCircle, Palette, MousePointer, Cpu, Video, Code, ShoppingCart, Wrench, Briefcase, Share2, Monitor, Database, Shield, Zap, Headphones, Target, Check, Smartphone, Download, ArrowRight, Menu, X, Linkedin, MessageCircle, Instagram, ArrowRight as ArrowRightIcon } from 'lucide-react';
 
 declare global {
@@ -9,17 +10,8 @@ declare global {
 }
 
 const Services: React.FC = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState('All');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-    }, [isMobileMenuOpen]);
-
-    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     const handleGetStarted = () => {
         navigate('/login');
@@ -28,198 +20,135 @@ const Services: React.FC = () => {
     // Define service categories
     const serviceCategories = [
         'All',
-        'Development', 
-        'Design', 
-        'Business', 
-        'Infrastructure', 
+        'Development',
+        'Design',
+        'Business',
+        'Infrastructure',
         'Marketing'
     ];
 
     // Enhanced services data with categories
     const services = [
-        { 
-            title: "Website Development", 
-            description: "Custom, high-performance websites built with modern frameworks to engage and convert.", 
+        {
+            title: "Website Development",
+            description: "Custom, high-performance websites built with modern frameworks to engage and convert.",
             icon: "globe",
             category: "Development"
         },
-        { 
-            title: "Web Application", 
-            description: "Scalable and secure web apps designed to solve complex business logic with ease.", 
+        {
+            title: "Web Application",
+            description: "Scalable and secure web apps designed to solve complex business logic with ease.",
             icon: "layout",
             category: "Development"
         },
-        { 
-            title: "Cloud DevOps", 
-            description: "Seamless infrastructure management and continuous delivery for global scalability.", 
+        {
+            title: "Cloud DevOps",
+            description: "Seamless infrastructure management and continuous delivery for global scalability.",
             icon: "cloud",
             category: "Infrastructure"
         },
-        { 
-            title: "Digital Marketing", 
-            description: "Data-driven strategies to increase visibility and ROI across digital channels.", 
+        {
+            title: "Digital Marketing",
+            description: "Data-driven strategies to increase visibility and ROI across digital channels.",
             icon: "trending-up",
             category: "Marketing"
         },
-        { 
-            title: "Free IT Consulting", 
-            description: "Expert technology strategy consulting at zero cost to accelerate your roadmap.", 
+        {
+            title: "Free IT Consulting",
+            description: "Expert technology strategy consulting at zero cost to accelerate your roadmap.",
             icon: "help-circle",
             category: "Business"
         },
-        { 
-            title: "Graphics Designing", 
-            description: "Premium visual assets that capture brand essence and leave a lasting mark.", 
+        {
+            title: "Graphics Designing",
+            description: "Premium visual assets that capture brand essence and leave a lasting mark.",
             icon: "palette",
             category: "Design"
         },
-        { 
-            title: "UI/UX Design", 
-            description: "Intuitive, human-centric design solutions for seamless cross-device experiences.", 
+        {
+            title: "UI/UX Design",
+            description: "Intuitive, human-centric design solutions for seamless cross-device experiences.",
             icon: "mouse-pointer",
             category: "Design"
         },
-        { 
-            title: "AI Solutions", 
-            description: "Machine learning models to automate tasks and gain intelligence.", 
+        {
+            title: "AI Solutions",
+            description: "Machine learning models to automate tasks and gain intelligence.",
             icon: "cpu",
             category: "Development"
         },
-        { 
-            title: "Video Editing", 
-            description: "Professional post-production storytelling to elevate your brand's message.", 
+        {
+            title: "Video Editing",
+            description: "Professional post-production storytelling to elevate your brand's message.",
             icon: "video",
             category: "Design"
         },
-        { 
-            title: "Custom Software", 
-            description: "Bespoke software engineered from the ground up for unique business needs.", 
+        {
+            title: "Custom Software",
+            description: "Bespoke software engineered from the ground up for unique business needs.",
             icon: "code",
             category: "Development"
         },
-        { 
-            title: "E-Commerce Solutions", 
-            description: "Robust stores designed for high-conversion and secure premium shopping.", 
+        {
+            title: "E-Commerce Solutions",
+            description: "Robust stores designed for high-conversion and secure premium shopping.",
             icon: "shopping-cart",
             category: "Development"
         },
-        { 
-            title: "Maintenance & Support", 
-            description: "Round-the-clock elite support to keep your ecosystem secure and optimized.", 
+        {
+            title: "Maintenance & Support",
+            description: "Round-the-clock elite support to keep your ecosystem secure and optimized.",
             icon: "wrench",
             category: "Business"
         },
-        { 
-            title: "Brand Identity", 
-            description: "Comprehensive branding services to define your voice in a global market.", 
+        {
+            title: "Brand Identity",
+            description: "Comprehensive branding services to define your voice in a global market.",
             icon: "briefcase",
             category: "Business"
         },
-        { 
-            title: "Social Media Mktg", 
-            description: "Strategic management to scale your community and drive participation.", 
+        {
+            title: "Social Media Mktg",
+            description: "Strategic management to scale your community and drive participation.",
             icon: "share-2",
             category: "Marketing"
         },
-        { 
-            title: "Web Design", 
-            description: "Modern, aesthetically-led designs prioritizing clarity, speed, and status.", 
+        {
+            title: "Web Design",
+            description: "Modern, aesthetically-led designs prioritizing clarity, speed, and status.",
             icon: "monitor",
             category: "Design"
         },
-        { 
-            title: "ERP Solutions", 
-            description: "Integrated resource systems to unify processes and maximize efficiency.", 
+        {
+            title: "ERP Solutions",
+            description: "Integrated resource systems to unify processes and maximize efficiency.",
             icon: "database",
             category: "Business"
         },
-        { 
-            title: "Cybersecurity", 
-            description: "Military-grade measures and assessments to protect your critical data.", 
+        {
+            title: "Cybersecurity",
+            description: "Military-grade measures and assessments to protect your critical data.",
             icon: "shield",
             category: "Infrastructure"
         }
     ];
 
     // Filter services based on active category
-    const filteredServices = activeCategory === 'All' 
-        ? services 
+    const filteredServices = activeCategory === 'All'
+        ? services
         : services.filter(service => service.category === activeCategory);
 
     // Count services per category for display purposes
     const categoryCounts = serviceCategories.reduce((acc, category) => {
-        acc[category] = category === 'All' 
-            ? services.length 
+        acc[category] = category === 'All'
+            ? services.length
             : services.filter(s => s.category === category).length;
         return acc;
     }, {} as Record<string, number>);
 
     return (
         <div className="bg-white text-navy-900 scroll-smooth selection:bg-brand-blue-100 selection:text-brand-blue-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            <header className="fixed top-0 w-full z-[100] transition-all duration-500 bg-white/80 backdrop-blur-2xl border-b border-navy-100/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
-                        <div className="flex items-center">
-                            <div className="flex-shrink-0 hover:opacity-80 transition-opacity">
-                                <img src="/assets/2.png" alt="Echoes Software Technologies" width="160" height="45" />
-                            </div>
-                        </div>
-                        <nav className="hidden md:flex items-center gap-12">
-                            {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item) => (
-                                <Link
-                                    key={item}
-                                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    className={`text-sm font-semibold uppercase tracking-[0.2em] transition-all relative group nav-blip ${item === 'Services' ? 'text-brand-blue-600 active' : 'text-navy-900 hover:text-brand-blue-600'}`}
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="flex items-center gap-6">
-                            <button
-                                onClick={handleGetStarted}
-                                className="hidden md:flex premium-gradient text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest shadow-xl shadow-brand-blue-500/20 hover:scale-105 active:scale-95 transition-all"
-                            >
-                                Login
-                            </button>
-                            <button className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 dark:bg-navy-900 text-navy-900 dark:text-white active:scale-90 transition-transform" onClick={toggleMobileMenu}>
-                                <Menu className="w-7 h-7" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* Premium Mobile Menu Overlay */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-[200] md:hidden">
-                    <div className="absolute inset-0 bg-navy-950/40 backdrop-blur-sm animate-fade-in" onClick={toggleMobileMenu} />
-                    <div className="absolute top-0 right-0 w-3/4 h-full bg-white shadow-2xl animate-slide-in-right flex flex-col">
-                        <div className="p-8 flex justify-between items-center border-b border-navy-50">
-                            <img src="/assets/2.png" alt="Echoes Logo" className="h-8 w-auto" />
-                            <button onClick={toggleMobileMenu} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 text-navy-900 active:rotate-90 transition-transform duration-300">
-                                <X className="w-6 h-6" />
-                            </button>
-                        </div>
-                        <nav className="flex-1 px-8 py-12 flex flex-col gap-10">
-                            {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item, i) => (
-                                <Link
-                                    key={item}
-                                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    onClick={toggleMobileMenu}
-                                    className={`text-3xl font-black uppercase tracking-tighter transition-all ${item === 'Services' ? 'text-brand-blue-600 pl-4 border-l-4 border-brand-blue-600' : 'text-navy-950 hover:text-brand-blue-600'}`}
-                                    style={{ animationDelay: `${i * 100}ms` }}
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="p-8 border-t border-navy-50 space-y-8">
-                            <button onClick={handleGetStarted} className="w-full premium-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest">Login</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <Navbar currentPage="Services" />
 
             <main>
                 <section className="mesh-gradient relative overflow-hidden pt-24 pb-20 lg:pt-40 lg:pb-32">
@@ -263,8 +192,8 @@ const Services: React.FC = () => {
                                 <button
                                     key={category}
                                     onClick={() => setActiveCategory(category)}
-                                    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${activeCategory === category 
-                                        ? 'bg-brand-blue-600 text-white shadow-lg' 
+                                    className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all ${activeCategory === category
+                                        ? 'bg-brand-blue-600 text-white shadow-lg'
                                         : 'bg-navy-100 text-navy-700 hover:bg-brand-blue-100 hover:text-brand-blue-700'}`}
                                 >
                                     {category}
@@ -286,10 +215,10 @@ const Services: React.FC = () => {
                                     <div className="absolute top-3 right-3 md:top-4 md:right-4 px-3 py-1 bg-brand-blue-100 text-brand-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
                                         {service.category}
                                     </div>
-                                    
+
                                     {/* Animated gradient top border */}
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue-500 to-brand-blue-700 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                                    
+
                                     {/* Icon container */}
                                     <div className="w-14 h-14 md:w-16 md:h-16 bg-brand-blue-50/70 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-brand-blue-100 transition-all duration-500 shadow-sm mx-auto">
                                         {service.icon === 'globe' && <Globe className="w-7 h-7 md:w-8 md:h-8 text-brand-blue-600 group-hover:text-brand-blue-700 transition-colors duration-500" />}
@@ -310,7 +239,7 @@ const Services: React.FC = () => {
                                         {service.icon === 'database' && <Database className="w-7 h-7 md:w-8 md:h-8 text-brand-blue-600 group-hover:text-brand-blue-700 transition-colors duration-500" />}
                                         {service.icon === 'shield' && <Shield className="w-7 h-7 md:w-8 md:h-8 text-brand-blue-600 group-hover:text-brand-blue-700 transition-colors duration-500" />}
                                     </div>
-                                    
+
                                     {/* Content container */}
                                     <div className="flex-grow flex flex-col">
                                         <h3 className="text-lg md:text-xl font-black text-navy-950 mb-3 md:mb-4 uppercase tracking-tight text-center group-hover:text-brand-blue-600 transition-colors">
@@ -319,7 +248,7 @@ const Services: React.FC = () => {
                                         <p className="text-navy-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base font-light text-center flex-grow">
                                             {service.description}
                                         </p>
-                                        
+
                                         {/* Service tags/badges */}
                                         <div className="flex flex-wrap justify-center gap-2 mb-4 md:mb-6">
                                             <span className="px-3 py-1 bg-brand-blue-100 text-brand-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
@@ -330,7 +259,7 @@ const Services: React.FC = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                     {/* Action button */}
                                     <button
                                         onClick={() => navigate('/contact', { state: { subject: service.title } })}
@@ -486,7 +415,7 @@ const Services: React.FC = () => {
                                         <div className="bg-navy-900 rounded-[2.5rem] p-8 text-white space-y-6 aspect-[9/16] flex flex-col justify-center border border-white/10">
                                             <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-10"></div>
                                             <div className="space-y-2 text-center">
-                                                <img src="./assets/3.png" alt="Echoes Mobile" className="h-8 mx-auto" />
+                                                <img src="/assets/3.png" alt="Echoes Mobile" className="h-8 mx-auto" />
                                                 <div className="text-2xl font-black uppercase tracking-[0.2em] italic">Mobile</div>
                                             </div>
                                             <div className="flex-grow flex items-center justify-center">
@@ -509,97 +438,91 @@ const Services: React.FC = () => {
                 </section>
             </main>
 
-            <footer className="bg-navy-950 text-white relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-[6px] bg-gradient-to-r from-brand-blue-600 via-brand-blue-400 to-brand-blue-800"></div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-20">
-                        <div className="col-span-1 md:col-span-2 space-y-10">
-                            <div>
-                                <img src="/assets/3.png" alt="Echoes Software Technologies" className="h-12 mb-8" />
-                                <p className="text-navy-300 mb-10 max-w-md text-xl font-light leading-relaxed">
-                                    Precision-engineered software solutions for the global enterprise. Defining the future of digital ecosystems.
-                                </p>
-                            </div>
-                            <div className="flex space-x-6">
-                                {[
-                                    { icon: "linkedin", href: "https://www.linkedin.com/company/echoes-software-solutions/posts/?feedView=all" },
-                                    { icon: "message-circle", href: "https://wa.me/918148549511" },
-                                    { icon: "instagram", href: "https://www.instagram.com/echoes_software_technologies/" }
-                                ].map((social, i) => (
-                                    <a key={i} href={social.href} target="_blank" rel="noopener noreferrer"
-                                        className="w-14 h-14 rounded-2xl glass-dark flex items-center justify-center text-white hover:bg-brand-blue-600 transition-all duration-500 hover:-translate-y-2 border border-white/10 shadow-lg">
-                                        {social.icon === 'linkedin' && <Linkedin className="w-6 h-6" />}
-                                        {social.icon === 'message-circle' && <MessageCircle className="w-6 h-6" />}
-                                        {social.icon === 'instagram' && <Instagram className="w-6 h-6" />}
-                                    </a>
-                                ))}
+            {/* Comprehensive Footer */}
+            <footer className="bg-gradient-to-br from-navy-950 to-navy-900 text-white relative overflow-hidden py-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                        {/* Company Info */}
+                        <div className="space-y-6">
+                            <img src="/assets/3.png" alt="Echoes Software Technologies" className="h-10" />
+                            <p className="text-navy-300 text-sm leading-relaxed">
+                                Precision-built enterprise software solutions driving digital transformation worldwide.
+                            </p>
+                            <div className="flex gap-4">
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="linkedin" className="w-5 h-5"></i>
+                                </a>
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="instagram" className="w-5 h-5"></i>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="twitter" className="w-5 h-5"></i>
+                                </a>
                             </div>
                         </div>
+
+                        {/* Quick Links */}
                         <div>
-                            <h3 className="text-sm font-black mb-10 text-white uppercase tracking-[0.3em] border-l-4 border-brand-blue-500 pl-4">Solutions</h3>
-                            <ul className="space-y-6">
-                                {["Enterprise Software", "Cloud Solutions", "Custom Development", "Integration Services"].map((item, i) => (
-                                    <li key={i}>
-                                        <Link to="/solutions" className="text-navy-400 hover:text-white transition-all flex items-center group text-lg font-light">
-                                            <ArrowRightIcon className="w-5 h-5 mr-3 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Quick Links</h4>
+                            <ul className="space-y-3">
+                                {['Home', 'About', 'Services', 'Solutions', 'Contact'].map((item) => (
+                                    <li key={item}>
+                                        <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-navy-300 hover:text-white transition-colors text-sm">
                                             {item}
                                         </Link>
                                     </li>
                                 ))}
                             </ul>
                         </div>
+
+                        {/* Services */}
                         <div>
-                            <h3 className="text-sm font-black mb-10 text-white uppercase tracking-[0.3em] border-l-4 border-brand-blue-500 pl-4">Company</h3>
-                            <ul className="space-y-6">
-                                {["About Us", "Careers", "News", "Contact"].map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={item === "Contact" ? "/contact" : item === "About Us" ? "/about" : "#"}
-                                            className="text-navy-400 hover:text-white transition-all flex items-center group text-lg font-light">
-                                            <ArrowRightIcon className="w-5 h-5 mr-3 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Services</h4>
+                            <ul className="space-y-3">
+                                <li><span className="text-navy-300 text-sm">Custom Development</span></li>
+                                <li><span className="text-navy-300 text-sm">Cloud Solutions</span></li>
+                                <li><span className="text-navy-300 text-sm">AI Integration</span></li>
+                                <li><span className="text-navy-300 text-sm">Enterprise Support</span></li>
+                            </ul>
+                        </div>
+
+                        {/* Contact */}
+                        <div>
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Contact</h4>
+                            <ul className="space-y-4">
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="mail" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span>connect@echoess.in</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="phone" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span>+91 81485 49511</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="map-pin" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span> Karur, Tamilnadu,<br />India - 639001</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div className="border-t border-white/5 mt-32 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
-                        <p className="text-navy-500 text-sm font-bold uppercase tracking-widest">© 2026 Echoes Software Technologies. Precision Built.</p>
-                        <div className="flex space-x-12">
-                            {["Privacy Policy", "Terms of Service", "Security"].map((item, i) => (
-                                <Link key={i} to={item === "Security" ? "#" : `/${item.toLowerCase().replace(/ /g, '-')}`}
-                                    className="text-navy-500 hover:text-white transition-colors text-sm font-bold uppercase tracking-[0.2em]">
-                                    {item}
-                                </Link>
-                            ))}
+
+                    {/* Bottom Bar */}
+                    <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-navy-400 text-sm">
+                            © 2026 Echoes Software Technologies. All rights reserved.
+                        </p>
+                        <div className="flex gap-6 text-sm">
+                            <Link to="/privacy-policy" className="text-navy-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </Link>
+                            <Link to="/terms-of-service" className="text-navy-400 hover:text-white transition-colors">
+                                Terms of Service
+                            </Link>
                         </div>
                     </div>
                 </div>
             </footer>
 
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 z-50 bg-navy-950/95 backdrop-blur-xl animate-fade-in">
-                    <div className="flex justify-end p-6">
-                        <button onClick={toggleMobileMenu} className="text-white hover:text-brand-blue-400 transition-colors">
-                            <X className="w-8 h-8" />
-                        </button>
-                    </div>
-                    <nav className="flex flex-col items-center justify-center space-y-12 h-3/4">
-                        <Link to="/" className="text-xl font-semibold text-white hover:text-brand-blue-400 uppercase tracking-widest" onClick={toggleMobileMenu}>Home</Link>
-                        <Link to="/solutions" className="text-xl font-semibold text-white hover:text-brand-blue-400 uppercase tracking-widest" onClick={toggleMobileMenu}>Solutions</Link>
-                        <Link to="/services" className="text-xl font-semibold text-brand-blue-400 uppercase tracking-widest" onClick={toggleMobileMenu}>Services</Link>
-                        <Link to="/about" className="text-xl font-semibold text-white hover:text-brand-blue-400 uppercase tracking-widest" onClick={toggleMobileMenu}>About</Link>
-                        <Link to="/contact" className="text-xl font-semibold text-white hover:text-brand-blue-400 uppercase tracking-widest" onClick={toggleMobileMenu}>Contact</Link>
-                        <button
-                            onClick={handleGetStarted}
-                            className="premium-gradient text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-xl shadow-2xl"
-                        >
-                            Login
-                        </button>
-                    </nav>
-                </div>
-            )}
         </div>
     );
 };

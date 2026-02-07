@@ -154,8 +154,8 @@ const TieUpManagement: React.FC = () => {
     };
 
     const TieUpForm = ({ onSubmit, buttonText }: { onSubmit: (e: React.FormEvent) => void, buttonText: string }) => (
-        <form onSubmit={onSubmit} className="p-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={onSubmit} className="p-6 md:p-8 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">Company Name</label>
                     <input
@@ -265,11 +265,11 @@ const TieUpManagement: React.FC = () => {
                 )}
 
                 {/* Header with Add Button */}
-                <div className="flex justify-between items-center">
-                    <h2 className="text-3xl font-black tracking-tight">Tie-ups Management</h2>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight">Tie-ups Management</h2>
                     <button
                         onClick={() => setShowAddModal(true)}
-                        className="flex items-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95"
                     >
                         <Plus className="w-5 h-5" />
                         Add New Tie-up
@@ -296,19 +296,21 @@ const TieUpManagement: React.FC = () => {
 
                 {/* Tie-ups List Section */}
                 <div className="bg-white rounded-3xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-8 border-b border-gray-200">
-                        <h3 className="text-2xl font-black mb-6">Tie-ups List</h3>
-                        <div className="flex flex-col md:flex-row gap-4">
+                    <div className="p-6 md:p-8 border-b border-gray-200">
+                        <h3 className="text-xl md:text-2xl font-black mb-6">Tie-ups List</h3>
+                        <div className="flex flex-col lg:flex-row gap-4">
                             <div className="flex-1 relative">
                                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                                 <input type="text" placeholder="Search tie-ups..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent" />
                             </div>
-                            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-6 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold">
-                                <option>All Status</option><option>Active</option><option>Inactive</option>
-                            </select>
-                            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="px-6 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold">
-                                <option>All Types</option><option>Technology</option><option>Marketing</option>
-                            </select>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-6 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold cursor-pointer">
+                                    <option>All Status</option><option>Active</option><option>Inactive</option>
+                                </select>
+                                <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="px-6 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold cursor-pointer">
+                                    <option>All Types</option><option>Technology</option><option>Marketing</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

@@ -116,7 +116,7 @@ const AttendanceManagement: React.FC = () => {
 
                 {/* Main Content Area */}
                 <div className="bg-white dark:bg-white/[0.02] border border-navy-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden shadow-xl shadow-navy-200/20 dark:shadow-navy-950/50">
-                    <div className="p-8 border-b border-navy-100 dark:border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                    <div className="p-6 md:p-8 border-b border-navy-100 dark:border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
                         <div>
                             <h2 className="text-xl font-black uppercase tracking-widest text-navy-950 dark:text-white">Attendance Ledger</h2>
                             <p className="text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Real-time force presence tracking</p>
@@ -156,18 +156,18 @@ const AttendanceManagement: React.FC = () => {
                         <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-navy-50/50 dark:bg-white/[0.02]">
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Personnel</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Department</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Time-In</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Time-Out</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Status</th>
-                                    <th className="px-8 py-5 text-right text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Operations</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Personnel</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Department</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Time-In</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Time-Out</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Status</th>
+                                    <th className="px-4 md:px-8 py-5 text-right text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Operations</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-navy-100 dark:divide-white/5">
                                 {filteredRecords.map(record => (
                                     <tr key={record.id} className="group hover:bg-navy-50 dark:hover:bg-white/[0.02] transition-colors cursor-default">
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-12 h-12 rounded-2xl bg-navy-100 dark:bg-navy-800 border border-navy-200 dark:border-white/10 flex items-center justify-center font-black text-brand-blue-600 dark:text-brand-blue-400 group-hover:border-brand-blue-500/50 transition-all shadow-inner">
                                                     {record.initials}
@@ -178,27 +178,27 @@ const AttendanceManagement: React.FC = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="text-sm font-black text-navy-600 dark:text-navy-300 group-hover:text-brand-blue-600 dark:group-hover:text-white transition-colors uppercase tracking-tight">{record.department}</div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-2 text-xs font-black text-navy-900 dark:text-white font-black">
                                                 <ArrowRight className="w-3 h-3 text-emerald-600 dark:text-emerald-400 rotate-45" />
                                                 {record.checkIn}
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-2 text-xs font-black text-navy-900 dark:text-white font-black">
                                                 <ArrowRight className="w-3 h-3 text-red-600 dark:text-red-400 -rotate-45" />
                                                 {record.checkOut}
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <span className={`px-3 py-1 rounded-lg border text-[10px] font-black uppercase tracking-widest ${getStatusStyle(record.status)}`}>
                                                 {record.status}
                                             </span>
                                         </td>
-                                        <td className="px-8 py-6 text-right">
+                                        <td className="px-4 md:px-8 py-6 text-right">
                                             <div className="flex items-center justify-end gap-2">
                                                 <button onClick={() => handleViewDetail(record)} className="w-9 h-9 rounded-xl bg-white dark:bg-white/5 border border-navy-200 dark:border-white/5 flex items-center justify-center text-navy-500 dark:text-navy-400 hover:text-white hover:bg-brand-blue-600 transition-all shadow-sm">
                                                     <Eye className="w-4 h-4" />
@@ -226,8 +226,8 @@ const AttendanceManagement: React.FC = () => {
                         className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
                         onClick={() => setIsMarkModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden animate-slide-up">
-                        <div className="p-8 sm:p-10">
+                    <div className="bg-navy-900 border border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                        <div className="p-6 md:p-10">
                             <div className="flex justify-between items-center mb-10">
                                 <div>
                                     <h3 className="text-2xl font-black text-white">Presence Logging.</h3>
@@ -295,8 +295,8 @@ const AttendanceManagement: React.FC = () => {
                         className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
                         onClick={() => setIsDetailModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-slide-up">
-                        <div className="p-8 sm:p-10">
+                    <div className="bg-navy-900 border border-white/10 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                        <div className="p-6 md:p-10">
                             <div className="flex justify-between items-start mb-10">
                                 <div className="flex items-center gap-6">
                                     <div className="w-20 h-20 rounded-xl bg-navy-800 border border-white/10 text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">

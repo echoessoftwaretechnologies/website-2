@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
 declare global {
     interface Window {
@@ -8,90 +9,11 @@ declare global {
 }
 
 const PrivacyPolicy: React.FC = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-    }, [isMobileMenuOpen]);
-
-    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
-    const handleGetStarted = () => {
-        navigate('/login');
-    };
 
     return (
         <div className="bg-white text-navy-900 min-h-screen" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            {/* Premium Header */}
-            <header className="fixed top-0 w-full z-[100] transition-all duration-500 bg-white/80 backdrop-blur-2xl border-b border-navy-100/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
-                        <div className="flex items-center">
-                            <Link to="/" className="flex-shrink-0 hover:opacity-80 transition-opacity">
-                                <img src="/assets/2.png" alt="Echoes Software Technologies" width="160" height="45" />
-                            </Link>
-                        </div>
-                        <nav className="hidden md:flex items-center gap-12">
-                            {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item) => (
-                                <Link
-                                    key={item}
-                                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    className="text-sm font-semibold uppercase tracking-[0.2em] transition-all relative group nav-blip text-navy-900 hover:text-brand-blue-600"
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="flex items-center gap-6">
-                            <button
-                                onClick={handleGetStarted}
-                                className="hidden md:flex premium-gradient text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest shadow-xl shadow-brand-blue-500/20 hover:scale-105 active:scale-95 transition-all"
-                            >
-                                Login
-                            </button>
-                            <button className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 text-navy-900 active:scale-90 transition-transform" onClick={toggleMobileMenu}>
-                                <i data-lucide="menu" className="w-7 h-7"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* Premium Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-[200] md:hidden">
-                    <div className="absolute inset-0 bg-navy-950/40 dark:bg-navy-950/80 backdrop-blur-sm animate-fade-in" onClick={toggleMobileMenu} />
-                    <div className="absolute top-0 right-0 w-3/4 h-full bg-white dark:bg-navy-900 shadow-2xl animate-slide-in-right flex flex-col">
-                        <div className="p-8 flex justify-between items-center border-b border-navy-50 dark:border-white/5">
-                            <img src="/assets/2.png" alt="Echoes Logo" className="h-8 w-auto" />
-                            <button onClick={toggleMobileMenu} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 dark:bg-navy-900 text-navy-900 dark:text-white active:rotate-90 transition-transform duration-300">
-                                <i data-lucide="x" className="w-6 h-6"></i>
-                            </button>
-                        </div>
-                        <nav className="flex-1 px-8 py-12 flex flex-col gap-10">
-                            {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item, i) => (
-                                <Link
-                                    key={item}
-                                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    onClick={toggleMobileMenu}
-                                    className="text-xl font-semibold uppercase tracking-tighter transition-all text-navy-950 dark:text-white hover:text-brand-blue-600 dark:hover:text-brand-blue-400"
-                                    style={{ animationDelay: `${i * 100}ms` }}
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="p-8 border-t border-navy-50 dark:border-white/5">
-                            <button onClick={handleGetStarted} className="w-full premium-gradient text-white py-5 rounded-full font-black uppercase tracking-widest shadow-xl">
-                                Login
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <Navbar currentPage="Privacy Policy" />
 
             <main className="pt-20">
                 {/* Hero Section */}
@@ -199,9 +121,11 @@ const PrivacyPolicy: React.FC = () => {
             </main>
 
             {/* Premium Footer */}
-            <footer className="bg-navy-950 dark:bg-navy-950 text-white relative overflow-hidden py-20">
+            {/* Comprehensive Footer */}
+            <footer className="bg-gradient-to-br from-navy-950 to-navy-900 text-white relative overflow-hidden py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                        {/* Company Info */}
                         <div className="space-y-6">
                             <img src="/assets/3.png" alt="Echoes Software Technologies" className="h-10" />
                             <p className="text-navy-300 text-sm leading-relaxed">
@@ -220,6 +144,7 @@ const PrivacyPolicy: React.FC = () => {
                             </div>
                         </div>
 
+                        {/* Quick Links */}
                         <div>
                             <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Quick Links</h4>
                             <ul className="space-y-3">
@@ -233,6 +158,7 @@ const PrivacyPolicy: React.FC = () => {
                             </ul>
                         </div>
 
+                        {/* Services */}
                         <div>
                             <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Services</h4>
                             <ul className="space-y-3">
@@ -243,6 +169,7 @@ const PrivacyPolicy: React.FC = () => {
                             </ul>
                         </div>
 
+                        {/* Contact */}
                         <div>
                             <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Contact</h4>
                             <ul className="space-y-4">
@@ -256,18 +183,21 @@ const PrivacyPolicy: React.FC = () => {
                                 </li>
                                 <li className="flex items-start gap-3 text-navy-300 text-sm">
                                     <i data-lucide="map-pin" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-                                    <span>Global Headquarters<br />San Francisco, CA</span>
+                                    <span> Karur, Tamilnadu,<br />India - 639001</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
+                    {/* Bottom Bar */}
                     <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-navy-400 text-sm">
                             © 2026 Echoes Software Technologies. All rights reserved.
                         </p>
                         <div className="flex gap-6 text-sm">
-                            <span className="text-navy-400 cursor-default">Privacy Policy</span>
+                            <Link to="/privacy-policy" className="text-navy-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </Link>
                             <Link to="/terms-of-service" className="text-navy-400 hover:text-white transition-colors">
                                 Terms of Service
                             </Link>

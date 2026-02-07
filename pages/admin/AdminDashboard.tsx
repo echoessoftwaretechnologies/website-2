@@ -106,7 +106,7 @@ const AdminDashboard: React.FC = () => {
               <button className="text-[10px] font-black text-brand-blue-400 uppercase tracking-widest hover:text-white transition-colors">Expand Intelligence</button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { title: 'CRM Core', path: '/admin/crm-management', icon: Users, desc: 'Enterprise client relations and sales intelligence' },
                 { title: 'HR Hub', path: '/admin/employee-management', icon: Users, desc: 'Human capital and permission matrix' },

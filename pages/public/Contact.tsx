@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
 declare global {
     interface Window {
@@ -8,7 +9,6 @@ declare global {
 }
 
 const Contact: React.FC = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -26,7 +26,7 @@ const Contact: React.FC = () => {
         if (window.lucide) {
             window.lucide.createIcons();
         }
-    }, [isMobileMenuOpen]);
+    }, []); // Removed isMobileMenuOpen from dependency array as it's no longer needed
 
     useEffect(() => {
         const state = location.state as { subject?: string } | null;
@@ -37,7 +37,6 @@ const Contact: React.FC = () => {
         }
     }, [location.state]);
 
-    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
@@ -70,69 +69,7 @@ Email: ${email}`;
 
     return (
         <div className="bg-white min-h-screen selection:bg-brand-blue-100 selection:text-brand-blue-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
-            {/* Navigation */}
-            <header className="fixed top-0 w-full z-[100] transition-all duration-500 bg-white/80 backdrop-blur-2xl border-b border-navy-100/50">
-                <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-                    <Link to="/" className="hover:opacity-80 transition-opacity">
-                        <img src="/assets/2.png" alt="Echoes Logo" className="h-10 w-auto" />
-                    </Link>
-
-                    <nav className="hidden md:flex items-center gap-12">
-                        {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item) => (
-                            <Link
-                                key={item}
-                                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                className={`text-sm font-semibold uppercase tracking-[0.2em] transition-all relative group nav-blip ${item === 'Contact' ? 'text-brand-blue-600 active' : 'text-navy-900 hover:text-brand-blue-600'}`}
-                            >
-                                {item}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    <div className="flex items-center gap-6">
-                        <button
-                            onClick={handleGetStarted}
-                            className="hidden md:flex premium-gradient text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest shadow-xl shadow-brand-blue-500/20 hover:scale-105 active:scale-95 transition-all"
-                        >
-                            Login
-                        </button>
-                        <button onClick={toggleMobileMenu} className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 dark:bg-navy-900 text-navy-900 dark:text-white active:scale-90 transition-transform">
-                            <i data-lucide="menu" className="w-6 h-6"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            {/* Premium Mobile Menu Overlay */}
-            {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-[200] md:hidden">
-                    <div className="absolute inset-0 bg-navy-950/40 backdrop-blur-sm animate-fade-in" onClick={toggleMobileMenu} />
-                    <div className="absolute top-0 right-0 w-3/4 h-full bg-white shadow-2xl animate-slide-in-right flex flex-col">
-                        <div className="p-8 flex justify-between items-center border-b border-navy-50">
-                            <img src="/assets/2.png" alt="Echoes Logo" className="h-8 w-auto" />
-                            <button onClick={toggleMobileMenu} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-navy-50 text-navy-900 active:rotate-90 transition-transform duration-300">
-                                <i data-lucide="x" className="w-6 h-6"></i>
-                            </button>
-                        </div>
-                        <nav className="flex-1 px-8 py-12 flex flex-col gap-10">
-                            {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item, i) => (
-                                <Link
-                                    key={item}
-                                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    onClick={toggleMobileMenu}
-                                    className={`text-xl font-semibold uppercase tracking-tighter transition-all ${item === 'Contact' ? 'text-brand-blue-600 pl-4 border-l-4 border-brand-blue-600' : 'text-navy-950 hover:text-brand-blue-600'}`}
-                                    style={{ animationDelay: `${i * 100}ms` }}
-                                >
-                                    {item}
-                                </Link>
-                            ))}
-                        </nav>
-                        <div className="p-8 border-t border-navy-50 space-y-8">
-                            <button onClick={handleGetStarted} className="w-full premium-gradient text-white py-5 rounded-3xl font-black uppercase tracking-widest">Login</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <Navbar currentPage="Contact" />
 
             <main className="pt-24">
                 {/* Hero Section */}
@@ -196,7 +133,7 @@ Email: ${email}`;
                                             <h3 className="text-3xl font-black text-navy-950 mb-2">Send us a message</h3>
                                             <p className="text-navy-600">We'd love to hear from you. Please fill out this form to get in touch.</p>
                                         </div>
-                                        
+
                                         <form className="space-y-6" onSubmit={handleSubmit}>
                                             <div className="grid md:grid-cols-2 gap-6">
                                                 <div className="space-y-2">
@@ -218,7 +155,7 @@ Email: ${email}`;
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="grid md:grid-cols-2 gap-6">
                                                 <div className="space-y-2">
                                                     <label htmlFor="phone" className="block text-xs font-black uppercase text-navy-400 tracking-wider pl-2">Phone Number *</label>
@@ -239,7 +176,7 @@ Email: ${email}`;
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="space-y-2">
                                                 <label htmlFor="subject" className="block text-xs font-black uppercase text-navy-400 tracking-wider pl-2">Subject *</label>
                                                 <div className="relative">
@@ -249,7 +186,7 @@ Email: ${email}`;
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="space-y-2">
                                                 <label htmlFor="message" className="block text-xs font-black uppercase text-navy-400 tracking-wider pl-2">Message *</label>
                                                 <div className="relative">
@@ -259,7 +196,7 @@ Email: ${email}`;
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="pt-4">
                                                 <button type="submit" className="w-full premium-gradient text-white py-4 rounded-xl font-black uppercase tracking-widest shadow-lg shadow-brand-blue-500/20 hover:scale-[1.01] active:scale-100 transition-all duration-300 flex items-center justify-center gap-3">
                                                     <span>Send Message</span>
@@ -282,7 +219,7 @@ Email: ${email}`;
                         <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-brand-blue-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
                         <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-brand-blue-400/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
                     </div>
-                    
+
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
                         <div className="text-center mb-24 space-y-8">
                             <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-brand-blue-500/10 border border-brand-blue-500/20 backdrop-blur-xl">
@@ -299,10 +236,10 @@ Email: ${email}`;
 
                         <div className="grid md:grid-cols-3 gap-8">
                             {[
-                                { 
-                                    city: "Karur", 
-                                    country: "India", 
-                                    address: "Covai Main Road, Karur, Tamil Nadu", 
+                                {
+                                    city: "Karur",
+                                    country: "India",
+                                    address: "Covai Main Road, Karur, Tamil Nadu",
                                     phone: "+91 81485 49511",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Primary Operations Hub",
@@ -313,10 +250,10 @@ Email: ${email}`;
                                         { label: "Uptime", value: "99.98%" }
                                     ]
                                 },
-                                { 
-                                    city: "Coimbatore", 
-                                    country: "India", 
-                                    address: "Thomas Street, Coimbatore, Tamil Nadu", 
+                                {
+                                    city: "Coimbatore",
+                                    country: "India",
+                                    address: "Thomas Street, Coimbatore, Tamil Nadu",
                                     phone: "+91 63796 44145",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Research & Development Center",
@@ -327,10 +264,10 @@ Email: ${email}`;
                                         { label: "Innovations", value: "25+ Patents" }
                                     ]
                                 },
-                                { 
-                                    city: "Coimbatore", 
-                                    country: "India", 
-                                    address: "Anna Salai, Coimbatore, Tamil Nadu", 
+                                {
+                                    city: "Coimbatore",
+                                    country: "India",
+                                    address: "Anna Salai, Coimbatore, Tamil Nadu",
                                     phone: "+91 63796 44145",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Client Success Center",
@@ -345,42 +282,42 @@ Email: ${email}`;
                                 <div key={i} className="group bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-3 relative overflow-hidden hover:border-brand-blue-500/30">
                                     {/* Hover Glow Effect */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl"></div>
-                                    
+
                                     {/* Status Indicator */}
                                     <div className="absolute top-6 right-6 flex items-center gap-2">
                                         <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                                         <span className="text-xs font-bold text-green-400 uppercase tracking-wider">{office.status}</span>
                                     </div>
-                                    
+
                                     {/* Icon */}
                                     <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-blue-500/10 to-cyan-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:from-brand-blue-500/20 group-hover:to-cyan-500/20 transition-all duration-500 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
                                         <i data-lucide={office.icon} className="w-12 h-12 text-brand-blue-400 group-hover:text-cyan-400 transition-colors duration-500"></i>
                                     </div>
-                                    
+
                                     {/* Content */}
                                     <div className="relative z-10 space-y-6">
                                         <div>
                                             <h3 className="text-3xl font-black text-white mb-2 tracking-tight group-hover:text-brand-blue-400 transition-colors duration-300">{office.city}</h3>
                                             <p className="text-brand-blue-400 font-extrabold tracking-widest text-xs uppercase">{office.country}</p>
                                         </div>
-                                        
+
                                         <div className="space-y-4 pt-6 border-t border-white/10">
                                             <div className="flex items-start gap-3">
                                                 <i data-lucide="map-pin" className="w-5 h-5 text-brand-blue-400 flex-shrink-0 mt-0.5"></i>
                                                 <p className="text-navy-200 font-light leading-relaxed">{office.address}</p>
                                             </div>
-                                            
+
                                             <div className="flex items-center gap-3">
                                                 <i data-lucide="phone" className="w-5 h-5 text-brand-blue-400"></i>
                                                 <p className="text-white font-bold">{office.phone}</p>
                                             </div>
-                                            
+
                                             <div className="flex items-center gap-3">
                                                 <i data-lucide="clock" className="w-5 h-5 text-brand-blue-400"></i>
                                                 <p className="text-navy-300 font-medium text-sm">{office.timezone}</p>
                                             </div>
                                         </div>
-                                        
+
                                         {/* Metrics */}
                                         <div className="grid grid-cols-2 gap-4 pt-4">
                                             {office.metrics.map((metric, j) => (
@@ -390,7 +327,7 @@ Email: ${email}`;
                                                 </div>
                                             ))}
                                         </div>
-                                        
+
                                         <div className="pt-4">
                                             <span className="inline-block px-4 py-2 bg-brand-blue-500/10 text-brand-blue-400 text-xs font-bold rounded-full border border-brand-blue-500/20">
                                                 {office.capacity}
@@ -454,33 +391,36 @@ Email: ${email}`;
                 </section>
             </main>
 
-            <footer className="bg-navy-950 text-white relative overflow-hidden pt-32 pb-12 border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
-                        <div className="md:col-span-4 space-y-10">
-                            <img src="/assets/3.png" alt="Echoes Logo" className="h-10 w-auto" />
-                            <p className="text-navy-300 text-lg leading-relaxed font-light">
-                                Architecting elite enterprise solutions for global leaders. Our engineering legacy defines the future of digital infrastructure.
+            {/* Comprehensive Footer */}
+            <footer className="bg-gradient-to-br from-navy-950 to-navy-900 text-white relative overflow-hidden py-20">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                        {/* Company Info */}
+                        <div className="space-y-6">
+                            <img src="/assets/3.png" alt="Echoes Software Technologies" className="h-10" />
+                            <p className="text-navy-300 text-sm leading-relaxed">
+                                Precision-built enterprise software solutions driving digital transformation worldwide.
                             </p>
-                            <div className="flex gap-6">
-                                {[
-                                    { icon: "linkedin", url: "https://www.linkedin.com/company/echoes-software-solutions/" },
-                                    { icon: "instagram", url: "https://www.instagram.com/echoes_software_technologies/" },
-                                    { icon: "message-circle", url: "https://wa.me/+918148549511" }
-                                ].map((social) => (
-                                    <a key={social.icon} href={social.url} target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-brand-blue-600 hover:border-brand-blue-600 transition-all duration-300 group">
-                                        <i data-lucide={social.icon} className="w-5 h-5 text-navy-300 group-hover:text-white"></i>
-                                    </a>
-                                ))}
+                            <div className="flex gap-4">
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="linkedin" className="w-5 h-5"></i>
+                                </a>
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="instagram" className="w-5 h-5"></i>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                    <i data-lucide="twitter" className="w-5 h-5"></i>
+                                </a>
                             </div>
                         </div>
 
-                        <div className="md:col-span-2 space-y-8">
-                            <h4 className="text-xs font-black uppercase tracking-[0.3em] text-brand-blue-400">Navigation</h4>
-                            <ul className="space-y-4">
-                                {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item) => (
+                        {/* Quick Links */}
+                        <div>
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Quick Links</h4>
+                            <ul className="space-y-3">
+                                {['Home', 'About', 'Services', 'Solutions', 'Contact'].map((item) => (
                                     <li key={item}>
-                                        <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-navy-300 hover:text-white transition-colors font-medium">
+                                        <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-navy-300 hover:text-white transition-colors text-sm">
                                             {item}
                                         </Link>
                                     </li>
@@ -488,62 +428,54 @@ Email: ${email}`;
                             </ul>
                         </div>
 
-                        <div className="md:col-span-3 space-y-8">
-                            <h4 className="text-xs font-black uppercase tracking-[0.3em] text-brand-blue-400">Solutions</h4>
-                            <ul className="space-y-4">
-                                {['Enterprise Architecture', 'AI & Neural Systems', 'Defense-Grade Security', 'Hyper-Scalable Cloud'].map((item) => (
-                                    <li key={item}>
-                                        <Link to="/solutions" className="text-navy-300 hover:text-white transition-colors font-medium">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
+                        {/* Services */}
+                        <div>
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Services</h4>
+                            <ul className="space-y-3">
+                                <li><span className="text-navy-300 text-sm">Custom Development</span></li>
+                                <li><span className="text-navy-300 text-sm">Cloud Solutions</span></li>
+                                <li><span className="text-navy-300 text-sm">AI Integration</span></li>
+                                <li><span className="text-navy-300 text-sm">Enterprise Support</span></li>
                             </ul>
                         </div>
 
-                        <div className="md:col-span-3 space-y-10">
-                            <h4 className="text-xs font-black uppercase tracking-[0.3em] text-brand-blue-400">Newsletter</h4>
-                            <p className="text-navy-300 font-light">Join our elite list for architecture insights.</p>
-                            <div className="relative group">
-                                <input type="email" placeholder="Professional Email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-brand-blue-600 transition-all" />
-                                <button className="absolute right-2 top-2 bottom-2 px-6 bg-brand-blue-600 rounded-xl text-white font-black text-xs uppercase tracking-widest hover:bg-brand-blue-500 transition-all">Join</button>
-                            </div>
+                        {/* Contact */}
+                        <div>
+                            <h4 className="text-white font-black text-sm uppercase tracking-widest mb-6">Contact</h4>
+                            <ul className="space-y-4">
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="mail" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span>connect@echoess.in</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="phone" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span>+91 81485 49511</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-navy-300 text-sm">
+                                    <i data-lucide="map-pin" className="w-5 h-5 flex-shrink-0 mt-0.5"></i>
+                                    <span> Karur, Tamilnadu,<br />India - 639001</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-                        <p className="text-navy-400 text-sm font-light">© 2026 Echoes Software Technologies. All rights reserved.</p>
-                        <div className="flex gap-12">
-                            <Link to="/privacy-policy" className="text-navy-400 hover:text-white text-sm font-medium transition-colors">Privacy Policy</Link>
-                            <Link to="/terms-of-service" className="text-navy-400 hover:text-white text-sm font-medium transition-colors">Terms of Service</Link>
+                    {/* Bottom Bar */}
+                    <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-navy-400 text-sm">
+                            © 2026 Echoes Software Technologies. All rights reserved.
+                        </p>
+                        <div className="flex gap-6 text-sm">
+                            <Link to="/privacy-policy" className="text-navy-400 hover:text-white transition-colors">
+                                Privacy Policy
+                            </Link>
+                            <Link to="/terms-of-service" className="text-navy-400 hover:text-white transition-colors">
+                                Terms of Service
+                            </Link>
                         </div>
                     </div>
                 </div>
             </footer>
 
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden fixed inset-0 z-50 bg-navy-950/95 backdrop-blur-xl animate-fade-in">
-                    <div className="flex justify-end p-6 pt-10">
-                        <button onClick={toggleMobileMenu} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 text-white">
-                            <i data-lucide="x" className="w-8 h-8"></i>
-                        </button>
-                    </div>
-                    <nav className="flex flex-col items-center justify-center gap-12 h-[70vh]">
-                        {['Home', 'Solutions', 'Services', 'About', 'Contact'].map((item, i) => (
-                            <Link
-                                key={item}
-                                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                onClick={toggleMobileMenu}
-                                className="text-xl font-semibold text-white hover:text-brand-blue-400 transition-all uppercase tracking-tighter"
-                                style={{ animationDelay: `${i * 100}ms` }}
-                            >
-                                {item}
-                            </Link>
-                        ))}
-                    </nav>
-                </div>
-            )}
         </div>
     );
 };

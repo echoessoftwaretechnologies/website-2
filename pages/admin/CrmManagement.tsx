@@ -158,7 +158,7 @@ const CrmManagement: React.FC = () => {
 
                 {/* Main Content Area */}
                 <div className="bg-white dark:bg-white/[0.02] border border-navy-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden shadow-xl shadow-navy-200/20 dark:shadow-navy-950/50">
-                    <div className="p-8 border-b border-navy-100 dark:border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                    <div className="p-6 md:p-8 border-b border-navy-100 dark:border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
                         <div>
                             <h2 className="text-xl font-black uppercase tracking-widest text-navy-950 dark:text-white">Client Matrix</h2>
                             <p className="text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Personnel & Enterprise Records</p>
@@ -198,17 +198,17 @@ const CrmManagement: React.FC = () => {
                         <table className="w-full border-collapse">
                             <thead>
                                 <tr className="bg-navy-50/50 dark:bg-white/[0.02]">
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Entity</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Intelligence</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Status</th>
-                                    <th className="px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Valuation</th>
-                                    <th className="px-8 py-5 text-right text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Operations</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Entity</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Intelligence</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Status</th>
+                                    <th className="px-4 md:px-8 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Valuation</th>
+                                    <th className="px-4 md:px-8 py-5 text-right text-[10px] font-black text-navy-500 uppercase tracking-[0.2em] border-b border-navy-100 dark:border-white/5">Operations</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-navy-100 dark:divide-white/5">
                                 {filteredClients.map(client => (
                                     <tr key={client.id} className="group hover:bg-navy-50 dark:hover:bg-white/[0.02] transition-colors cursor-default">
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-12 h-12 rounded-2xl bg-navy-100 dark:bg-navy-800 border border-navy-200 dark:border-white/10 flex items-center justify-center font-black text-brand-blue-600 dark:text-brand-blue-400 group-hover:border-brand-blue-500/50 transition-all shadow-inner">
                                                     {client.initials}
@@ -219,7 +219,7 @@ const CrmManagement: React.FC = () => {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-2 text-xs font-black text-navy-600 dark:text-navy-300 group-hover:text-brand-blue-600 dark:group-hover:text-white transition-colors uppercase tracking-tight">
                                                 <Mail className="w-3.5 h-3.5 text-navy-400/60 dark:text-navy-600" />
                                                 {client.email}
@@ -229,16 +229,16 @@ const CrmManagement: React.FC = () => {
                                                 {client.phone}
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <span className={`px-3 py-1 rounded-lg border text-[10px] font-black uppercase tracking-widest ${getStatusStyle(client.status)}`}>
                                                 {client.status.replace('-', ' ')}
                                             </span>
                                         </td>
-                                        <td className="px-8 py-6">
+                                        <td className="px-4 md:px-8 py-6">
                                             <div className="text-sm font-black text-navy-950 dark:text-white">{client.value}</div>
                                             <div className="text-[10px] font-bold text-navy-400 dark:text-navy-700 uppercase tracking-widest mt-0.5">{client.type}</div>
                                         </td>
-                                        <td className="px-8 py-6 text-right">
+                                        <td className="px-4 md:px-8 py-6 text-right">
                                             <div className="flex items-center justify-end gap-2">
                                                 <button onClick={() => handleViewClient(client)} className="w-9 h-9 rounded-xl bg-white dark:bg-white/5 border border-navy-200 dark:border-white/5 flex items-center justify-center text-navy-500 dark:text-navy-400 hover:text-white hover:bg-brand-blue-600 transition-all shadow-sm">
                                                     <Eye className="w-4 h-4" />
@@ -266,8 +266,8 @@ const CrmManagement: React.FC = () => {
                         className="absolute inset-0 bg-navy-950/40 dark:bg-navy-950/80 backdrop-blur-md dark:backdrop-blur-xl animate-fade-in"
                         onClick={() => setIsAddModalOpen(false)}
                     />
-                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden animate-slide-up">
-                        <div className="p-8 sm:p-10">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                        <div className="p-6 md:p-10">
                             <div className="flex justify-between items-center mb-10">
                                 <div>
                                     <h3 className="text-2xl font-black text-navy-950 dark:text-white">Initialize Record.</h3>
@@ -329,8 +329,8 @@ const CrmManagement: React.FC = () => {
                         className="absolute inset-0 bg-navy-950/40 dark:bg-navy-950/80 backdrop-blur-md dark:backdrop-blur-xl animate-fade-in"
                         onClick={() => setIsDetailModalOpen(false)}
                     />
-                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-hidden animate-slide-up">
-                        <div className="p-8 sm:p-10">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                        <div className="p-6 md:p-10">
                             <div className="flex justify-between items-start mb-10">
                                 <div className="flex items-center gap-6">
                                     <div className="w-20 h-20 rounded-xl bg-navy-100 dark:bg-navy-800 border border-navy-200 dark:border-white/10 text-brand-blue-600 dark:text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">
