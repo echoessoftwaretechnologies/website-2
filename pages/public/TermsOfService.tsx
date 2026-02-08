@@ -16,50 +16,50 @@ const TermsOfService: React.FC = () => {
 
             <main className="pt-20">
                 {/* Hero Section */}
-                <section className="bg-gradient-to-br from-brand-blue-600 to-indigo-700 py-32 relative overflow-hidden">
+                <section className="bg-gradient-to-br from-brand-blue-600 to-indigo-700 py-20 lg:py-32 relative overflow-hidden">
                     {/* Background Patterns */}
-                    <div className="absolute inset-0 opacity-20">
-                        <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-[100px]" />
-                        <div className="absolute bottom-1/2 right-0 w-[500px] h-[500px] border border-white/10 rounded-full" />
-                        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400 rounded-full blur-[100px]" />
+                    <div className="absolute inset-0 opacity-20 pointer-events-none">
+                        <div className="absolute -top-24 -left-24 w-64 h-64 lg:w-96 lg:h-96 bg-white rounded-full blur-[100px]" />
+                        <div className="absolute bottom-1/2 right-0 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] border border-white/10 rounded-full" />
+                        <div className="absolute -bottom-24 -right-24 w-64 h-64 lg:w-96 lg:h-96 bg-blue-400 rounded-full blur-[100px]" />
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm font-bold uppercase tracking-widest mb-8 border border-white/20">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm font-bold uppercase tracking-widest mb-6 lg:mb-8 border border-white/20">
                             <i data-lucide="scale" className="w-4 h-4"></i>
                             <span>Legal Agreement</span>
                         </div>
-                        <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-8 tracking-tight drop-shadow-sm">
+                        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 lg:mb-8 tracking-tight drop-shadow-sm">
                             Terms of Service
                         </h1>
-                        <p className="text-xl text-blue-50 max-w-2xl mx-auto font-light leading-relaxed">
+                        <p className="text-lg lg:text-xl text-blue-50 max-w-2xl mx-auto font-light leading-relaxed px-4">
                             Please read these terms carefully before using our services. They define our relationship with you.
                         </p>
                     </div>
                 </section>
 
                 {/* Content Section */}
-                <section className="py-24 bg-gray-50 relative">
+                <section className="py-12 lg:py-24 bg-gray-50 relative">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 p-8 md:p-16 border border-gray-100">
+                        <div className="bg-white rounded-[2rem] lg:rounded-[2.5rem] shadow-xl shadow-gray-200/50 p-6 sm:p-10 md:p-16 border border-gray-100">
 
-                            <div className="flex items-center justify-between border-b border-gray-100 pb-8 mb-12">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-8 mb-8 lg:mb-12 gap-6 sm:gap-0">
                                 <div>
                                     <p className="text-sm font-bold text-navy-400 uppercase tracking-widest mb-1">Effective Date</p>
                                     <p className="text-navy-900 font-semibold">December 28, 2025</p>
                                 </div>
-                                <div className="text-right">
+                                <div className="text-left sm:text-right">
                                     <p className="text-sm font-bold text-navy-400 uppercase tracking-widest mb-1">Version</p>
                                     <p className="text-navy-900 font-semibold">2.0</p>
                                 </div>
                             </div>
 
-                            <article className="prose prose-lg prose-headings:text-navy-950 prose-p:text-navy-600 prose-a:text-brand-blue-600 prose-li:text-navy-600 max-w-none">
-                                <p className="lead text-xl text-navy-700 font-light mb-12">
+                            <article className="prose prose-base md:prose-lg prose-headings:text-navy-950 prose-p:text-navy-600 prose-a:text-brand-blue-600 prose-li:text-navy-600 max-w-none">
+                                <p className="lead text-lg md:text-xl text-navy-700 font-light mb-8 lg:mb-12">
                                     Welcome to Echoes Software Technologies ("Company", "we", "our", "us"). These Terms & Conditions ("Terms") govern your access to and use of our websites, applications, software, products, and services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.
                                 </p>
 
-                                <div className="p-8 bg-blue-50 border border-blue-100 rounded-3xl mb-12 not-prose">
+                                <div className="p-6 lg:p-8 bg-blue-50 border border-blue-100 rounded-3xl mb-8 lg:mb-12 not-prose">
                                     <h4 className="text-lg font-bold text-navy-900 mb-2 flex items-center gap-2">
                                         <i data-lucide="info" className="w-5 h-5 text-brand-blue-600"></i>
                                         Important Notice
@@ -117,7 +117,7 @@ const TermsOfService: React.FC = () => {
                                         </div>
                                         <h5 className="font-bold text-navy-900 mb-1">Email Support</h5>
                                         <p className="text-navy-500 text-sm mb-3">Get a response within 24 hours.</p>
-                                        <a href="mailto:echoessoftwaretech@gmail.com" className="text-brand-blue-600 font-semibold hover:underline">echoessoftwaretech@gmail.com</a>
+                                        <a href="mailto:echoessoftwaretech@gmail.com" className="text-brand-blue-600 font-semibold hover:underline break-all">echoessoftwaretech@gmail.com</a>
                                     </div>
                                     <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                                         <div className="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mb-4">
