@@ -222,10 +222,7 @@ Email: ${email}`;
 
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
                         <div className="text-center mb-24 space-y-8">
-                            <div className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-brand-blue-500/10 border border-brand-blue-500/20 backdrop-blur-xl">
-                                <i data-lucide="globe" className="w-6 h-6 text-brand-blue-400"></i>
-                                <span className="text-brand-blue-400 font-black tracking-[0.3em] text-sm uppercase">GLOBAL COMMAND NETWORK</span>
-                            </div>
+
                             <h3 className="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
                                 Strategic <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue-400 to-cyan-400">Operational Hubs</span>
                             </h3>
