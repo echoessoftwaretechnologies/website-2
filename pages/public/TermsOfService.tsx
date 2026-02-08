@@ -1,117 +1,141 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
-declare global {
-    interface Window {
-        lucide: any;
-    }
-}
-
 const TermsOfService: React.FC = () => {
-    const navigate = useNavigate();
+    useEffect(() => {
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
-        <div className="bg-white text-navy-900 min-h-screen" style={{ fontFamily: "'Outfit', sans-serif" }}>
+        <div className="bg-white text-navy-900 min-h-screen selection:bg-brand-blue-100 selection:text-brand-blue-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
             <Navbar currentPage="Terms of Service" />
 
             <main className="pt-20">
                 {/* Hero Section */}
-                <section className="bg-gradient-to-br from-brand-blue-600 to-indigo-700 dark:from-brand-blue-800 dark:to-indigo-900 py-20 lg:py-32 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div className="text-center">
-                            <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight">Terms of Service</h1>
-                            <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto font-light">Please read these terms and conditions carefully before using our services and website.</p>
+                <section className="bg-gradient-to-br from-brand-blue-600 to-indigo-700 py-32 relative overflow-hidden">
+                    {/* Background Patterns */}
+                    <div className="absolute inset-0 opacity-20">
+                        <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-[100px]" />
+                        <div className="absolute bottom-1/2 right-0 w-[500px] h-[500px] border border-white/10 rounded-full" />
+                        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400 rounded-full blur-[100px]" />
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-sm font-bold uppercase tracking-widest mb-8 border border-white/20">
+                            <i data-lucide="scale" className="w-4 h-4"></i>
+                            <span>Legal Agreement</span>
                         </div>
+                        <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-8 tracking-tight drop-shadow-sm">
+                            Terms of Service
+                        </h1>
+                        <p className="text-xl text-blue-50 max-w-2xl mx-auto font-light leading-relaxed">
+                            Please read these terms carefully before using our services. They define our relationship with you.
+                        </p>
                     </div>
                 </section>
 
                 {/* Content Section */}
-                <section className="py-20 bg-white dark:bg-navy-950 transition-colors duration-500">
-                    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="prose prose-lg max-w-none">
-                            <h2 className="text-3xl font-bold text-navy-950 dark:text-white mb-6">Last Updated: December 28, 2025</h2>
+                <section className="py-24 bg-gray-50 relative">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 p-8 md:p-16 border border-gray-100">
 
-                            <p className="text-navy-600 dark:text-navy-300 mb-6 leading-relaxed">Welcome to Echoes Software Technologies ("Company", "we", "our", "us"). These Terms & Conditions ("Terms") govern your access to and use of our websites, applications, software, products, and services (collectively, the "Services").</p>
-
-                            <p className="text-navy-600 dark:text-navy-300 mb-6 leading-relaxed">By accessing or using our Services, you agree to be bound by these Terms. If you do not agree, please do not use our Services.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">1. Eligibility</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">By using our Services, you represent that you have the legal capacity to enter into a binding agreement under applicable laws. If you are using the Services on behalf of an organization, you represent that you are authorized to bind that organization to these Terms.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">2. Use of Services</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">You agree to use the Services only for lawful purposes and in accordance with these Terms. You must not:</p>
-                            <ul className="list-disc list-inside text-navy-600 dark:text-navy-300 mb-6 space-y-2 ml-4">
-                                <li>Violate any applicable laws or regulations</li>
-                                <li>Infringe upon intellectual property or proprietary rights</li>
-                                <li>Attempt to gain unauthorized access to systems or data</li>
-                                <li>Interfere with or disrupt the operation or security of the Services</li>
-                                <li>Use the Services to transmit malicious code, spam, or harmful content</li>
-                            </ul>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">3. Accounts and Responsibilities</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">If any part of the Services requires account creation:</p>
-                            <ul className="list-disc list-inside text-navy-600 dark:text-navy-300 mb-6 space-y-2 ml-4">
-                                <li>You are responsible for maintaining the confidentiality of your account credentials</li>
-                                <li>You agree to provide accurate and complete information</li>
-                                <li>You are responsible for all activities that occur under your account</li>
-                                <li>We reserve the right to suspend or terminate accounts that violate these Terms</li>
-                            </ul>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">4. Intellectual Property Rights</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">All content, software, designs, logos, trademarks, and materials provided through the Services are owned by or licensed to Echoes Software Technologies and are protected by intellectual property laws.</p>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">You may not copy, modify, distribute, sell, or create derivative works from any part of the Services without our prior written consent.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">5. Payments and Fees (If Applicable)</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">Certain Services may be subject to fees or charges. Where applicable:</p>
-                            <ul className="list-disc list-inside text-navy-600 dark:text-navy-300 mb-6 space-y-2 ml-4">
-                                <li>Prices, payment terms, and billing cycles will be disclosed before purchase</li>
-                                <li>Payments are non-refundable unless otherwise stated in writing</li>
-                                <li>We reserve the right to change pricing with reasonable notice</li>
-                            </ul>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">6. Third-Party Services and Links</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">Our Services may integrate with or link to third-party websites or services. We do not control and are not responsible for third-party content, policies, or practices. Your use of third-party services is at your own risk.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">7. Disclaimer of Warranties</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">The Services are provided on an "as is" and "as available" basis. To the maximum extent permitted by law, we disclaim all warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">We do not guarantee that the Services will be uninterrupted, error-free, or secure.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">8. Limitation of Liability</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">To the fullest extent permitted by law, Echoes Software Technologies shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities, arising out of or related to your use of the Services.</p>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">Our total liability for any claim shall not exceed the amount paid by you (if any) for the Services giving rise to the claim.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">9. Indemnification</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">You agree to indemnify and hold harmless Echoes Software Technologies, its directors, employees, and partners from any claims, damages, losses, liabilities, and expenses arising from:</p>
-                            <ul className="list-disc list-inside text-navy-600 dark:text-navy-300 mb-6 space-y-2 ml-4">
-                                <li>Your use of the Services</li>
-                                <li>Your violation of these Terms</li>
-                                <li>Your infringement of any third-party rights</li>
-                            </ul>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">10. Termination</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">We reserve the right to suspend or terminate your access to the Services at any time, with or without notice, if you violate these Terms or engage in conduct that we consider harmful to our interests or users.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">11. Governing Law and Jurisdiction</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">These Terms shall be governed by and construed in accordance with the laws of India. The courts located in India shall have exclusive jurisdiction over any disputes arising under these Terms.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">12. Changes to These Terms</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-6">We may update these Terms from time to time. Any changes will be effective upon posting with an updated "Last Updated" date. Continued use of the Services after changes constitutes acceptance of the revised Terms.</p>
-
-                            <h3 className="text-2xl font-bold text-navy-950 dark:text-white mt-12 mb-4">13. Contact Information</h3>
-                            <p className="text-navy-600 dark:text-navy-300 mb-4">If you have any questions about these Terms & Conditions, please contact us:</p>
-                            <div className="bg-navy-50 dark:bg-navy-900/50 border border-navy-100 dark:border-white/5 p-8 rounded-2xl mb-8">
-                                <p className="text-navy-900 dark:text-white font-bold mb-2">Echoes Software Technologies</p>
-                                <p className="text-navy-700 dark:text-navy-300"><strong className="text-navy-900 dark:text-white">Email:</strong> echoessoftwaretech@gmail.com</p>
+                            <div className="flex items-center justify-between border-b border-gray-100 pb-8 mb-12">
+                                <div>
+                                    <p className="text-sm font-bold text-navy-400 uppercase tracking-widest mb-1">Effective Date</p>
+                                    <p className="text-navy-900 font-semibold">December 28, 2025</p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-sm font-bold text-navy-400 uppercase tracking-widest mb-1">Version</p>
+                                    <p className="text-navy-900 font-semibold">2.0</p>
+                                </div>
                             </div>
+
+                            <article className="prose prose-lg prose-headings:text-navy-950 prose-p:text-navy-600 prose-a:text-brand-blue-600 prose-li:text-navy-600 max-w-none">
+                                <p className="lead text-xl text-navy-700 font-light mb-12">
+                                    Welcome to Echoes Software Technologies ("Company", "we", "our", "us"). These Terms & Conditions ("Terms") govern your access to and use of our websites, applications, software, products, and services (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.
+                                </p>
+
+                                <div className="p-8 bg-blue-50 border border-blue-100 rounded-3xl mb-12 not-prose">
+                                    <h4 className="text-lg font-bold text-navy-900 mb-2 flex items-center gap-2">
+                                        <i data-lucide="info" className="w-5 h-5 text-brand-blue-600"></i>
+                                        Important Notice
+                                    </h4>
+                                    <p className="text-navy-700 text-sm leading-relaxed mb-0">
+                                        By using our Services, you represent that you have the legal authority to accept these Terms on behalf of yourself or any party you represent. If you do not agree to these Terms, you are not authorized to use the Services.
+                                    </p>
+                                </div>
+
+                                <h3>1. Usage & Eligibility</h3>
+                                <p>You must use our Services only for lawful purposes. You agree not to:</p>
+                                <ul className="marker:text-brand-blue-500">
+                                    <li>Violate any applicable national or international laws.</li>
+                                    <li>Infringe upon the intellectual property rights of others.</li>
+                                    <li>Distribute viruses, malware, or any other harmful code.</li>
+                                    <li>Attempt to gain unauthorized access to our systems or user accounts.</li>
+                                </ul>
+
+                                <h3>2. Intellectual Property</h3>
+                                <p>
+                                    All content included on our website and services, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the site, is the property of Echoes Software Technologies or its suppliers and protected by copyright and other laws.
+                                </p>
+
+                                <h3>3. User Accounts</h3>
+                                <p>
+                                    If you create an account with us, you are responsible for maintaining the security of your account and you are fully responsible for all activities that occur under the account. You must immediately notify us of any unauthorized uses of your account or any other breaches of security.
+                                </p>
+
+                                <h3>4. Limitation of Liability</h3>
+                                <p>
+                                    To the maximum extent permitted by applicable law, in no event shall Echoes Software Technologies be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, checking data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service).
+                                </p>
+
+                                <blockquote className="border-l-4 border-brand-blue-500 pl-6 italic text-navy-700 bg-gray-50 py-4 pr-4 rounded-r-xl my-8">
+                                    "Our liability is limited to the fullest extent permitted by law. We prioritize transparency and fairness in all our agreements."
+                                </blockquote>
+
+                                <h3>5. Termination</h3>
+                                <p>
+                                    We may terminate or suspend your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms and Conditions. Upon termination, your right to use the Service will cease immediately.
+                                </p>
+
+                                <h3>6. Governing Law</h3>
+                                <p>
+                                    These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+                                </p>
+
+                                <h3>7. Contact Information</h3>
+                                <p>If you have any questions about these Terms, please contact us:</p>
+
+                                <div className="grid md:grid-cols-2 gap-6 not-prose mt-8">
+                                    <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="w-10 h-10 bg-brand-blue-50 rounded-full flex items-center justify-center mb-4">
+                                            <i data-lucide="mail" className="w-5 h-5 text-brand-blue-600"></i>
+                                        </div>
+                                        <h5 className="font-bold text-navy-900 mb-1">Email Support</h5>
+                                        <p className="text-navy-500 text-sm mb-3">Get a response within 24 hours.</p>
+                                        <a href="mailto:echoessoftwaretech@gmail.com" className="text-brand-blue-600 font-semibold hover:underline">echoessoftwaretech@gmail.com</a>
+                                    </div>
+                                    <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                                        <div className="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center mb-4">
+                                            <i data-lucide="phone" className="w-5 h-5 text-purple-600"></i>
+                                        </div>
+                                        <h5 className="font-bold text-navy-900 mb-1">Phone Support</h5>
+                                        <p className="text-navy-500 text-sm mb-3">Mon-Fri from 9am to 6pm.</p>
+                                        <a href="tel:+918148549511" className="text-purple-600 font-semibold hover:underline">+91 81485 49511</a>
+                                    </div>
+                                </div>
+
+                            </article>
                         </div>
                     </div>
                 </section>
             </main>
 
-            {/* Premium Footer */}
-            {/* Comprehensive Footer */}
+            {/* Comprehensive Footer - Exactly matching Home.tsx */}
             <footer className="bg-gradient-to-br from-navy-950 to-navy-900 text-white relative overflow-hidden py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -122,37 +146,16 @@ const TermsOfService: React.FC = () => {
                                 Precision-built enterprise software solutions driving digital transformation worldwide.
                             </p>
                             <div className="flex gap-4">
-                                {/* LinkedIn */}
-                                <a
-                                    href="https://www.linkedin.com/company/echoes-software-solutions/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
-                                >
+                                <a href="https://www.linkedin.com/company/echoes-software-solutions/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
                                     <i data-lucide="linkedin" className="w-5 h-5"></i>
                                 </a>
-
-                                {/* Instagram */}
-                                <a
-                                    href="https://www.instagram.com/echoes_software_technologies?igsh=OW1xOGpmMzZmZ3Bq"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
-                                >
+                                <a href="https://www.instagram.com/echoes_software_technologies?igsh=OW1xOGpmMzZmZ3Bq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
                                     <i data-lucide="instagram" className="w-5 h-5"></i>
                                 </a>
-
-                                {/* WhatsApp */}
-                                <a
-                                    href="https://wa.me/918148549511"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
-                                >
+                                <a href="https://wa.me/918148549511" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
                                     <i data-lucide="message-circle" className="w-5 h-5"></i>
                                 </a>
                             </div>
-
                         </div>
 
                         {/* Quick Links */}
