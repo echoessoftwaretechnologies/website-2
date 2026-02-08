@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage = 'Home' }) => {
                                 <Link
                                     key={item}
                                     to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                    className={`text-sm font-black uppercase tracking-[0.2em] transition-all relative group nav-blip ${currentPage === item ? 'text-brand-blue-600 active' : 'text-navy-700 hover:text-brand-blue-600'}`}
+                                    className={`text-sm font-normal uppercase tracking-[0.2em] transition-all relative group nav-blip ${currentPage === item ? 'text-brand-blue-600 active' : 'text-navy-700 hover:text-brand-blue-600'}`}
                                 >
                                     {item}
                                 </Link>
@@ -87,7 +87,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage = 'Home' }) => {
                                     key={item}
                                     to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                                     onClick={toggleMobileMenu}
-                                    className={`text-xl font-black uppercase tracking-tight transition-all ${currentPage === item ? 'text-brand-blue-600 pl-4 border-l-4 border-brand-blue-600' : 'text-navy-900 hover:text-brand-blue-600 hover:pl-4'}`}
+                                    className={`text-xl font-normal uppercase tracking-tight transition-all ${currentPage === item ? 'text-brand-blue-600 pl-4 border-l-4 border-brand-blue-600' : 'text-navy-900 hover:text-brand-blue-600 hover:pl-4'}`}
                                     style={{ animationDelay: `${i * 100}ms` }}
                                 >
                                     {item}
