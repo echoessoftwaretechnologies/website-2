@@ -77,12 +77,12 @@ const AttendanceManagement: React.FC = () => {
 
     const getStatusStyle = (status: string) => {
         switch (status) {
-            case 'present': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
-            case 'absent': return 'bg-red-500/10 text-red-400 border-red-500/20';
-            case 'late': return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-            case 'half-day': return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
-            case 'on-leave': return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-            default: return 'bg-white/10 text-white border-white/20';
+            case 'present': return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+            case 'absent': return 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20';
+            case 'late': return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+            case 'half-day': return 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20';
+            case 'on-leave': return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
+            default: return 'bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-white border-gray-200 dark:border-white/20';
         }
     };
 
@@ -137,11 +137,11 @@ const AttendanceManagement: React.FC = () => {
                                 onChange={(e) => setStatusFilter(e.target.value)}
                                 className="bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer"
                             >
-                                <option value="all">All Statuses</option>
-                                <option value="present">Present</option>
-                                <option value="absent">Absent</option>
-                                <option value="late">Late Arrival</option>
-                                <option value="half-day">Half Ops</option>
+                                <option value="all" className="dark:bg-navy-900">All Statuses</option>
+                                <option value="present" className="dark:bg-navy-900">Present</option>
+                                <option value="absent" className="dark:bg-navy-900">Absent</option>
+                                <option value="late" className="dark:bg-navy-900">Late Arrival</option>
+                                <option value="half-day" className="dark:bg-navy-900">Half Ops</option>
                             </select>
                             <button
                                 onClick={() => setIsMarkModalOpen(true)}
@@ -174,7 +174,7 @@ const AttendanceManagement: React.FC = () => {
                                                 </div>
                                                 <div>
                                                     <div className="text-sm font-black text-navy-950 dark:text-white">{record.employeeName}</div>
-                                                    <div className="text-[10px] font-bold text-navy-500/60 dark:text-navy-700 uppercase tracking-widest mt-0.5">ID_00{record.id}</div>
+                                                    <div className="text-[10px] font-bold text-navy-500 dark:text-gray-500 uppercase tracking-widest mt-0.5">ID_00{record.id}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -223,57 +223,57 @@ const AttendanceManagement: React.FC = () => {
             {isMarkModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
                     <div
-                        className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
+                        className="absolute inset-0 bg-navy-950/40 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
                         onClick={() => setIsMarkModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
                         <div className="p-6 md:p-10">
                             <div className="flex justify-between items-center mb-10">
                                 <div>
-                                    <h3 className="text-2xl font-black text-white">Presence Logging.</h3>
-                                    <p className="text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Personnel Time-Tracking Gateway</p>
+                                    <h3 className="text-2xl font-black text-navy-950 dark:text-white">Presence Logging.</h3>
+                                    <p className="text-xs font-bold text-navy-500 dark:text-navy-400 uppercase tracking-widest mt-1">Personnel Time-Tracking Gateway</p>
                                 </div>
-                                <button onClick={() => setIsMarkModalOpen(false)} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-navy-400 hover:text-white transition-all">
+                                <button onClick={() => setIsMarkModalOpen(false)} className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 flex items-center justify-center text-navy-400 hover:text-navy-950 dark:hover:text-white transition-all">
                                     <X className="w-6 h-6" />
                                 </button>
                             </div>
 
                             <form onSubmit={handleMarkAttendance} className="space-y-6">
                                 <div>
-                                    <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Identity Assignment</label>
-                                    <select required value={newRecord.employeeId} onChange={e => setNewRecord({ ...newRecord, employeeId: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
-                                        <option value="" className="bg-navy-900">Select Personnel</option>
-                                        <option value="1" className="bg-navy-900">John Doe (Engineering)</option>
-                                        <option value="2" className="bg-navy-900">Sarah Johnson (Marketing)</option>
-                                        <option value="3" className="bg-navy-900">Michael Brown (Sales)</option>
-                                        <option value="4" className="bg-navy-900">Alice Parker (HR)</option>
+                                    <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Identity Assignment</label>
+                                    <select required value={newRecord.employeeId} onChange={e => setNewRecord({ ...newRecord, employeeId: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
+                                        <option value="" className="dark:bg-navy-900">Select Personnel</option>
+                                        <option value="1" className="dark:bg-navy-900">John Doe (Engineering)</option>
+                                        <option value="2" className="dark:bg-navy-900">Sarah Johnson (Marketing)</option>
+                                        <option value="3" className="dark:bg-navy-900">Michael Brown (Sales)</option>
+                                        <option value="4" className="dark:bg-navy-900">Alice Parker (HR)</option>
                                     </select>
                                 </div>
 
                                 <div>
-                                    <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Cycle Date</label>
-                                    <input type="date" required value={newRecord.date} onChange={e => setNewRecord({ ...newRecord, date: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
+                                    <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Cycle Date</label>
+                                    <input type="date" required value={newRecord.date} onChange={e => setNewRecord({ ...newRecord, date: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Entry Timestamp</label>
-                                        <input type="time" value={newRecord.checkIn} onChange={e => setNewRecord({ ...newRecord, checkIn: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Entry Timestamp</label>
+                                        <input type="time" value={newRecord.checkIn} onChange={e => setNewRecord({ ...newRecord, checkIn: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Exit Timestamp</label>
-                                        <input type="time" value={newRecord.checkOut} onChange={e => setNewRecord({ ...newRecord, checkOut: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Exit Timestamp</label>
+                                        <input type="time" value={newRecord.checkOut} onChange={e => setNewRecord({ ...newRecord, checkOut: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Status Classification</label>
-                                    <select value={newRecord.status} onChange={e => setNewRecord({ ...newRecord, status: e.target.value as any })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
-                                        <option value="present" className="bg-navy-900">Present Ops</option>
-                                        <option value="absent" className="bg-navy-900">Absent State</option>
-                                        <option value="late" className="bg-navy-900">Late Synced</option>
-                                        <option value="half-day" className="bg-navy-900">Half Cycle</option>
-                                        <option value="on-leave" className="bg-navy-900">Authorized Leave</option>
+                                    <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Status Classification</label>
+                                    <select value={newRecord.status} onChange={e => setNewRecord({ ...newRecord, status: e.target.value as any })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
+                                        <option value="present" className="dark:bg-navy-900">Present Ops</option>
+                                        <option value="absent" className="dark:bg-navy-900">Absent State</option>
+                                        <option value="late" className="dark:bg-navy-900">Late Synced</option>
+                                        <option value="half-day" className="dark:bg-navy-900">Half Cycle</option>
+                                        <option value="on-leave" className="dark:bg-navy-900">Authorized Leave</option>
                                     </select>
                                 </div>
 
@@ -292,25 +292,25 @@ const AttendanceManagement: React.FC = () => {
             {isDetailModalOpen && selectedRecord && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
                     <div
-                        className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
+                        className="absolute inset-0 bg-navy-950/40 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
                         onClick={() => setIsDetailModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
                         <div className="p-6 md:p-10">
                             <div className="flex justify-between items-start mb-10">
                                 <div className="flex items-center gap-6">
-                                    <div className="w-20 h-20 rounded-xl bg-navy-800 border border-white/10 text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">
+                                    <div className="w-20 h-20 rounded-xl bg-navy-50 dark:bg-navy-800 border border-navy-200 dark:border-white/10 text-brand-blue-600 dark:text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">
                                         {selectedRecord.initials}
                                     </div>
                                     <div>
-                                        <h3 className="text-3xl font-black text-white leading-none">{selectedRecord.employeeName}.</h3>
-                                        <div className="flex items-center gap-2 text-navy-500 font-bold uppercase tracking-widest text-[10px] mt-2">
+                                        <h3 className="text-3xl font-black text-navy-950 dark:text-white leading-none">{selectedRecord.employeeName}.</h3>
+                                        <div className="flex items-center gap-2 text-navy-500 dark:text-navy-400 font-bold uppercase tracking-widest text-[10px] mt-2">
                                             <Users className="w-3.5 h-3.5" />
                                             {selectedRecord.department}
                                         </div>
                                     </div>
                                 </div>
-                                <button onClick={() => setIsDetailModalOpen(false)} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-navy-400 hover:text-white transition-all">
+                                <button onClick={() => setIsDetailModalOpen(false)} className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 flex items-center justify-center text-navy-400 hover:text-navy-950 dark:hover:text-white transition-all">
                                     <X className="w-6 h-6" />
                                 </button>
                             </div>
@@ -375,7 +375,7 @@ const AttendanceManagement: React.FC = () => {
                             </div>
 
                             <div className="flex gap-4">
-                                <button onClick={() => setIsDetailModalOpen(false)} className="flex-1 bg-white/5 border border-white/5 text-navy-400 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all">
+                                <button onClick={() => setIsDetailModalOpen(false)} className="flex-1 bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 text-navy-600 dark:text-navy-400 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-navy-100 dark:hover:bg-white/10 hover:text-navy-950 dark:hover:text-white transition-all">
                                     Terminate View
                                 </button>
                                 <button onClick={() => { setIsDetailModalOpen(false); setIsMarkModalOpen(true); }} className="flex-1 bg-brand-blue-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand-blue-500 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95">

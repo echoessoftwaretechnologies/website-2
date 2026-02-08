@@ -92,12 +92,12 @@ const MeetingArrangement: React.FC = () => {
 
     const getMeetingTypeColor = (type: string) => {
         const colors: { [key: string]: string } = {
-            'team': 'bg-blue-100 text-blue-700',
-            'client': 'bg-green-100 text-green-700',
-            'review': 'bg-purple-100 text-purple-700',
-            'planning': 'bg-yellow-100 text-yellow-700'
+            'team': 'bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400',
+            'client': 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400',
+            'review': 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400',
+            'planning': 'bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400'
         };
-        return colors[type] || 'bg-gray-100 text-gray-700';
+        return colors[type] || 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/60';
     };
 
     const getMeetingTypeIcon = (type: string) => {
@@ -126,14 +126,14 @@ const MeetingArrangement: React.FC = () => {
                 </div>
 
                 {/* Meeting Form */}
-                <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8">
-                    <h3 className="text-2xl font-black mb-8">Schedule a New Meeting</h3>
+                <div className="bg-white dark:bg-white/[0.03] rounded-3xl border border-gray-200 dark:border-white/10 shadow-lg p-8">
+                    <h3 className="text-2xl font-black mb-8 dark:text-white">Schedule a New Meeting</h3>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Meeting Title and Type */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">
+                                <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">
                                     Meeting Title <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -141,32 +141,32 @@ const MeetingArrangement: React.FC = () => {
                                     placeholder="Enter meeting title"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent"
+                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">
+                                <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">
                                     Meeting Type <span className="text-red-500">*</span>
                                 </label>
                                 <select
                                     value={formData.type}
                                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent"
+                                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all cursor-pointer"
                                     required
                                 >
-                                    <option value="">Select meeting type</option>
-                                    <option value="team">Team Meeting</option>
-                                    <option value="client">Client Meeting</option>
-                                    <option value="review">Review Meeting</option>
-                                    <option value="planning">Planning Meeting</option>
+                                    <option value="" className="dark:bg-navy-900">Select meeting type</option>
+                                    <option value="team" className="dark:bg-navy-900">Team Meeting</option>
+                                    <option value="client" className="dark:bg-navy-900">Client Meeting</option>
+                                    <option value="review" className="dark:bg-navy-900">Review Meeting</option>
+                                    <option value="planning" className="dark:bg-navy-900">Planning Meeting</option>
                                 </select>
                             </div>
                         </div>
 
                         {/* Participants */}
                         <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
+                            <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">
                                 Participants <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -174,32 +174,32 @@ const MeetingArrangement: React.FC = () => {
                                 placeholder="Type participant names or emails..."
                                 value={formData.participants}
                                 onChange={(e) => setFormData({ ...formData, participants: e.target.value })}
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent"
+                                className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all"
                                 required
                             />
-                            <p className="text-xs text-gray-500 mt-2">Separate multiple participants with commas</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Separate multiple participants with commas</p>
                         </div>
 
                         {/* Calendar */}
                         <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
+                            <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">
                                 Select Date <span className="text-red-500">*</span>
                             </label>
-                            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                            <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6">
                                 {/* Calendar Header */}
                                 <div className="flex items-center justify-between mb-6">
                                     <button
                                         type="button"
                                         onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))}
-                                        className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                                        className="p-2 hover:bg-gray-200 dark:hover:bg-white/10 rounded-lg transition-colors text-gray-600 dark:text-white"
                                     >
                                         <ChevronLeft className="w-5 h-5" />
                                     </button>
-                                    <h4 className="text-lg font-black">{monthName}</h4>
+                                    <h4 className="text-lg font-black dark:text-white">{monthName}</h4>
                                     <button
                                         type="button"
                                         onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))}
-                                        className="p-2 hover:bg-gray-200 rounded-lg transition-colors"
+                                        className="p-2 hover:bg-gray-200 dark:hover:bg-white/10 rounded-lg transition-colors text-gray-600 dark:text-white"
                                     >
                                         <ChevronRight className="w-5 h-5" />
                                     </button>
@@ -230,7 +230,7 @@ const MeetingArrangement: React.FC = () => {
                                                 onClick={() => setSelectedDate(day)}
                                                 className={`aspect-square rounded-xl flex items-center justify-center text-sm font-semibold transition-all ${isSelected
                                                     ? 'bg-brand-blue-600 text-white shadow-lg'
-                                                    : 'bg-white hover:bg-gray-100 text-gray-700'
+                                                    : 'bg-white dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-700 dark:text-white'
                                                     }`}
                                             >
                                                 {day}
@@ -243,14 +243,14 @@ const MeetingArrangement: React.FC = () => {
 
                         {/* Time */}
                         <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
+                            <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">
                                 Select Time <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="time"
                                 value={formData.time}
                                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent"
+                                className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all"
                                 required
                             />
                         </div>
@@ -266,10 +266,10 @@ const MeetingArrangement: React.FC = () => {
                 </div>
 
                 {/* Upcoming Meetings */}
-                <div className="bg-white rounded-3xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-6 md:p-8 border-b border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="bg-white dark:bg-white/[0.03] rounded-3xl border border-gray-200 dark:border-white/10 shadow-lg overflow-hidden">
+                    <div className="p-6 md:p-8 border-b border-gray-200 dark:border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <div>
-                            <h3 className="text-xl md:text-2xl font-black">Upcoming Meetings</h3>
+                            <h3 className="text-xl md:text-2xl font-black dark:text-white">Upcoming Meetings</h3>
                             <p className="text-[10px] md:text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Operational Node Scheduling</p>
                         </div>
                         <div className="flex items-center gap-3">
@@ -290,21 +290,21 @@ const MeetingArrangement: React.FC = () => {
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {meetings.map((meeting) => (
-                                    <div key={meeting.id} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 relative group">
+                                    <div key={meeting.id} className="bg-gray-50 dark:bg-white/5 rounded-2xl p-6 border border-gray-200 dark:border-white/10 hover:shadow-lg transition-all duration-300 relative group">
                                         <button
                                             onClick={() => handleDelete(meeting.id)}
-                                            className="absolute top-4 right-4 p-2 bg-red-100 hover:bg-red-200 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                                            className="absolute top-4 right-4 p-2 bg-red-100 dark:bg-red-500/20 hover:bg-red-200 dark:hover:bg-red-500/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                                             title="Delete meeting"
                                         >
                                             <Trash2 className="w-4 h-4 text-red-600" />
                                         </button>
 
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-12 h-12 bg-brand-blue-100 rounded-xl flex items-center justify-center text-2xl">
+                                            <div className="w-12 h-12 bg-brand-blue-100 dark:bg-brand-blue-500/20 rounded-xl flex items-center justify-center text-2xl">
                                                 {getMeetingTypeIcon(meeting.type)}
                                             </div>
                                             <div className="flex-1">
-                                                <h4 className="font-black text-gray-900 text-lg">{meeting.title}</h4>
+                                                <h4 className="font-black text-gray-900 dark:text-white text-lg">{meeting.title}</h4>
                                                 <span className={`inline-block px-2 py-1 rounded-full text-xs font-bold mt-1 ${getMeetingTypeColor(meeting.type)}`}>
                                                     {meeting.type.charAt(0).toUpperCase() + meeting.type.slice(1)}
                                                 </span>
@@ -312,15 +312,15 @@ const MeetingArrangement: React.FC = () => {
                                         </div>
 
                                         <div className="space-y-2">
-                                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                                 <Calendar className="w-4 h-4" />
                                                 <span className="font-semibold">{meeting.date}</span>
                                             </div>
-                                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                                 <Clock className="w-4 h-4" />
                                                 <span className="font-semibold">{meeting.time}</span>
                                             </div>
-                                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                                            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                                 <Users className="w-4 h-4" />
                                                 <span className="font-semibold">{meeting.participants}</span>
                                             </div>

@@ -6,6 +6,7 @@ const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const navigate = useNavigate();
 
@@ -26,12 +27,13 @@ const Login: React.FC = () => {
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
 
         if (authenticateUser(username, password)) {
             // Redirect to 2FA verification page using navigate
             navigate(`/two-factor-setup?username=${encodeURIComponent(username)}&remember=${remember}`);
         } else {
-            alert('Invalid credentials. Please try again.');
+            setError('System Access Denied: Invalid credentials. Please verify your identity and try again.');
         }
     };
 
@@ -57,6 +59,17 @@ const Login: React.FC = () => {
                         <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Admin Access</h1>
                         <p className="text-navy-300 font-medium">Secure authentication for enterprise core</p>
                     </div>
+
+                    {error && (
+                        <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl animate-shake">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                                    <ShieldCheck className="w-4 h-4 text-red-400" />
+                                </div>
+                                <p className="text-xs font-bold text-red-200 leading-tight uppercase tracking-wider">{error}</p>
+                            </div>
+                        </div>
+                    )}
 
                     <form className="space-y-6" onSubmit={handleFormSubmit}>
                         <div className="space-y-2">

@@ -79,13 +79,16 @@ const AccountManagement: React.FC = () => {
             <div className={`space-y-8 transition-all duration-1000 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
 
                 {notification && (
-                    <div className={`fixed top-24 right-8 z-50 px-6 py-4 rounded-2xl shadow-lg animate-slide-in-right ${notification.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
-                        <p className="font-bold">{notification.message}</p>
+                    <div className={`fixed top-24 right-8 z-50 px-6 py-4 rounded-2xl shadow-lg border animate-slide-in-right ${notification.type === 'success'
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 backdrop-blur-md'
+                        : 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20 backdrop-blur-md'
+                        }`}>
+                        <p className="font-bold uppercase tracking-widest text-[10px]">{notification.message}</p>
                     </div>
                 )}
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight">Account Management</h2>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-navy-950 dark:text-white uppercase">Account Matrix</h2>
                     <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                         <button onClick={() => setShowAddModal(true)} className="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
                             <Plus className="w-5 h-5" />
@@ -100,105 +103,108 @@ const AccountManagement: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                     {[
-                        { label: 'Total Revenue', value: `₹${(totalRevenue / 100000).toFixed(1)}L`, icon: '💰', bgColor: 'bg-green-50', iconBg: 'bg-green-100', textColor: 'text-green-600' },
-                        { label: 'Total Expenses', value: `₹${(totalExpenses / 100000).toFixed(1)}L`, icon: '💸', bgColor: 'bg-red-50', iconBg: 'bg-red-100', textColor: 'text-red-600' },
-                        { label: 'Net Profit', value: `₹${(netProfit / 100000).toFixed(1)}L`, icon: '📈', bgColor: 'bg-blue-50', iconBg: 'bg-blue-100', textColor: 'text-blue-600' },
-                        { label: 'Total Transactions', value: totalTransactions.toString(), icon: '📊', bgColor: 'bg-purple-50', iconBg: 'bg-purple-100', textColor: 'text-purple-600' }
+                        { label: 'Total Revenue', value: `₹${(totalRevenue / 100000).toFixed(1)}L`, icon: '💰', bgColor: 'bg-emerald-50 dark:bg-emerald-500/5', iconBg: 'bg-emerald-100 dark:bg-emerald-500/10', textColor: 'text-emerald-600 dark:text-emerald-400', borderColor: 'border-emerald-100 dark:border-emerald-500/20' },
+                        { label: 'Total Expenses', value: `₹${(totalExpenses / 100000).toFixed(1)}L`, icon: '💸', bgColor: 'bg-red-50 dark:bg-red-500/5', iconBg: 'bg-red-100 dark:bg-red-500/10', textColor: 'text-red-600 dark:text-red-400', borderColor: 'border-red-100 dark:border-red-500/20' },
+                        { label: 'Net Profit', value: `₹${(netProfit / 100000).toFixed(1)}L`, icon: '📈', bgColor: 'bg-brand-blue-50 dark:bg-brand-blue-500/5', iconBg: 'bg-brand-blue-100 dark:bg-brand-blue-500/10', textColor: 'text-brand-blue-600 dark:text-brand-blue-400', borderColor: 'border-brand-blue-100 dark:border-brand-blue-500/20' },
+                        { label: 'Total Entries', value: totalTransactions.toString(), icon: '📊', bgColor: 'bg-purple-50 dark:bg-purple-500/5', iconBg: 'bg-purple-100 dark:bg-purple-500/10', textColor: 'text-purple-600 dark:text-purple-400', borderColor: 'border-purple-100 dark:border-purple-500/20' }
                     ].map((stat, i) => (
-                        <div key={i} className={`${stat.bgColor} rounded-3xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300`}>
+                        <div key={i} className={`${stat.bgColor} ${stat.borderColor} rounded-[2rem] p-6 border group hover:scale-[1.02] transition-all duration-300 shadow-sm backdrop-blur-sm`}>
                             <div className="flex items-start justify-between mb-4">
-                                <div className={`w-12 h-12 ${stat.iconBg} rounded-2xl flex items-center justify-center text-2xl`}>{stat.icon}</div>
+                                <div className={`w-12 h-12 ${stat.iconBg} rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>{stat.icon}</div>
                             </div>
-                            <div className={`text-3xl font-black mb-1 ${stat.textColor}`}>{stat.value}</div>
-                            <div className="text-sm font-semibold text-gray-600">{stat.label}</div>
+                            <div className={`text-3xl font-black mb-1 ${stat.textColor} tracking-tight`}>{stat.value}</div>
+                            <div className="text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest">{stat.label}</div>
                         </div>
                     ))}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-6 md:p-8">
-                        <h3 className="text-xl md:text-2xl font-black mb-6">Revenue vs Expenses</h3>
-                        <div className="space-y-4">
+                    <div className="bg-white dark:bg-white/[0.02] rounded-[2.5rem] border border-navy-100 dark:border-white/5 shadow-xl shadow-navy-100/20 dark:shadow-navy-950/50 p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-black mb-6 text-navy-950 dark:text-white uppercase tracking-tight">Revenue vs Expenses</h3>
+                        <div className="space-y-6">
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <span className="text-sm font-bold text-gray-700">Revenue</span>
-                                    <span className="text-sm font-bold text-green-600">₹{(totalRevenue / 100000).toFixed(2)}L</span>
+                                    <span className="text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest">Revenue Alpha</span>
+                                    <span className="text-xs font-black text-emerald-600 dark:text-emerald-400">₹{(totalRevenue / 100000).toFixed(2)}L</span>
                                 </div>
-                                <div className="w-full bg-gray-200 rounded-full h-3">
-                                    <div className="bg-green-500 h-3 rounded-full" style={{ width: `${(totalRevenue / (totalRevenue + totalExpenses)) * 100}%` }}></div>
+                                <div className="w-full bg-navy-50 dark:bg-white/5 rounded-full h-3 overflow-hidden">
+                                    <div className="bg-emerald-500 h-3 rounded-full shadow-lg shadow-emerald-500/20 transition-all duration-1000" style={{ width: `${(totalRevenue / (totalRevenue + totalExpenses)) * 100}%` }}></div>
                                 </div>
                             </div>
                             <div>
                                 <div className="flex justify-between mb-2">
-                                    <span className="text-sm font-bold text-gray-700">Expenses</span>
-                                    <span className="text-sm font-bold text-red-600">₹{(totalExpenses / 100000).toFixed(2)}L</span>
+                                    <span className="text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest">Expense Vector</span>
+                                    <span className="text-xs font-black text-red-600 dark:text-red-400">₹{(totalExpenses / 100000).toFixed(2)}L</span>
                                 </div>
-                                <div className="w-full bg-gray-200 rounded-full h-3">
-                                    <div className="bg-red-500 h-3 rounded-full" style={{ width: `${(totalExpenses / (totalRevenue + totalExpenses)) * 100}%` }}></div>
+                                <div className="w-full bg-navy-50 dark:bg-white/5 rounded-full h-3 overflow-hidden">
+                                    <div className="bg-red-500 h-3 rounded-full shadow-lg shadow-red-500/20 transition-all duration-1000" style={{ width: `${(totalExpenses / (totalRevenue + totalExpenses)) * 100}%` }}></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-3xl border border-gray-200 shadow-lg p-6 md:p-8">
-                        <h3 className="text-xl md:text-2xl font-black mb-6">Financial Summary</h3>
+                    <div className="bg-white dark:bg-white/[0.02] rounded-[2.5rem] border border-navy-100 dark:border-white/5 shadow-xl shadow-navy-100/20 dark:shadow-navy-950/50 p-6 md:p-8">
+                        <h3 className="text-xl md:text-2xl font-black mb-6 text-navy-950 dark:text-white uppercase tracking-tight">Financial Index</h3>
                         <div className="space-y-4">
-                            <div className="flex items-center justify-between p-4 bg-green-50 rounded-2xl">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                                        <TrendingUp className="w-5 h-5 text-green-600" />
+                            <div className="flex items-center justify-between p-5 bg-emerald-50 dark:bg-emerald-500/5 rounded-[1.5rem] border border-emerald-100 dark:border-emerald-500/10">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/20 rounded-2xl flex items-center justify-center shadow-inner">
+                                        <TrendingUp className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                                     </div>
                                     <div>
-                                        <div className="text-sm font-bold text-gray-700">Revenue Growth</div>
-                                        <div className="text-xs text-gray-500">vs last month</div>
+                                        <div className="text-[10px] font-black text-navy-950 dark:text-white uppercase tracking-widest leading-none mb-1">Revenue Delta</div>
+                                        <div className="text-[9px] font-bold text-navy-500 dark:text-navy-400 uppercase tracking-widest leading-none">vs Cycle-01</div>
                                     </div>
                                 </div>
-                                <div className="text-2xl font-black text-green-600">+15%</div>
+                                <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight">+15%</div>
                             </div>
-                            <div className="flex items-center justify-between p-4 bg-red-50 rounded-2xl">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
-                                        <TrendingDown className="w-5 h-5 text-red-600" />
+                            <div className="flex items-center justify-between p-5 bg-red-50 dark:bg-red-500/5 rounded-[1.5rem] border border-red-100 dark:border-red-500/10">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-red-100 dark:bg-red-500/20 rounded-2xl flex items-center justify-center shadow-inner">
+                                        <TrendingDown className="w-6 h-6 text-red-600 dark:text-red-400" />
                                     </div>
                                     <div>
-                                        <div className="text-sm font-bold text-gray-700">Expense Reduction</div>
-                                        <div className="text-xs text-gray-500">vs last month</div>
+                                        <div className="text-[10px] font-black text-navy-950 dark:text-white uppercase tracking-widest leading-none mb-1">Expense Logic</div>
+                                        <div className="text-[9px] font-bold text-navy-500 dark:text-navy-400 uppercase tracking-widest leading-none">vs Cycle-01</div>
                                     </div>
                                 </div>
-                                <div className="text-2xl font-black text-red-600">-8%</div>
+                                <div className="text-2xl font-black text-red-600 dark:text-red-400 tracking-tight">-8%</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-6 md:p-8 border-b border-gray-200">
-                        <h3 className="text-xl md:text-2xl font-black">Recent Transactions</h3>
+                <div className="bg-white dark:bg-white/[0.02] rounded-[2.5rem] border border-navy-100 dark:border-white/5 shadow-xl shadow-navy-100/20 dark:shadow-navy-950/50 overflow-hidden">
+                    <div className="p-6 md:p-8 border-b border-navy-100 dark:border-white/5">
+                        <h3 className="text-xl md:text-2xl font-black text-navy-950 dark:text-white uppercase tracking-tight">Recent Ledger</h3>
                     </div>
-                    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-200">
-                        <table className="w-full min-w-[600px]">
-                            <thead className="bg-gray-50 border-b border-gray-200">
+                    <div className="overflow-x-auto">
+                        <table className="w-full">
+                            <thead className="bg-navy-50/50 dark:bg-white/[0.02]">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Date</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Description</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Category</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Type</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Amount</th>
+                                    <th className="px-6 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-widest border-b border-navy-100 dark:border-white/5">Date Space</th>
+                                    <th className="px-6 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-widest border-b border-navy-100 dark:border-white/5">Intelligence Desc</th>
+                                    <th className="px-6 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-widest border-b border-navy-100 dark:border-white/5">Nexus Category</th>
+                                    <th className="px-6 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-widest border-b border-navy-100 dark:border-white/5">State Type</th>
+                                    <th className="px-6 py-5 text-left text-[10px] font-black text-navy-500 uppercase tracking-widest border-b border-navy-100 dark:border-white/5">Value Quant</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className="divide-y divide-navy-100 dark:divide-white/5">
                                 {transactions.map((transaction) => (
-                                    <tr key={transaction.id} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 text-sm font-semibold text-gray-700">{new Date(transaction.date).toLocaleDateString()}</td>
-                                        <td className="px-6 py-4 text-sm font-bold text-gray-900">{transaction.description}</td>
-                                        <td className="px-6 py-4"><span className="px-3 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-700">{transaction.category}</span></td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${transaction.type === 'Revenue' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                    <tr key={transaction.id} className="hover:bg-navy-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                        <td className="px-6 py-6 text-sm font-black text-navy-600 dark:text-navy-400 group-hover:text-navy-950 dark:group-hover:text-white transition-colors">{new Date(transaction.date).toLocaleDateString()}</td>
+                                        <td className="px-6 py-6 text-sm font-black text-navy-950 dark:text-white">{transaction.description}</td>
+                                        <td className="px-6 py-6"><span className="px-3 py-1 rounded-lg text-[10px] font-black bg-navy-50 dark:bg-white/5 text-navy-500 dark:text-navy-400 border border-navy-100 dark:border-white/10 uppercase tracking-widest">{transaction.category}</span></td>
+                                        <td className="px-6 py-6">
+                                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black border uppercase tracking-widest ${transaction.type === 'Revenue'
+                                                ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
+                                                : 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20'
+                                                }`}>
                                                 {transaction.type}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`text-sm font-bold ${transaction.type === 'Revenue' ? 'text-green-600' : 'text-red-600'}`}>
+                                        <td className="px-6 py-6">
+                                            <span className={`text-sm font-black tracking-tight ${transaction.type === 'Revenue' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
                                                 {transaction.type === 'Revenue' ? '+' : '-'}₹{(transaction.amount / 1000).toFixed(2)}K
                                             </span>
                                         </td>
@@ -211,40 +217,55 @@ const AccountManagement: React.FC = () => {
             </div>
 
             {showAddModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[70] p-4 backdrop-blur-sm overflow-y-auto">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl my-auto">
-                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-5 md:p-6 text-white flex justify-between items-center z-10">
-                            <h3 className="text-xl md:text-2xl font-black">Add New Transaction</h3>
-                            <button onClick={() => { setShowAddModal(false); resetForm(); }} className="p-2 hover:bg-white/20 rounded-lg transition-colors"><X className="w-6 h-6" /></button>
-                        </div>
-                        <form onSubmit={handleAdd} className="p-5 md:p-6 space-y-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
+                    <div
+                        className="absolute inset-0 bg-navy-950/40 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
+                        onClick={() => { setShowAddModal(false); resetForm(); }}
+                    />
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                        <div className="p-6 md:p-10">
+                            <div className="flex justify-between items-center mb-10">
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Date</label>
-                                    <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                                    <h3 className="text-2xl font-black text-navy-950 dark:text-white uppercase">Log Entry.</h3>
+                                    <p className="text-xs font-bold text-navy-500 dark:text-navy-400 uppercase tracking-widest mt-1">Operational Financial Ingestion</p>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Type</label>
-                                    <select value={formData.type} onChange={(e) => setFormData({ ...formData, type: e.target.value as 'Revenue' | 'Expense' })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500">
-                                        <option>Revenue</option>
-                                        <option>Expense</option>
-                                    </select>
-                                </div>
-                                <div className="col-span-2">
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
-                                    <input type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
-                                    <input type="text" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">Amount (₹)</label>
-                                    <input type="number" value={formData.amount} onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
-                                </div>
+                                <button onClick={() => { setShowAddModal(false); resetForm(); }} className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 flex items-center justify-center text-navy-400 hover:text-navy-950 dark:hover:text-white transition-all">
+                                    <X className="w-6 h-6" />
+                                </button>
                             </div>
-                            <button type="submit" className="w-full bg-brand-blue-600 hover:bg-brand-blue-700 text-white py-4 rounded-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl">Add Transaction</button>
-                        </form>
+                            <form onSubmit={handleAdd} className="space-y-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Cycle Date</label>
+                                        <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all font-black" required />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Logic Type</label>
+                                        <select value={formData.type} onChange={(e) => setFormData({ ...formData, type: e.target.value as 'Revenue' | 'Expense' })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer font-black">
+                                            <option className="dark:bg-navy-900">Revenue</option>
+                                            <option className="dark:bg-navy-900">Expense</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-span-1 sm:col-span-2">
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Intel Description</label>
+                                        <input type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all font-black placeholder:text-navy-300 dark:placeholder:text-navy-600" placeholder="Source identifier..." required />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Nexus Classification</label>
+                                        <input type="text" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all font-black placeholder:text-navy-300 dark:placeholder:text-navy-600" placeholder="Sector assign..." required />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Value Quantum (₹)</label>
+                                        <input type="number" value={formData.amount} onChange={(e) => setFormData({ ...formData, amount: Number(e.target.value) })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all font-black placeholder:text-navy-300 dark:placeholder:text-navy-600" placeholder="0.00" required />
+                                    </div>
+                                </div>
+                                <div className="pt-4">
+                                    <button type="submit" className="w-full bg-brand-blue-600 hover:bg-brand-blue-500 text-white py-5 rounded-2xl font-black text-sm uppercase tracking-[0.2em] transition-all shadow-xl shadow-brand-blue-900/40 active:scale-95">
+                                        Commit Transaction
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}

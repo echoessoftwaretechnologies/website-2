@@ -125,34 +125,34 @@ const BranchManagement: React.FC = () => {
         <form onSubmit={onSubmit} className="p-6 md:p-8 space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Branch Name</label>
-                    <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Branch Name</label>
+                    <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
-                    <input type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Description</label>
+                    <input type="text" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Location</label>
-                    <input type="text" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Location</label>
+                    <input type="text" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Manager</label>
-                    <input type="text" value={formData.manager} onChange={(e) => setFormData({ ...formData, manager: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Manager</label>
+                    <input type="text" value={formData.manager} onChange={(e) => setFormData({ ...formData, manager: e.target.value })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Employees</label>
-                    <input type="number" value={formData.employees} onChange={(e) => setFormData({ ...formData, employees: Number(e.target.value) })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500" required />
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Employees</label>
+                    <input type="number" value={formData.employees} onChange={(e) => setFormData({ ...formData, employees: Number(e.target.value) })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Status</label>
-                    <select value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value as 'ACTIVE' | 'INACTIVE' })} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500">
-                        <option>ACTIVE</option>
-                        <option>INACTIVE</option>
+                    <label className="block text-sm font-bold text-gray-700 dark:text-white/70 mb-2">Status</label>
+                    <select value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value as 'ACTIVE' | 'INACTIVE' })} className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 transition-all cursor-pointer">
+                        <option className="dark:bg-navy-900">ACTIVE</option>
+                        <option className="dark:bg-navy-900">INACTIVE</option>
                     </select>
                 </div>
             </div>
-            <button type="submit" className="w-full bg-brand-blue-600 hover:bg-brand-blue-700 text-white py-4 rounded-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl">{buttonText}</button>
+            <button type="submit" className="w-full bg-brand-blue-600 hover:bg-brand-blue-700 text-white py-4 rounded-2xl font-bold transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">{buttonText}</button>
         </form>
     );
 
@@ -167,7 +167,7 @@ const BranchManagement: React.FC = () => {
                 )}
 
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight">Branch Management</h2>
+                    <h2 className="text-2xl md:text-3xl font-black tracking-tight dark:text-white">Branch Management</h2>
                     <button onClick={() => setShowAddModal(true)} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand-blue-600 hover:bg-brand-blue-700 text-white px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95">
                         <Plus className="w-5 h-5" />
                         Add New Branch
@@ -176,62 +176,62 @@ const BranchManagement: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
-                        { label: 'Total Branches', value: totalBranches.toString(), icon: '🏢', bgColor: 'bg-blue-50', iconBg: 'bg-blue-100', textColor: 'text-blue-600' },
-                        { label: 'Total Employees', value: totalEmployees.toString(), icon: '👥', bgColor: 'bg-green-50', iconBg: 'bg-green-100', textColor: 'text-green-600' },
-                        { label: 'Active Branches', value: activeBranches.toString(), icon: '📍', bgColor: 'bg-yellow-50', iconBg: 'bg-yellow-100', textColor: 'text-yellow-600' },
-                        { label: 'Growth Rate', value: `${growthRate}%`, icon: '📈', bgColor: 'bg-purple-50', iconBg: 'bg-purple-100', textColor: 'text-purple-600' }
+                        { label: 'Total Branches', value: totalBranches.toString(), icon: '🏢', bgColor: 'bg-blue-50 dark:bg-blue-500/10', iconBg: 'bg-blue-100 dark:bg-blue-500/20', textColor: 'text-blue-600 dark:text-blue-400' },
+                        { label: 'Total Employees', value: totalEmployees.toString(), icon: '👥', bgColor: 'bg-green-50 dark:bg-green-500/10', iconBg: 'bg-green-100 dark:bg-green-500/20', textColor: 'text-green-600 dark:text-green-400' },
+                        { label: 'Active Branches', value: activeBranches.toString(), icon: '📍', bgColor: 'bg-yellow-50 dark:bg-yellow-500/10', iconBg: 'bg-yellow-100 dark:bg-yellow-500/20', textColor: 'text-yellow-600 dark:text-yellow-400' },
+                        { label: 'Growth Rate', value: `${growthRate}%`, icon: '📈', bgColor: 'bg-purple-50 dark:bg-purple-500/10', iconBg: 'bg-purple-100 dark:bg-purple-500/20', textColor: 'text-purple-600 dark:text-purple-400' }
                     ].map((stat, i) => (
-                        <div key={i} className={`${stat.bgColor} rounded-3xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300`}>
+                        <div key={i} className={`${stat.bgColor} rounded-3xl p-6 border border-gray-200 dark:border-white/10 hover:shadow-lg transition-all duration-300`}>
                             <div className="flex items-start justify-between mb-4">
                                 <div className={`w-12 h-12 ${stat.iconBg} rounded-2xl flex items-center justify-center text-2xl`}>{stat.icon}</div>
                             </div>
                             <div className={`text-3xl font-black mb-1 ${stat.textColor}`}>{stat.value}</div>
-                            <div className="text-sm font-semibold text-gray-600">{stat.label}</div>
+                            <div className="text-sm font-semibold text-gray-600 dark:text-gray-400">{stat.label}</div>
                         </div>
                     ))}
                 </div>
 
-                <div className="bg-white rounded-3xl border border-gray-200 shadow-lg overflow-hidden">
-                    <div className="p-6 md:p-8 border-b border-gray-200">
-                        <h3 className="text-xl md:text-2xl font-black mb-6">Branch List</h3>
+                <div className="bg-white dark:bg-white/[0.03] rounded-3xl border border-gray-200 dark:border-white/10 shadow-lg overflow-hidden">
+                    <div className="p-6 md:p-8 border-b border-gray-200 dark:border-white/10">
+                        <h3 className="text-xl md:text-2xl font-black mb-6 dark:text-white">Branch List</h3>
                         <div className="flex flex-col lg:flex-row gap-4">
                             <div className="flex-1 relative">
-                                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                                <input type="text" placeholder="Search branches..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent" />
+                                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-600" />
+                                <input type="text" placeholder="Search branches..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:border-transparent transition-all" />
                             </div>
-                            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-full lg:w-48 px-6 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold cursor-pointer">
-                                <option>All Status</option><option>ACTIVE</option><option>INACTIVE</option>
+                            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-full lg:w-48 px-6 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-blue-500 font-semibold cursor-pointer transition-all">
+                                <option className="dark:bg-navy-900">All Status</option><option className="dark:bg-navy-900">ACTIVE</option><option className="dark:bg-navy-900">INACTIVE</option>
                             </select>
                         </div>
                     </div>
 
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-gray-50 border-b border-gray-200">
+                            <thead className="bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-white/10">
                                 <tr>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Branch</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Location</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Manager</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Employees</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Status</th>
-                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 uppercase tracking-wider">Actions</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Branch</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Location</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Manager</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Employees</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                                    <th className="px-6 py-4 text-left text-xs font-black text-gray-600 dark:text-gray-400 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200">
+                            <tbody className="divide-y divide-gray-200 dark:divide-white/5">
                                 {filteredBranches.map((branch) => (
-                                    <tr key={branch.id} className="hover:bg-gray-50 transition-colors">
+                                    <tr key={branch.id} className="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center"><span className="text-blue-600 font-black text-sm">🏢</span></div>
-                                                <div><div className="font-bold text-navy-900">{branch.name}</div><div className="text-sm text-gray-500">{branch.description}</div></div>
+                                                <div className="w-10 h-10 bg-blue-100 dark:bg-blue-500/20 rounded-xl flex items-center justify-center"><span className="text-blue-600 dark:text-blue-400 font-black text-sm">🏢</span></div>
+                                                <div><div className="font-bold text-navy-900 dark:text-white">{branch.name}</div><div className="text-sm text-gray-500 dark:text-gray-400">{branch.description}</div></div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4"><div className="flex items-center gap-2 text-sm font-semibold text-gray-700"><MapPin className="w-4 h-4 text-gray-400" />{branch.location}</div></td>
-                                        <td className="px-6 py-4 text-sm font-semibold text-gray-700">{branch.manager}</td>
-                                        <td className="px-6 py-4 text-sm font-bold text-gray-900">{branch.employees}</td>
-                                        <td className="px-6 py-4"><span className={`px-3 py-1 rounded-full text-xs font-bold ${branch.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>{branch.status}</span></td>
+                                        <td className="px-6 py-4"><div className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300"><MapPin className="w-4 h-4 text-gray-400 dark:text-gray-500" />{branch.location}</div></td>
+                                        <td className="px-6 py-4 text-sm font-semibold text-gray-700 dark:text-gray-300">{branch.manager}</td>
+                                        <td className="px-6 py-4 text-sm font-bold text-gray-900 dark:text-white">{branch.employees}</td>
+                                        <td className="px-6 py-4"><span className={`px-3 py-1 rounded-full text-xs font-bold ${branch.status === 'ACTIVE' ? 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400' : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white/60'}`}>{branch.status}</span></td>
                                         <td className="px-6 py-4">
-                                            <button onClick={() => handleEdit(branch)} className="p-2 hover:bg-blue-50 rounded-lg transition-colors" title="Edit"><Edit2 className="w-4 h-4 text-blue-600" /></button>
+                                            <button onClick={() => handleEdit(branch)} className="p-2 hover:bg-blue-50 dark:hover:bg-white/10 rounded-lg transition-colors text-blue-600 dark:text-blue-400" title="Edit"><Edit2 className="w-4 h-4" /></button>
                                         </td>
                                     </tr>
                                 ))}
@@ -242,9 +242,9 @@ const BranchManagement: React.FC = () => {
             </div>
 
             {showAddModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-6 text-white flex justify-between items-center">
+                <div className="fixed inset-0 bg-navy-950/40 dark:bg-black/60 flex items-center justify-center z-[100] p-4 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white dark:bg-navy-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-slide-up border dark:border-white/10">
+                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-6 text-white flex justify-between items-center z-10">
                             <h3 className="text-2xl font-black">Add New Branch</h3>
                             <button onClick={() => { setShowAddModal(false); resetForm(); }} className="p-2 hover:bg-white/20 rounded-lg transition-colors"><X className="w-6 h-6" /></button>
                         </div>
@@ -254,9 +254,9 @@ const BranchManagement: React.FC = () => {
             )}
 
             {showEditModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-6 text-white flex justify-between items-center">
+                <div className="fixed inset-0 bg-navy-950/40 dark:bg-black/60 flex items-center justify-center z-[100] p-4 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white dark:bg-navy-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-slide-up border dark:border-white/10">
+                        <div className="sticky top-0 bg-gradient-to-r from-brand-blue-600 to-indigo-600 p-6 text-white flex justify-between items-center z-10">
                             <h3 className="text-2xl font-black">Edit Branch</h3>
                             <button onClick={() => { setShowEditModal(false); setSelectedBranch(null); resetForm(); }} className="p-2 hover:bg-white/20 rounded-lg transition-colors"><X className="w-6 h-6" /></button>
                         </div>

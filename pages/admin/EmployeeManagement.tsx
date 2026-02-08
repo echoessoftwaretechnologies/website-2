@@ -83,11 +83,11 @@ const EmployeeManagement: React.FC = () => {
 
     const getStatusStyle = (status: string) => {
         switch (status) {
-            case 'active': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
-            case 'probation': return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-            case 'on-leave': return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
-            case 'terminated': return 'bg-red-500/10 text-red-400 border-red-500/20';
-            default: return 'bg-white/10 text-white border-white/20';
+            case 'active': return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+            case 'probation': return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+            case 'on-leave': return 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20';
+            case 'terminated': return 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20';
+            default: return 'bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-white border-gray-200 dark:border-white/20';
         }
     };
 
@@ -174,18 +174,18 @@ const EmployeeManagement: React.FC = () => {
                                     <tr key={emp.id} className="group hover:bg-navy-50 dark:hover:bg-white/[0.02] transition-colors cursor-default">
                                         <td className="px-4 md:px-8 py-6">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 rounded-2xl bg-navy-100 dark:bg-navy-800 border border-navy-200 dark:border-white/10 flex items-center justify-center font-black text-brand-blue-600 dark:text-brand-blue-400 group-hover:border-brand-blue-500/50 transition-all shadow-inner">
+                                                <div className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-navy-800 border border-navy-200 dark:border-white/10 flex items-center justify-center font-black text-brand-blue-600 dark:text-brand-blue-400 group-hover:border-brand-blue-500/50 transition-all shadow-inner">
                                                     {emp.initials}
                                                 </div>
                                                 <div>
                                                     <div className="text-sm font-black text-navy-950 dark:text-white">{emp.firstName} {emp.lastName}</div>
-                                                    <div className="text-[10px] font-bold text-navy-500 uppercase tracking-widest mt-0.5">{emp.email}</div>
+                                                    <div className="text-[10px] font-bold text-navy-500 dark:text-gray-500 uppercase tracking-widest mt-0.5">{emp.email}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-4 md:px-8 py-6">
                                             <div className="text-sm font-black text-navy-600 dark:text-navy-300 group-hover:text-brand-blue-600 dark:group-hover:text-white transition-colors uppercase tracking-tight">{emp.position}</div>
-                                            <div className="text-[10px] font-bold text-navy-500/60 dark:text-navy-700 uppercase tracking-widest mt-0.5">{emp.department}</div>
+                                            <div className="text-[10px] font-bold text-navy-500 dark:text-gray-600 uppercase tracking-widest mt-0.5">{emp.department}</div>
                                         </td>
                                         <td className="px-4 md:px-8 py-6">
                                             <span className={`px-3 py-1 rounded-lg border text-[10px] font-black uppercase tracking-widest ${getStatusStyle(emp.status)}`}>
@@ -194,7 +194,7 @@ const EmployeeManagement: React.FC = () => {
                                         </td>
                                         <td className="px-4 md:px-8 py-6">
                                             <div className="text-xs font-black text-navy-600 dark:text-navy-300 group-hover:text-brand-blue-600 dark:group-hover:text-white transition-colors uppercase tracking-tight">{emp.joinDate}</div>
-                                            <div className="text-[10px] font-bold text-navy-500/60 dark:text-navy-700 uppercase tracking-widest mt-0.5">EMP_ID_00{emp.id}</div>
+                                            <div className="text-[10px] font-bold text-navy-500 dark:text-gray-600 uppercase tracking-widest mt-0.5">EMP_ID_00{emp.id}</div>
                                         </td>
                                         <td className="px-4 md:px-8 py-6 text-right">
                                             <div className="flex items-center justify-end gap-2">
@@ -217,21 +217,20 @@ const EmployeeManagement: React.FC = () => {
                 </div>
             </div>
 
-            {/* Recruit Talent Modal */}
             {isAddModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
                     <div
-                        className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
+                        className="absolute inset-0 bg-navy-950/40 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
                         onClick={() => setIsAddModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
                         <div className="p-6 md:p-10">
                             <div className="flex justify-between items-center mb-10">
                                 <div>
-                                    <h3 className="text-2xl font-black text-white">Talent Admission.</h3>
-                                    <p className="text-xs font-bold text-navy-500 uppercase tracking-widest mt-1">Human Capital Ingestion Portal</p>
+                                    <h3 className="text-2xl font-black text-navy-950 dark:text-white">Talent Admission.</h3>
+                                    <p className="text-xs font-bold text-navy-500 dark:text-navy-400 uppercase tracking-widest mt-1">Human Capital Ingestion Portal</p>
                                 </div>
-                                <button onClick={() => setIsAddModalOpen(false)} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-navy-400 hover:text-white transition-all">
+                                <button onClick={() => setIsAddModalOpen(false)} className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 flex items-center justify-center text-navy-400 hover:text-navy-950 dark:hover:text-white transition-all">
                                     <X className="w-6 h-6" />
                                 </button>
                             </div>
@@ -239,49 +238,49 @@ const EmployeeManagement: React.FC = () => {
                             <form onSubmit={handleAddEmployee} className="space-y-6">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">First Designation</label>
-                                        <input required value={newEmployee.firstName} onChange={e => setNewEmployee({ ...newEmployee, firstName: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Given name" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">First Designation</label>
+                                        <input required value={newEmployee.firstName} onChange={e => setNewEmployee({ ...newEmployee, firstName: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Given name" />
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Last Designation</label>
-                                        <input required value={newEmployee.lastName} onChange={e => setNewEmployee({ ...newEmployee, lastName: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Surname" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Last Designation</label>
+                                        <input required value={newEmployee.lastName} onChange={e => setNewEmployee({ ...newEmployee, lastName: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Surname" />
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Network Identity</label>
-                                    <input type="email" required value={newEmployee.email} onChange={e => setNewEmployee({ ...newEmployee, email: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="secure@echoes.sys" />
+                                    <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Network Identity</label>
+                                    <input type="email" required value={newEmployee.email} onChange={e => setNewEmployee({ ...newEmployee, email: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="secure@echoes.sys" />
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Functional Role</label>
-                                        <input required value={newEmployee.position} onChange={e => setNewEmployee({ ...newEmployee, position: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Title assigning" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Functional Role</label>
+                                        <input required value={newEmployee.position} onChange={e => setNewEmployee({ ...newEmployee, position: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" placeholder="Title assigning" />
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Operational Nexus</label>
-                                        <select required value={newEmployee.department} onChange={e => setNewEmployee({ ...newEmployee, department: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
-                                            <option value="" className="bg-navy-900">Select Department</option>
-                                            <option value="Engineering" className="bg-navy-900">Engineering</option>
-                                            <option value="Marketing" className="bg-navy-900">Marketing</option>
-                                            <option value="Sales" className="bg-navy-900">Sales</option>
-                                            <option value="HR" className="bg-navy-900">Human Capital</option>
-                                            <option value="Finance" className="bg-navy-900">Finance</option>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Operational Nexus</label>
+                                        <select required value={newEmployee.department} onChange={e => setNewEmployee({ ...newEmployee, department: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
+                                            <option value="" className="dark:bg-navy-900">Select Department</option>
+                                            <option value="Engineering" className="dark:bg-navy-900">Engineering</option>
+                                            <option value="Marketing" className="dark:bg-navy-900">Marketing</option>
+                                            <option value="Sales" className="dark:bg-navy-900">Sales</option>
+                                            <option value="HR" className="dark:bg-navy-900">Human Capital</option>
+                                            <option value="Finance" className="dark:bg-navy-900">Finance</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Admission Date</label>
-                                        <input type="date" required value={newEmployee.startDate} onChange={e => setNewEmployee({ ...newEmployee, startDate: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Admission Date</label>
+                                        <input type="date" required value={newEmployee.startDate} onChange={e => setNewEmployee({ ...newEmployee, startDate: e.target.value })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all" />
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-black text-navy-500 uppercase tracking-widest mb-2 px-1">Initial Status</label>
-                                        <select value={newEmployee.status} onChange={e => setNewEmployee({ ...newEmployee, status: e.target.value as any })} className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
-                                            <option value="active" className="bg-navy-900">Active Duty</option>
-                                            <option value="probation" className="bg-navy-900">Probation Screening</option>
-                                            <option value="on-leave" className="bg-navy-900">Authorized Leave</option>
+                                        <label className="block text-[10px] font-black text-navy-500 dark:text-navy-400 uppercase tracking-widest mb-2 px-1">Initial Status</label>
+                                        <select value={newEmployee.status} onChange={e => setNewEmployee({ ...newEmployee, status: e.target.value as any })} className="w-full bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 rounded-2xl px-4 py-3.5 text-sm text-navy-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-brand-blue-500 transition-all cursor-pointer">
+                                            <option value="active" className="dark:bg-navy-900">Active Duty</option>
+                                            <option value="probation" className="dark:bg-navy-900">Probation Screening</option>
+                                            <option value="on-leave" className="dark:bg-navy-900">Authorized Leave</option>
                                         </select>
                                     </div>
                                 </div>
@@ -297,29 +296,28 @@ const EmployeeManagement: React.FC = () => {
                 </div>
             )}
 
-            {/* Personnel Intelligence Modal */}
             {isDetailModalOpen && selectedEmployee && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12">
                     <div
-                        className="absolute inset-0 bg-navy-950/80 backdrop-blur-xl animate-fade-in"
+                        className="absolute inset-0 bg-navy-950/40 dark:bg-black/60 backdrop-blur-sm animate-fade-in"
                         onClick={() => setIsDetailModalOpen(false)}
                     />
-                    <div className="bg-navy-900 border border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
+                    <div className="bg-white dark:bg-navy-900 border border-navy-200 dark:border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative z-10 overflow-y-auto max-h-[90vh] animate-slide-up">
                         <div className="p-6 md:p-10">
                             <div className="flex justify-between items-start mb-10">
                                 <div className="flex items-center gap-6">
-                                    <div className="w-20 h-20 rounded-[2rem] bg-navy-800 border border-white/10 text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">
+                                    <div className="w-20 h-20 rounded-[2rem] bg-navy-50 dark:bg-navy-800 border border-navy-200 dark:border-white/10 text-brand-blue-600 dark:text-brand-blue-400 font-black text-2xl flex items-center justify-center shadow-inner">
                                         {selectedEmployee.initials}
                                     </div>
                                     <div>
-                                        <h3 className="text-3xl font-black text-white leading-none">{selectedEmployee.firstName} {selectedEmployee.lastName}.</h3>
-                                        <div className="flex items-center gap-2 text-navy-500 font-bold uppercase tracking-widest text-[10px] mt-2">
+                                        <h3 className="text-3xl font-black text-navy-950 dark:text-white leading-none">{selectedEmployee.firstName} {selectedEmployee.lastName}.</h3>
+                                        <div className="flex items-center gap-2 text-navy-500 dark:text-navy-400 font-bold uppercase tracking-widest text-[10px] mt-2">
                                             <Briefcase className="w-3.5 h-3.5" />
                                             {selectedEmployee.position}
                                         </div>
                                     </div>
                                 </div>
-                                <button onClick={() => setIsDetailModalOpen(false)} className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-navy-400 hover:text-white transition-all">
+                                <button onClick={() => setIsDetailModalOpen(false)} className="w-12 h-12 rounded-2xl bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 flex items-center justify-center text-navy-400 hover:text-navy-950 dark:hover:text-white transition-all">
                                     <X className="w-6 h-6" />
                                 </button>
                             </div>
@@ -382,7 +380,7 @@ const EmployeeManagement: React.FC = () => {
                             </div>
 
                             <div className="flex gap-4">
-                                <button onClick={() => setIsDetailModalOpen(false)} className="flex-1 bg-white/5 border border-white/5 text-navy-400 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all">
+                                <button onClick={() => setIsDetailModalOpen(false)} className="flex-1 bg-navy-50 dark:bg-white/5 border border-navy-200 dark:border-white/10 text-navy-600 dark:text-navy-400 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-navy-100 dark:hover:bg-white/10 hover:text-navy-950 dark:hover:text-white transition-all">
                                     Terminate View
                                 </button>
                                 <button onClick={() => { setIsDetailModalOpen(false); setIsAddModalOpen(true); }} className="flex-1 bg-brand-blue-600 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-brand-blue-500 transition-all shadow-lg shadow-brand-blue-900/20 active:scale-95">

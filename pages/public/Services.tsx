@@ -11,7 +11,23 @@ declare global {
 
 const Services: React.FC = () => {
     const [activeCategory, setActiveCategory] = useState('All');
+    const [showMobilePopup, setShowMobilePopup] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const showTimeout = setTimeout(() => {
+            setShowMobilePopup(true);
+        }, 2000);
+
+        const hideTimeout = setTimeout(() => {
+            setShowMobilePopup(false);
+        }, 32000); // 2s delay + 30s visibility
+
+        return () => {
+            clearTimeout(showTimeout);
+            clearTimeout(hideTimeout);
+        };
+    }, []);
 
     const handleGetStarted = () => {
         navigate('/login');
@@ -373,69 +389,7 @@ const Services: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Mobile App Section */}
-                <section className="bg-navy-50 py-32 relative overflow-hidden">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div className="bg-white rounded-2xl shadow-premium p-12 lg:p-20 relative overflow-hidden border border-navy-100">
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-brand-blue-50/50 rounded-full blur-[100px] pointer-events-none"></div>
 
-                            <div className="grid lg:grid-cols-2 gap-16 items-center">
-                                <div className="space-y-10">
-                                    <div className="space-y-6">
-                                        <div className="w-16 h-16 bg-brand-blue-50 rounded-2xl flex items-center justify-center text-brand-blue-600 shadow-sm">
-                                            <Smartphone className="w-8 h-8" />
-                                        </div>
-                                        <h2 className="text-4xl lg:text-5xl font-black text-navy-950 tracking-tight leading-tight">Mobile Ecosystem <br /> Now Available</h2>
-                                        <p className="text-xl text-navy-600 font-light leading-relaxed">
-                                            Access our powerful software solutions anytime, anywhere. Our feature-rich mobile application keeps your business at your fingertips.
-                                        </p>
-                                    </div>
-
-                                    <div className="space-y-6">
-                                        {['Hyper-fast Performance', 'Military-grade Secure Access', 'Real-time Ecosystem Sync', 'Advanced Offline Mode'].map((feature, idx) => (
-                                            <div key={idx} className="flex items-center gap-4 group">
-                                                <div className="w-10 h-10 rounded-xl bg-brand-blue-50 flex items-center justify-center group-hover:bg-brand-blue-600 transition-colors">
-                                                    <Zap className="w-5 h-5 text-brand-blue-600 group-hover:text-white" />
-                                                </div>
-                                                <span className="text-lg font-bold text-navy-800 tracking-tight uppercase tracking-widest text-xs">{feature}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <a href="./Echoes Software Technologies.apk" download
-                                        className="inline-flex items-center justify-center premium-gradient text-white font-black px-12 py-6 rounded-full transition-all duration-500 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-200 text-xl uppercase tracking-widest w-full sm:w-auto">
-                                        <Download className="w-6 h-6 mr-3" />
-                                        Download App (APK)
-                                    </a>
-                                </div>
-
-                                <div className="relative">
-                                    <div className="absolute -inset-10 bg-brand-blue-100/30 rounded-full blur-[80px] z-0"></div>
-                                    <div className="relative z-10 bg-navy-950 p-4 rounded-[3rem] shadow-2xl border-4 border-white/20">
-                                        <div className="bg-navy-900 rounded-[2.5rem] p-8 text-white space-y-6 aspect-[9/16] flex flex-col justify-center border border-white/10">
-                                            <div className="w-12 h-1 bg-white/20 rounded-full mx-auto mb-10"></div>
-                                            <div className="space-y-2 text-center">
-                                                <img src="/assets/3.png" alt="Echoes Mobile" className="h-8 mx-auto" />
-                                                <div className="text-2xl font-black uppercase tracking-[0.2em] italic">Mobile</div>
-                                            </div>
-                                            <div className="flex-grow flex items-center justify-center">
-                                                <div className="w-40 h-40 bg-brand-blue-600/20 rounded-full flex items-center justify-center animate-pulse">
-                                                    <Shield className="w-20 h-20 text-brand-blue-500" />
-                                                </div>
-                                            </div>
-                                            <div className="text-center space-y-4">
-                                                <div className="text-xs font-bold text-white/40 uppercase tracking-widest">System Status</div>
-                                                <div className="flex justify-center gap-2">
-                                                    {[1, 2, 3, 4].map(i => <div key={i} className="w-8 h-1 bg-brand-blue-500 rounded-full"></div>)}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </main>
 
             {/* Comprehensive Footer */}
@@ -449,16 +403,37 @@ const Services: React.FC = () => {
                                 Precision-built enterprise software solutions driving digital transformation worldwide.
                             </p>
                             <div className="flex gap-4">
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+                                {/* LinkedIn */}
+                                <a
+                                    href="https://www.linkedin.com/company/echoes-software-solutions/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
+                                >
                                     <i data-lucide="linkedin" className="w-5 h-5"></i>
                                 </a>
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
+
+                                {/* Instagram */}
+                                <a
+                                    href="https://www.instagram.com/echoes_software_technologies?igsh=OW1xOGpmMzZmZ3Bq"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
+                                >
                                     <i data-lucide="instagram" className="w-5 h-5"></i>
                                 </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110">
-                                    <i data-lucide="twitter" className="w-5 h-5"></i>
+
+                                {/* WhatsApp */}
+                                <a
+                                    href="https://wa.me/918148549511"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all hover:scale-110"
+                                >
+                                    <i data-lucide="message-circle" className="w-5 h-5"></i>
                                 </a>
                             </div>
+
                         </div>
 
                         {/* Quick Links */}
@@ -523,6 +498,76 @@ const Services: React.FC = () => {
                 </div>
             </footer>
 
+            {/* Timed Mobile App Popup */}
+            {showMobilePopup && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-navy-950/40 backdrop-blur-sm animate-fade-in">
+                    <div className="relative bg-white rounded-[2rem] shadow-3xl max-w-4xl w-full p-8 md:p-12 overflow-hidden border border-navy-100 animate-slide-up">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue-50/50 rounded-full blur-[80px] pointer-events-none"></div>
+
+                        <button
+                            onClick={() => setShowMobilePopup(false)}
+                            className="absolute top-6 right-6 w-10 h-10 rounded-full bg-navy-50 flex items-center justify-center text-navy-400 hover:bg-brand-blue-600 hover:text-white transition-all duration-300 z-20"
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+
+                        <div className="grid lg:grid-cols-2 gap-10 items-center">
+                            <div className="space-y-8 relative z-10">
+                                <div className="space-y-4">
+                                    <div className="w-14 h-14 bg-brand-blue-50 rounded-2xl flex items-center justify-center text-brand-blue-600 shadow-sm">
+                                        <Smartphone className="w-7 h-7" />
+                                    </div>
+                                    <h2 className="text-3xl md:text-4xl font-black text-navy-950 tracking-tight leading-tight">Mobile Ecosystem <br className="hidden md:block" /> Now Available</h2>
+                                    <p className="text-lg text-navy-600 font-light leading-relaxed">
+                                        Access our powerful software solutions anytime, anywhere. Experience the full ecosystem on your mobile device.
+                                    </p>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {['Hyper-fast Performance', 'Military-grade Security', 'Real-time Sync'].map((feature, idx) => (
+                                        <div key={idx} className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-lg bg-brand-blue-50 flex items-center justify-center">
+                                                <Zap className="w-4 h-4 text-brand-blue-600" />
+                                            </div>
+                                            <span className="text-sm font-bold text-navy-800 uppercase tracking-widest">{feature}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <a href="./Echoes Software Technologies.apk" download
+                                    className="inline-flex items-center justify-center premium-gradient text-white font-black px-10 py-5 rounded-full transition-all duration-500 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-200 text-lg uppercase tracking-widest w-full sm:w-auto">
+                                    <Download className="w-5 h-5 mr-3" />
+                                    Download APK
+                                </a>
+                            </div>
+
+                            <div className="hidden lg:block relative text-center">
+                                <div className="absolute -inset-10 bg-brand-blue-100/30 rounded-full blur-[60px] z-0"></div>
+                                <div className="relative z-10 bg-navy-950 p-3 rounded-[2.5rem] shadow-2xl border-4 border-white/20 mx-auto w-[240px]">
+                                    <div className="bg-navy-900 rounded-[2rem] p-6 text-white space-y-4 aspect-[9/16] flex flex-col justify-center border border-white/10">
+                                        <div className="w-10 h-1 bg-white/20 rounded-full mx-auto mb-6"></div>
+                                        <div className="space-y-1 text-center">
+                                            <img src="/assets/3.png" alt="Echoes Mobile" className="h-6 mx-auto" />
+                                            <div className="text-lg font-black uppercase tracking-[0.2em] italic">Mobile</div>
+                                        </div>
+                                        <div className="flex-grow flex items-center justify-center">
+                                            <div className="w-24 h-24 bg-brand-blue-600/20 rounded-full flex items-center justify-center animate-pulse">
+                                                <Shield className="w-12 h-12 text-brand-blue-500" />
+                                            </div>
+                                        </div>
+                                        <div className="text-center space-y-3">
+                                            <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">System Online</div>
+                                            <div className="flex justify-center gap-1.5">
+                                                {[1, 2, 3, 4].map(i => <div key={i} className="w-6 h-1 bg-brand-blue-500 rounded-full"></div>)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

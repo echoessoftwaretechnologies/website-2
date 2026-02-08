@@ -7,6 +7,7 @@ const TwoFactorSetup: React.FC = () => {
     const [timeLeft, setTimeLeft] = useState(30);
     const [secret, setSecret] = useState('');
     const [username, setUsername] = useState('admin');
+    const [error, setError] = useState<string | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const navigate = useNavigate();
 
@@ -66,6 +67,7 @@ const TwoFactorSetup: React.FC = () => {
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
 
         if (verificationCode.length === 6 && /^\d{6}$/.test(verificationCode)) {
             const un = localStorage.getItem('tempUsername');
@@ -88,7 +90,7 @@ const TwoFactorSetup: React.FC = () => {
             // Redirect using navigate
             navigate('/admin/dashboard');
         } else {
-            alert('Invalid verification code.');
+            setError('Invalid Verification Code: Please enter the 6-digit code from your authenticator app.');
             setVerificationCode('');
         }
     };
@@ -113,6 +115,17 @@ const TwoFactorSetup: React.FC = () => {
                         <h1 className="text-3xl font-bold text-white tracking-tight mb-3">Two-Factor Authentication</h1>
                         <p className="text-navy-300 font-medium px-4">Secure your endpoint using Google Authenticator</p>
                     </div>
+
+                    {error && (
+                        <div className="mb-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl animate-shake">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                                    <ShieldCheck className="w-4 h-4 text-red-400" />
+                                </div>
+                                <p className="text-xs font-bold text-red-200 leading-tight uppercase tracking-wider">{error}</p>
+                            </div>
+                        </div>
+                    )}
 
                     <div className="flex flex-col md:flex-row gap-8 mb-10 items-center bg-white/[0.02] p-8 rounded-3xl border border-white/5 shadow-inner">
                         <div className="flex-shrink-0">
@@ -186,16 +199,6 @@ const TwoFactorSetup: React.FC = () => {
                             Return to Entry Point
                         </button>
                     </div>
-                </div>
-
-                <div className="mt-8 text-center flex items-center justify-center gap-6">
-                    <p className="text-navy-500 text-[10px] font-black uppercase tracking-[0.3em]">
-                        Encryption: SHA-256 HMAC
-                    </p>
-                    <div className="w-1 h-1 bg-navy-700 rounded-full"></div>
-                    <p className="text-navy-500 text-[10px] font-black uppercase tracking-[0.3em]">
-                        Endpoint: {username}
-                    </p>
                 </div>
             </div>
         </div>
