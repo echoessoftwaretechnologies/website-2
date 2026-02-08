@@ -186,7 +186,7 @@ const Solutions: React.FC = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
                                 <a href="https://forms.gle/K3LySpfU6YYvQKGj9" target="_blank" rel="noopener noreferrer"
                                     className="w-full sm:w-auto premium-gradient text-white font-black px-12 py-6 rounded-full transition-all duration-500 transform hover:scale-105 hover:shadow-premium shadow-2xl shadow-brand-blue-900/40 text-center text-xl uppercase tracking-widest">
-                                    Schedule Consultancy
+                                    Schedule Consultation
                                 </a>
                                 <a href="https://forms.gle/JNS54uLpgQXWP8NZ9" target="_blank" rel="noopener noreferrer"
                                     className="w-full sm:w-auto glass-dark hover:bg-white/10 text-white font-black px-12 py-6 rounded-full transition-all duration-500 border border-white/20 text-center text-lg md:text-xl uppercase tracking-widest">
