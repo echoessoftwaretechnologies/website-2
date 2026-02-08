@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import FAQ from './components/FAQ';
 
 declare global {
     interface Window {
@@ -399,6 +400,9 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* FAQ Section */}
+                <FAQ />
 
                 {/* Comprehensive Footer */}
                 <footer className="bg-gradient-to-br from-navy-950 to-navy-900 text-white relative overflow-hidden py-20">
