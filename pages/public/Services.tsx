@@ -358,7 +358,7 @@ const Services: React.FC = () => {
                                 <a href="https://forms.gle/K3LySpfU6YYvQKGj9" target="_blank" rel="noopener noreferrer"
                                     className="w-full sm:w-auto premium-gradient text-white font-bold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-900/30 text-center text-sm uppercase tracking-wider flex items-center justify-center gap-2">
                                     <span className="w-5 h-5"><i data-lucide="calendar" className="w-full h-full"></i></span>
-                                    Schedule Consultation
+                                    Consultation
                                 </a>
                                 <a href="https://forms.gle/JNS54uLpgQXWP8NZ9" target="_blank" rel="noopener noreferrer"
                                     className="w-full sm:w-auto glass-dark hover:bg-white/10 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 border border-white/20 text-center text-sm uppercase tracking-wider flex items-center justify-center gap-2">
