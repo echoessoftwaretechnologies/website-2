@@ -462,9 +462,6 @@ const Home: React.FC = () => {
                                         <p className="text-navy-200 text-lg leading-relaxed mb-8 italic">"{testimonial.content}"</p>
                                         
                                         <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-blue-500 to-cyan-500 flex items-center justify-center text-white font-black text-lg">
-                                                {testimonial.avatar}
-                                            </div>
                                             <div>
                                                 <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
                                                 <p className="text-brand-blue-400 text-sm font-medium">{testimonial.role}</p>
