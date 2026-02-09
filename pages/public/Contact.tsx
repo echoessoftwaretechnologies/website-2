@@ -88,7 +88,7 @@ Email: ${email}`;
                             Initialize <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue-400 to-brand-blue-100">Global Dialogue</span>
                         </h1>
                         <p className="text-2xl text-navy-200 max-w-3xl mx-auto font-light leading-relaxed animate-fade-in delay-500">
-                            Partner with elite architecture teams to build your enterprise legacy. <br />
+                            Partner with expert architecture teams to build your enterprise legacy. <br />
                         </p>
                     </div>
                 </section>
@@ -211,6 +211,40 @@ Email: ${email}`;
                     </div>
                 </section>
 
+                {/* Google Maps Location Section */}
+                <section className="py-20 bg-white relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                        <div className="text-center mb-16 space-y-6">
+                            <h3 className="text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-[1.1]">
+                                Our <span className="text-brand-blue-600">Location</span>
+                            </h3>
+                            <p className="text-xl text-navy-600 max-w-3xl mx-auto font-light leading-relaxed">
+                                Visit our headquarters in the heart of Karur, Tamil Nadu, India
+                            </p>
+                        </div>
+                        
+                        <div className="rounded-2xl overflow-hidden shadow-2xl border border-navy-100">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15741.543837245555!2d78.0693433!3d10.9503709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f0a00000001%3A0x1234567890abcdef!2sKarur%2C%20Tamil%20Nadu%2C%20India!5e0!3m2!1sen!2sin!4v1640995200000!5m2!1sen!2sin" 
+                                width="100%" 
+                                height="450" 
+                                style={{ border: 0 }} 
+                                allowFullScreen 
+                                loading="lazy" 
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Echoes Software Technologies - Karur, Tamil Nadu, India"
+                            ></iframe>
+                        </div>
+                        
+                        <div className="mt-8 text-center">
+                            <div className="inline-flex items-center gap-3 px-6 py-3 bg-brand-blue-50 rounded-full border border-brand-blue-200">
+                                <i data-lucide="map-pin" className="w-5 h-5 text-brand-blue-600"></i>
+                                <span className="text-navy-950 font-medium">Karur, Tamil Nadu, India - 639001</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Global Offices Section */}
                 <section className="py-40 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 relative overflow-hidden">
                     {/* Animated Background Elements */}
@@ -240,7 +274,7 @@ Email: ${email}`;
                                     phone: "+91 81485 49511",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Primary Operations Hub",
-                                    icon: "building-2",
+                                    icon: undefined,
                                     status: "Active",
                                     metrics: [
                                         { label: "Team Size", value: "45+ Experts" },
@@ -254,7 +288,7 @@ Email: ${email}`;
                                     phone: "+91 63796 44145",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Research & Development Center",
-                                    icon: "microscope",
+                                    icon: undefined,
                                     status: "Active",
                                     metrics: [
                                         { label: "Projects", value: "120+" },
@@ -268,7 +302,7 @@ Email: ${email}`;
                                     phone: "+91 63796 44145",
                                     timezone: "IST (UTC+5:30)",
                                     capacity: "Client Success Center",
-                                    icon: "users",
+                                    icon: undefined,
                                     status: "Active",
                                     metrics: [
                                         { label: "Clients", value: "200+" },
@@ -287,9 +321,11 @@ Email: ${email}`;
                                     </div>
 
                                     {/* Icon */}
-                                    <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-blue-500/10 to-cyan-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:from-brand-blue-500/20 group-hover:to-cyan-500/20 transition-all duration-500 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
-                                        <i data-lucide={office.icon} className="w-12 h-12 text-brand-blue-400 group-hover:text-cyan-400 transition-colors duration-500"></i>
-                                    </div>
+                                    {office.icon && (
+                                        <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-blue-500/10 to-cyan-500/10 rounded-2xl flex items-center justify-center mb-8 group-hover:from-brand-blue-500/20 group-hover:to-cyan-500/20 transition-all duration-500 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                            <i data-lucide={office.icon} className="w-12 h-12 text-brand-blue-400 group-hover:text-cyan-400 transition-colors duration-500"></i>
+                                        </div>
+                                    )}
 
                                     {/* Content */}
                                     <div className="relative z-10 space-y-6">
