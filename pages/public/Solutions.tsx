@@ -114,7 +114,7 @@ const Solutions: React.FC = () => {
                                 },
                                 {
                                     title: "Technology Strategy & Consulting",
-                                    desc: "Navigate the complexity of digital evolution with elite technical advisory. We optimize your technology stack to maximize speed, security, and market impact.",
+                                    desc: "Navigate the complexity of digital evolution with expert technical advisory. We optimize your technology stack to maximize speed, security, and market impact.",
                                     image: "/assets/Technology Strategy & Consulting.png",
                                     points: ["Global Digital Roadmap Planning", "Architectural Integrity Audits", "Scalability & Performance Strategy"],
                                     reverse: true
@@ -148,7 +148,7 @@ const Solutions: React.FC = () => {
 
                         <div className="grid md:grid-cols-3 gap-10 mt-40">
                             {[
-                                { title: "Elite 24/7 Support", desc: "Constant vigil over your digital assets with round-the-clock technical excellence.", icon: "headphones" },
+                                { title: "Premium 24/7 Support", desc: "Constant vigil over your digital assets with round-the-clock technical excellence.", icon: "headphones" },
                                 { title: "Defense-First Security", desc: "Military-grade protocols integrated into every layer of your application ecosystem.", icon: "shield-check" },
                                 { title: "Ultra-Rapid Deployment", desc: "Agile methodologies optimized for sub-millisecond market response and iterative dominance.", icon: "zap" }
                             ].map((card, i) => (
@@ -178,7 +178,7 @@ const Solutions: React.FC = () => {
                                     Ready to <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue-400 to-brand-blue-200">Scale Your Vision?</span>
                                 </h2>
                                 <p className="text-2xl text-navy-200 leading-relaxed font-light">
-                                    Join the elite circle of enterprises powered by Echoes Software Technologies. <br className="hidden lg:block" />
+                                    Join the distinguished circle of enterprises powered by Echoes Software Technologies. <br className="hidden lg:block" />
                                     Let's build the future of your digital ecosystem today.
                                 </p>
                             </div>
