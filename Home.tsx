@@ -422,27 +422,27 @@ const Home: React.FC = () => {
                         <div className="grid md:grid-cols-3 gap-8">
                             {[
                                 {
-                                    name: "Sarah Johnson",
-                                    role: "CTO, TechGlobal Inc.",
-                                    company: "TechGlobal Inc.",
+                                    name: "Ravi Kumar",
+                                    role: "CTO, TechGlobal Solutions",
+                                    company: "TechGlobal Solutions",
                                     content: "Echoes transformed our legacy systems into a modern, scalable platform. Their expertise and commitment to excellence exceeded our expectations. The 40% efficiency boost was achieved within 4 months!",
-                                    avatar: "SJ",
+                                    avatar: "RK",
                                     rating: 5
                                 },
                                 {
-                                    name: "Michael Chen",
-                                    role: "Director of Operations, FinServe Solutions",
+                                    name: "Lakshmi Priya",
+                                    role: "Head of Digital, RetailCorp India",
+                                    company: "RetailCorp India",
+                                    content: "Working with Echoes was a game-changer for our e-commerce platform. The AI-powered analytics helped us increase conversion rates by 35% and reduce operational costs significantly.",
+                                    avatar: "LP",
+                                    rating: 5
+                                },
+                                {
+                                    name: "Suresh Rajan",
+                                    role: "Director, FinServe Solutions",
                                     company: "FinServe Solutions",
                                     content: "The team delivered our fintech platform ahead of schedule with zero security incidents. Their proactive approach and technical depth made them the perfect partner for our digital transformation.",
-                                    avatar: "MC",
-                                    rating: 5
-                                },
-                                {
-                                    name: "Priya Sharma",
-                                    role: "Head of Digital, RetailCorp",
-                                    company: "RetailCorp",
-                                    content: "Working with Echoes was a game-changer for our e-commerce platform. The AI-powered analytics helped us increase conversion rates by 35% and reduce operational costs significantly.",
-                                    avatar: "PS",
+                                    avatar: "SR",
                                     rating: 5
                                 }
                             ].map((testimonial, i) => (
