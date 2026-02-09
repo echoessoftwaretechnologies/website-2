@@ -116,6 +116,115 @@ const About: React.FC = () => {
                     </div>
                 </section>
 
+                {/* Testimonials Section */}
+                <section className="py-40 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 relative overflow-hidden">
+                    {/* Animated Background Elements */}
+                    <div className="absolute inset-0">
+                        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue-500/10 rounded-full blur-[120px] animate-pulse"></div>
+                        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-brand-blue-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-brand-blue-400/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                        <div className="text-center mb-24 space-y-8">
+                            <div className="inline-block px-8 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md animate-fade-in-down">
+                                <span className="text-brand-blue-400 font-black tracking-[0.3em] text-xs uppercase">CLIENT VOICES</span>
+                            </div>
+                            <h2 className="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
+                                Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue-400 to-cyan-400">Industry Leaders</span>
+                            </h2>
+                            <p className="text-xl text-navy-200 max-w-3xl mx-auto font-light leading-relaxed">
+                                Hear what our enterprise clients say about their transformation journey with Echoes Software Technologies.
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {[
+                                {
+                                    name: "Sarah Johnson",
+                                    role: "CTO, TechGlobal Inc.",
+                                    company: "TechGlobal Inc.",
+                                    content: "Echoes transformed our legacy systems into a modern, scalable platform. Their expertise and commitment to excellence exceeded our expectations. The 40% efficiency boost was achieved within 4 months!",
+                                    avatar: "SJ",
+                                    rating: 5
+                                },
+                                {
+                                    name: "Michael Chen",
+                                    role: "Director of Operations, FinServe Solutions",
+                                    company: "FinServe Solutions",
+                                    content: "The team delivered our fintech platform ahead of schedule with zero security incidents. Their proactive approach and technical depth made them the perfect partner for our digital transformation.",
+                                    avatar: "MC",
+                                    rating: 5
+                                },
+                                {
+                                    name: "Priya Sharma",
+                                    role: "Head of Digital, RetailCorp",
+                                    company: "RetailCorp",
+                                    content: "Working with Echoes was a game-changer for our e-commerce platform. The AI-powered analytics helped us increase conversion rates by 35% and reduce operational costs significantly.",
+                                    avatar: "PS",
+                                    rating: 5
+                                }
+                            ].map((testimonial, i) => (
+                                <div key={i} className="group bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-3 relative overflow-hidden hover:border-brand-blue-500/30">
+                                    {/* Hover Glow Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl"></div>
+                                    
+                                    {/* Rating Stars */}
+                                    <div className="relative z-10 flex gap-1 mb-6">
+                                        {[...Array(testimonial.rating)].map((_, j) => (
+                                            <i key={j} data-lucide="star" className="w-5 h-5 text-yellow-400 fill-current"></i>
+                                        ))}
+                                    </div>
+                                    
+                                    {/* Testimonial Content */}
+                                    <div className="relative z-10">
+                                        <p className="text-navy-200 text-lg leading-relaxed mb-8 italic">"{testimonial.content}"</p>
+                                        
+                                        <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-blue-500 to-cyan-500 flex items-center justify-center text-white font-black text-lg">
+                                                {testimonial.avatar}
+                                            </div>
+                                            <div>
+                                                <h4 className="text-white font-bold text-lg">{testimonial.name}</h4>
+                                                <p className="text-brand-blue-400 text-sm font-medium">{testimonial.role}</p>
+                                                <p className="text-navy-400 text-xs uppercase tracking-wider mt-1">{testimonial.company}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* View All Reviews Button */}
+                        <div className="text-center mt-16">
+                            <Link to="/testimonials" className="inline-flex items-center gap-3 premium-gradient text-white font-bold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-900/30 text-center text-sm uppercase tracking-wider">
+                                <span>View Full Reviews</span>
+                                <i data-lucide="arrow-right" className="w-5 h-5"></i>
+                            </Link>
+                        </div>
+
+                        {/* Trust Indicators */}
+                        <div className="mt-24 flex flex-wrap justify-center gap-12">
+                            <div className="text-center">
+                                <div className="text-4xl font-black text-white mb-2">200+</div>
+                                <div className="text-navy-400 text-sm uppercase tracking-wider">Enterprise Clients</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-4xl font-black text-white mb-2">98.7%</div>
+                                <div className="text-navy-400 text-sm uppercase tracking-wider">Client Satisfaction</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-4xl font-black text-white mb-2">120+</div>
+                                <div className="text-navy-400 text-sm uppercase tracking-wider">Projects Delivered</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-4xl font-black text-white mb-2">24/7</div>
+                                <div className="text-navy-400 text-sm uppercase tracking-wider">Support Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* Why Choose Us */}
                 <section className="py-40 bg-white relative overflow-hidden">
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -125,7 +234,7 @@ const About: React.FC = () => {
                                 <h3 className="text-5xl lg:text-7xl font-extrabold text-navy-950 tracking-tight leading-[1.1] text-left">Why Global Leaders <span className="text-brand-blue-600">Choose Us</span></h3>
                             </div>
                             <p className="text-2xl text-navy-600 max-w-xl font-light leading-relaxed text-left lg:text-right">
-                                From startup acceleration to Fortune 500 digital evolution, we provide the elite technical edge.
+                                From startup acceleration to Fortune 500 digital evolution, we provide the innovative technical advantage.
                             </p>
                         </div>
 
@@ -136,7 +245,7 @@ const About: React.FC = () => {
                                 { title: "Client Focused", desc: "Dedicated architecture teams that function as a seamless extension of your organization.", icon: "users" },
                                 { title: "Security First", desc: "Defense-grade security protocols (SOC 2, ISO 27001) integrated from Day 0.", icon: "lock" },
                                 { title: "Hyper-Scalable", desc: "Architecture designed to scale from 10 to 10M concurrent users without friction.", icon: "trending-up" },
-                                { title: "24/7 Vigilance", desc: "Constant monitoring and elite technical assistance across every global timezone.", icon: "activity" }
+                                { title: "24/7 Vigilance", desc: "Constant monitoring and professional technical assistance across every global timezone.", icon: "activity" }
                             ].map((item, i) => (
                                 <div key={i} className="p-10 rounded-xl bg-navy-50/30 border border-navy-100 hover:bg-white hover:shadow-premium transition-all duration-500 hover-lift group">
                                     <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-brand-blue-600 transition-colors">
