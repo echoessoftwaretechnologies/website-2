@@ -113,7 +113,7 @@ const Services: React.FC = () => {
         },
         {
             title: "Maintenance & Support",
-            description: "Round-the-clock elite support to keep your ecosystem secure and optimized.",
+            description: "Round-the-clock premium support to keep your ecosystem secure and optimized.",
             icon: "wrench",
             category: "Business"
         },
@@ -183,6 +183,125 @@ const Services: React.FC = () => {
                             <p className="text-2xl text-navy-600 max-w-3xl mx-auto leading-relaxed font-light">
                                 Comprehensive ecosystem of software services precision-engineered to transform enterprise productivity and scale global operations.
                             </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Specialized Services Section */}
+                <section className="bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 py-32 relative overflow-hidden">
+                    {/* Animated Background Elements */}
+                    <div className="absolute inset-0">
+                        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue-500/10 rounded-full blur-[120px] animate-pulse"></div>
+                        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-brand-blue-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-brand-blue-400/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+                    </div>
+
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                        <div className="text-center mb-24 space-y-8">
+                            <div className="inline-block px-8 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md animate-fade-in-down">
+                                <span className="text-brand-blue-400 font-black tracking-[0.3em] text-xs uppercase">SPECIALIZED SERVICES</span>
+                            </div>
+                            <h2 className="text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
+                                Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue-400 to-cyan-400">Digital Excellence</span>
+                            </h2>
+                            <p className="text-xl text-navy-200 max-w-3xl mx-auto font-light leading-relaxed">
+                                Our specialized services drive measurable growth and establish your digital presence in today's competitive landscape.
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {[
+                                {
+                                    title: "Website Development",
+                                    description: "Custom, high-performance websites built with modern frameworks to engage and convert visitors into customers.",
+                                    icon: "globe",
+                                    features: ["Responsive Design", "SEO Optimized", "Fast Loading", "Conversion Focused"],
+                                    color: "blue"
+                                },
+                                {
+                                    title: "Digital Marketing",
+                                    description: "Data-driven strategies to increase visibility, generate leads, and maximize ROI across all digital channels.",
+                                    icon: "trending-up",
+                                    features: ["PPC Campaigns", "Email Marketing", "Analytics", "ROI Tracking"],
+                                    color: "green"
+                                },
+                                {
+                                    title: "Social Media Marketing",
+                                    description: "Strategic social media management to build brand awareness, engage audiences, and drive community growth.",
+                                    icon: "share-2",
+                                    features: ["Content Strategy", "Community Management", "Paid Advertising", "Performance Analytics"],
+                                    color: "purple"
+                                },
+                                {
+                                    title: "SEO Optimization",
+                                    description: "Comprehensive search engine optimization to improve rankings, increase organic traffic, and boost online visibility.",
+                                    icon: "search",
+                                    features: ["Keyword Research", "Technical SEO", "Content Optimization", "Rank Tracking"],
+                                    color: "orange"
+                                }
+                            ].map((service, i) => (
+                                <div key={i} className="group bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-3 relative overflow-hidden hover:border-brand-blue-500/30">
+                                    {/* Hover Glow Effect */}
+                                    <div className={`absolute inset-0 bg-gradient-to-br from-${service.color}-500/5 to-${service.color}-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl`}></div>
+                                    
+                                    {/* Icon */}
+                                    <div className={`relative z-10 w-20 h-20 bg-gradient-to-br from-${service.color}-500/20 to-${service.color}-400/20 rounded-2xl flex items-center justify-center mb-8 group-hover:from-${service.color}-500/30 group-hover:to-${service.color}-400/30 transition-all duration-500 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1`}> 
+                                        {service.icon === 'globe' && <Globe className={`w-10 h-10 text-${service.color}-400 group-hover:text-${service.color}-300 transition-colors duration-500`} />}
+                                        {service.icon === 'trending-up' && <TrendingUp className={`w-10 h-10 text-${service.color}-400 group-hover:text-${service.color}-300 transition-colors duration-500`} />}
+                                        {service.icon === 'share-2' && <Share2 className={`w-10 h-10 text-${service.color}-400 group-hover:text-${service.color}-300 transition-colors duration-500`} />}
+                                        {service.icon === 'search' && <i data-lucide="search" className={`w-10 h-10 text-${service.color}-400 group-hover:text-${service.color}-300 transition-colors duration-500`}></i>}
+                                    </div>
+                                    
+                                    {/* Content */}
+                                    <div className="relative z-10 space-y-6">
+                                        <div>
+                                            <h3 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-brand-blue-400 transition-colors duration-300">{service.title}</h3>
+                                            <p className="text-navy-200 font-light leading-relaxed">{service.description}</p>
+                                        </div>
+                                        
+                                        {/* Features */}
+                                        <div className="space-y-3 pt-4 border-t border-white/10">
+                                            {service.features.map((feature, j) => (
+                                                <div key={j} className="flex items-center gap-3">
+                                                    <div className={`w-2 h-2 rounded-full bg-${service.color}-400`}></div>
+                                                    <span className="text-navy-300 text-sm font-medium">{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        
+                                        {/* CTA Button */}
+                                        <button
+                                            onClick={() => navigate('/contact', { state: { subject: service.title } })}
+                                            className={`w-full mt-6 py-3 rounded-xl font-bold uppercase tracking-wider text-sm transition-all duration-300 border border-${service.color}-500/30 hover:bg-${service.color}-500/20 hover:border-${service.color}-400 hover:text-${service.color}-300 text-white`}
+                                        >
+                                            Get Started
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* View All Reviews Button */}
+                        <div className="text-center mt-16">
+                            <Link to="/testimonials" className="inline-flex items-center gap-3 premium-gradient text-white font-bold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-900/30 text-center text-sm uppercase tracking-wider">
+                                <span>View Full Reviews</span>
+                                <i data-lucide="arrow-right" className="w-5 h-5"></i>
+                            </Link>
+                        </div>
+
+                        {/* Stats Section */}
+                        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
+                            {[
+                                { value: "500+", label: "Websites Built", icon: "globe" },
+                                { value: "250+", label: "Marketing Campaigns", icon: "trending-up" },
+                                { value: "150+", label: "Social Media Clients", icon: "share-2" },
+                                { value: "85%", label: "SEO Improvement", icon: "search" }
+                            ].map((stat, i) => (
+                                <div key={i} className="text-center bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10 hover:border-brand-blue-500/30 transition-all duration-300">
+                                    <div className="text-3xl font-black text-white mb-2">{stat.value}</div>
+                                    <div className="text-navy-300 text-sm uppercase tracking-wider">{stat.label}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
