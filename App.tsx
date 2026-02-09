@@ -6,6 +6,7 @@ import About from './pages/public/About';
 import Contact from './pages/public/Contact';
 import Services from './pages/public/Services';
 import Solutions from './pages/public/Solutions';
+import Testimonials from './pages/public/Testimonials';
 import PrivacyPolicy from './pages/public/PrivacyPolicy';
 import TermsOfService from './pages/public/TermsOfService';
 import Login from './pages/auth/Login';
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/solutions" element={<Solutions />} />
+                <Route path="/testimonials" element={<Testimonials />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
 
