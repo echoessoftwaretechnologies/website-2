@@ -50,64 +50,54 @@ const Testimonials: React.FC = () => {
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {[
                                 {
-                                    name: "Sarah Johnson",
-                                    role: "CTO, TechGlobal Inc.",
-                                    company: "TechGlobal Inc.",
+                                    name: "Ravi Kumar",
+                                    role: "CTO, TechGlobal Solutions",
+                                    company: "TechGlobal Solutions",
                                     content: "Echoes transformed our legacy systems into a modern, scalable platform. Their expertise and commitment to excellence exceeded our expectations. The 40% efficiency boost was achieved within 4 months! The team's technical depth and proactive approach made them the perfect partner for our digital transformation journey.",
-                                    avatar: "SJ",
+                                    avatar: "RK",
                                     rating: 5,
                                     industry: "Technology",
                                     project: "Enterprise Platform Modernization"
                                 },
                                 {
-                                    name: "Michael Chen",
-                                    role: "Director of Operations, FinServe Solutions",
-                                    company: "FinServe Solutions",
-                                    content: "The team delivered our fintech platform ahead of schedule with zero security incidents. Their proactive approach and technical depth made them the perfect partner for our digital transformation. The regulatory compliance and security measures they implemented exceeded industry standards.",
-                                    avatar: "MC",
-                                    rating: 5,
-                                    industry: "Financial Services",
-                                    project: "Fintech Platform Development"
-                                },
-                                {
-                                    name: "Priya Sharma",
-                                    role: "Head of Digital, RetailCorp",
-                                    company: "RetailCorp",
+                                    name: "Lakshmi Priya",
+                                    role: "Head of Digital, RetailCorp India",
+                                    company: "RetailCorp India",
                                     content: "Working with Echoes was a game-changer for our e-commerce platform. The AI-powered analytics helped us increase conversion rates by 35% and reduce operational costs significantly. Their innovative approach to customer experience optimization delivered measurable business results.",
-                                    avatar: "PS",
+                                    avatar: "LP",
                                     rating: 5,
                                     industry: "Retail & E-commerce",
                                     project: "E-commerce Platform & Analytics"
                                 },
                                 {
-                                    name: "Robert Williams",
+                                    name: "Arjun Venkatesh",
                                     role: "CIO, HealthTech Systems",
                                     company: "HealthTech Systems",
                                     content: "Echoes revolutionized our healthcare platform with cutting-edge technology solutions. Their HIPAA-compliant architecture and real-time data processing capabilities transformed patient care delivery. The 60% reduction in system downtime speaks volumes about their engineering excellence.",
-                                    avatar: "RW",
+                                    avatar: "AV",
                                     rating: 5,
                                     industry: "Healthcare Technology",
                                     project: "Healthcare Platform Integration"
                                 },
                                 {
-                                    name: "Jennifer Martinez",
-                                    role: "VP of Engineering, CloudScale Ltd",
-                                    company: "CloudScale Ltd",
-                                    content: "The migration to microservices architecture was seamless thanks to Echoes' expertise. Their cloud-native solutions and DevOps practices have reduced our deployment cycles by 75%. The scalability and performance improvements have been instrumental to our growth.",
-                                    avatar: "JM",
-                                    rating: 5,
-                                    industry: "Cloud Services",
-                                    project: "Cloud Infrastructure Migration"
-                                },
-                                {
-                                    name: "David Thompson",
+                                    name: "Meera Devi",
                                     role: "CEO, StartupX Innovations",
                                     company: "StartupX Innovations",
                                     content: "As a startup, we needed a technology partner who could scale with us. Echoes provided enterprise-grade solutions without the enterprise price tag. Their MVP development and rapid iteration approach helped us secure Series A funding and scale to 100,000+ users.",
-                                    avatar: "DT",
+                                    avatar: "MD",
                                     rating: 5,
                                     industry: "Startups & Innovation",
                                     project: "MVP Development & Scaling"
+                                },
+                                {
+                                    name: "Suresh Rajan",
+                                    role: "Director, FinServe Solutions",
+                                    company: "FinServe Solutions",
+                                    content: "The team delivered our fintech platform ahead of schedule with zero security incidents. Their proactive approach and technical depth made them the perfect partner for our digital transformation. The regulatory compliance and security measures they implemented exceeded industry standards.",
+                                    avatar: "SR",
+                                    rating: 5,
+                                    industry: "Financial Services",
+                                    project: "Fintech Platform Development"
                                 }
                             ].map((testimonial, i) => (
                                 <div key={i} className="group bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-3 relative overflow-hidden hover:border-brand-blue-500/30">
