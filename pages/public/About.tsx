@@ -292,14 +292,15 @@ const About: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Our Work Section */}
-                <section className="py-40 bg-white relative overflow-hidden">
+                {/* Featured Projects Section */}
+                <section className="py-32 bg-navy-50/30 relative overflow-hidden">
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
-                        <div className="text-center mb-32 space-y-6">
-                            <h2 className="text-brand-blue-600 font-black tracking-[0.3em] text-sm uppercase">OUR PORTFOLIO</h2>
-                            <h3 className="text-5xl lg:text-7xl font-extrabold text-navy-950 tracking-tight leading-[1.1]">Featured <span className="text-brand-blue-600">Projects</span></h3>
-                            <p className="text-2xl text-navy-600 max-w-2xl mx-auto font-light leading-relaxed">
-                                Showcasing our expertise through exceptional client projects.
+                        <div className="text-center mb-16 space-y-6">
+                            <h2 className="text-4xl lg:text-6xl font-extrabold text-navy-950 tracking-tight leading-[1.1]">
+                                Featured <span className="text-brand-blue-600">Projects</span>
+                            </h2>
+                            <p className="text-xl text-navy-600 max-w-2xl mx-auto font-light leading-relaxed">
+                                Some of our recent work that demonstrates our technical expertise and commitment to quality.
                             </p>
                         </div>
 
@@ -307,66 +308,56 @@ const About: React.FC = () => {
                             {[
                                 {
                                     name: "Dr. Mohamed Sameel Hassan",
-                                    type: "Portfolio",
-                                    link: "https://www.drsameel.in",
+                                    type: "Medical Portfolio",
                                     description: "A sophisticated personal portfolio website showcasing medical expertise and professional achievements.",
-                                    tech: ["React", "TypeScript", "TailwindCSS"]
+                                    link: "https://www.drsameel.in"
                                 },
                                 {
                                     name: "Arroway",
-                                    type: "Website",
-                                    link: "https://www.arroway.co.in",
+                                    type: "Corporate Website",
                                     description: "Modern corporate website with sleek design and intuitive user experience.",
-                                    tech: ["Next.js", "Node.js", "MongoDB"]
+                                    link: "https://www.arroway.co.in"
                                 },
                                 {
                                     name: "Formann",
-                                    type: "E-Commerce",
-                                    link: "https://www.formann.in",
-                                    description: "Full-featured e-commerce platform with advanced product management and secure checkout.",
-                                    tech: ["React", "Stripe", "Express"]
+                                    type: "E-Commerce Platform",
+                                    description: "Full-featured e-commerce platform with advanced product management.",
+                                    link: "https://www.formann.in"
                                 }
                             ].map((project, i) => (
-                                <div key={i} className="group bg-gradient-to-br from-navy-50 to-white p-8 rounded-2xl border border-navy-100 shadow-glass hover:shadow-premium transition-all duration-500 hover-lift relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue-500 to-brand-blue-700 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                                    
-                                    <div className="mb-6">
-                                        <div className="inline-flex items-center gap-3 px-4 py-2 bg-brand-blue-100 text-brand-blue-700 rounded-full text-sm font-bold uppercase tracking-wider mb-4">
-                                            <i data-lucide="folder" className="w-4 h-4"></i>
-                                            {project.type}
-                                        </div>
-                                        <h4 className="text-2xl font-black text-navy-950 mb-3 uppercase tracking-tight group-hover:text-brand-blue-600 transition-colors">{project.name}</h4>
-                                        <p className="text-navy-600 font-light leading-relaxed mb-4">{project.description}</p>
-                                        
-                                        <div className="flex flex-wrap gap-2 mb-6">
-                                            {project.tech.map((tech, j) => (
-                                                <span key={j} className="px-3 py-1 bg-navy-100 text-navy-700 text-xs font-bold rounded-full uppercase tracking-wider">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    
+                                <div 
+                                    key={i} 
+                                    className="bg-white rounded-xl border border-navy-100 shadow-md p-6 hover:shadow-xl transition-shadow duration-300"
+                                >
+                                    <span className="text-sm font-bold text-brand-blue-600 uppercase tracking-wider mb-2 block">
+                                        {project.type}
+                                    </span>
+                                    <h3 className="text-xl font-bold text-navy-950 mb-3">
+                                        {project.name}
+                                    </h3>
+                                    <p className="text-navy-600 mb-4">
+                                        {project.description}
+                                    </p>
                                     <a 
                                         href={project.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-brand-blue-600 font-black uppercase tracking-wider text-xs hover:text-brand-blue-800 transition-all group-hover:gap-3"
+                                        className="inline-flex items-center gap-2 text-brand-blue-600 font-bold hover:text-brand-blue-800 transition-colors"
                                     >
-                                        <span>View Project</span>
-                                        <i data-lucide="external-link" className="w-4 h-4"></i>
+                                        View Project
+                                        <i data-lucide="arrow-right" className="w-4 h-4"></i>
                                     </a>
                                 </div>
                             ))}
                         </div>
 
-                        <div className="text-center mt-20">
+                        <div className="text-center mt-16">
                             <a 
-                                href="/contact" 
-                                className="inline-flex items-center gap-3 premium-gradient text-white font-bold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-premium shadow-xl shadow-brand-blue-900/30 text-center text-sm uppercase tracking-wider"
+                                href="/solutions" 
+                                className="inline-flex items-center gap-3 bg-brand-blue-600 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:bg-brand-blue-700 text-center text-sm uppercase tracking-wider"
                             >
-                                <span>Start Your Project</span>
-                                <i data-lucide="rocket" className="w-5 h-5"></i>
+                                <span>View All Solutions</span>
+                                <i data-lucide="arrow-right" className="w-5 h-5"></i>
                             </a>
                         </div>
                     </div>
