@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users, Target, Award, Globe } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const stats = [
