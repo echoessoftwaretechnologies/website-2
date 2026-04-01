@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, Check, ArrowRight, MessageSquare, Users, Calendar } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, Check, MessageSquare, Users, Calendar } from 'lucide-react';
 import Layout from '../components/Layout';
 
 const contactInfo = [
