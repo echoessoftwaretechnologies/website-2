@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { 
   Menu, X, ArrowRight, Check, Star, ArrowUpRight,
-  Mail, MapPin, Phone
+  Mail, MapPin, Phone, ChevronRight
 } from 'lucide-react';
 
 const services = [
@@ -144,7 +144,6 @@ export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
