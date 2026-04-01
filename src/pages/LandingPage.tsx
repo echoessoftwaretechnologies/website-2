@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
-  Menu, X, ArrowRight, Zap, Shield, Globe,
-  Cloud, Database, Smartphone, Cpu, Check, ChevronRight,
-  Star, Users, TrendingUp, MessageSquare, Mail, MapPin, Phone,
-  Code2, ArrowUpRight
+  Menu, X, ArrowRight, Check, Star, ArrowUpRight,
+  Mail, MapPin, Phone
 } from 'lucide-react';
 
 const services = [
