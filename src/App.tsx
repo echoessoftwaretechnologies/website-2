@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
 import ServicesPage from './pages/ServicesPage';
@@ -9,8 +9,28 @@ import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import AcceptanceModal from './components/AcceptanceModal';
+import LoginPage from './pages/LoginPage';
 
 import SitemapPage from './pages/SitemapPage';
+import OverviewPage from './pages/workspace/overview/OverviewPage';
+import ProjectsPage from './pages/workspace/projects/ProjectsPage';
+import TeamPage from './pages/workspace/team/TeamPage';
+import MessagesPage from '@/pages/workspace/messages/MessagesPage';
+import CalendarPage from './pages/workspace/calendar/CalendarPage';
+import SettingsPage from './pages/workspace/settings/SettingsPage';
+import InvoicePage from './pages/workspace/invoice/InvoicePage';
+
+// Protected Route wrapper component
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const isAuthenticated = localStorage.getItem('workspace_auth') === 'true';
+  const location = useLocation();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  
+  return <>{children}</>;
+}
 
 function AppContent() {
   const [showModal, setShowModal] = useState(false);
@@ -48,6 +68,16 @@ function AppContent() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/sitemap" element={<SitemapPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        
+        {/* Protected Workspace Routes */}
+        <Route path="/workspace" element={<ProtectedRoute><OverviewPage /></ProtectedRoute>} />
+        <Route path="/workspace/projects" element={<ProtectedRoute><ProjectsPage /></ProtectedRoute>} />
+        <Route path="/workspace/team" element={<ProtectedRoute><TeamPage /></ProtectedRoute>} />
+        <Route path="/workspace/messages" element={<ProtectedRoute><MessagesPage /></ProtectedRoute>} />
+        <Route path="/workspace/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
+        <Route path="/workspace/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+        <Route path="/workspace/invoice" element={<ProtectedRoute><InvoicePage /></ProtectedRoute>} />
       </Routes>
     </>
   );
