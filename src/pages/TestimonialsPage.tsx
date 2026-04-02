@@ -173,34 +173,36 @@ export default function TestimonialsPage() {
             </div>
             <div>
               <span className="text-[11px] tracking-widest uppercase text-primary font-semibold">
-                Featured Case Study
+                Client Reviews
               </span>
               <h2 className="text-3xl sm:text-4xl font-display font-medium tracking-tighter mt-4 mb-6">
-                How We Helped a FinTech Startup Scale to 1 Million Users
+                What Our Clients<br />Say About Us
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                A detailed look at how we architected and built a scalable platform that handled 
-                rapid growth while maintaining 99.99% uptime and bank-grade security.
+                At Echoes Software Technologies, we pride ourselves on delivering exceptional 
+                results that exceed expectations. Our client testimonials reflect our commitment 
+                to quality, innovation, and building lasting partnerships. Watch our client 
+                review video to hear directly from those who have experienced our services firsthand.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
                 <div>
-                  <p className="text-3xl font-display font-bold text-primary">1M+</p>
-                  <p className="text-sm text-muted-foreground">Active Users</p>
+                  <p className="text-3xl font-display font-bold text-primary">98%</p>
+                  <p className="text-sm text-muted-foreground">Client Satisfaction</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-display font-bold text-primary">99.99%</p>
-                  <p className="text-sm text-muted-foreground">Uptime</p>
+                  <p className="text-3xl font-display font-bold text-primary">250+</p>
+                  <p className="text-sm text-muted-foreground">Projects Delivered</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-display font-bold text-primary">&lt;100ms</p>
-                  <p className="text-sm text-muted-foreground">Response Time</p>
+                  <p className="text-3xl font-display font-bold text-primary">5.0</p>
+                  <p className="text-sm text-muted-foreground">Average Rating</p>
                 </div>
               </div>
               <a 
                 href="/contact"
                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-foreground transition-colors"
               >
-                Read Full Case Study
+                Become Our Next Success Story
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
