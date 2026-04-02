@@ -507,9 +507,9 @@ export default function LandingPage() {
             
             <div className="relative flex justify-center">
               <img 
-                src="/debpto-pos.jpg" 
+                src="/saas-debpto-2026.png" 
                 alt="Debpto POS System"
-                className="w-[400px] h-[600px] object-cover rounded-lg shadow-xl"
+                className="w-full max-w-[400px] h-auto object-cover rounded-lg shadow-xl"
               />
             </div>
           </div>
