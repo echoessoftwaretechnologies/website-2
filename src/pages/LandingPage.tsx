@@ -144,6 +144,16 @@ export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    service: '',
+    message: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -160,6 +170,48 @@ export default function LandingPage() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xlgowryg', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+          source: 'Landing Page'
+        })
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          message: ''
+        });
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Failed to send message. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const navLinks = [
@@ -582,73 +634,112 @@ export default function LandingPage() {
             </div>
             
             <div className="bg-muted p-8 md:p-12">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {submitted ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Check className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-2xl font-display font-medium mb-2">Message Sent!</h3>
+                  <p className="text-muted-foreground">
+                    Thank you for reaching out. We'll get back to you within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="Your name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
                   <div>
                     <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                      Name *
+                      Company
                     </label>
                     <input
                       type="text"
-                      required
+                      value={formData.company}
+                      onChange={(e) => setFormData({...formData, company: e.target.value})}
                       className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
-                      placeholder="Your name"
+                      placeholder="Your company"
                     />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        Service Interest
+                      </label>
+                      <select 
+                        value={formData.service}
+                        onChange={(e) => setFormData({...formData, service: e.target.value})}
+                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                      >
+                        <option value="">Select a service</option>
+                        <option value="software">Custom Software</option>
+                        <option value="cloud">Cloud Solutions</option>
+                        <option value="mobile">Mobile Apps</option>
+                        <option value="data">Data Analytics</option>
+                        <option value="security">Cybersecurity</option>
+                        <option value="ai">AI & Automation</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
                   </div>
                   <div>
                     <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                      Email *
+                      Message *
                     </label>
-                    <input
-                      type="email"
+                    <textarea
+                      rows={4}
                       required
-                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
-                      placeholder="your@email.com"
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                      placeholder="Tell us about your project..."
                     />
                   </div>
-                </div>
-                <div>
-                  <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Your company"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                    Service Interest
-                  </label>
-                  <select className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors">
-                    <option value="">Select a service</option>
-                    <option value="software">Custom Software</option>
-                    <option value="cloud">Cloud Solutions</option>
-                    <option value="mobile">Mobile Apps</option>
-                    <option value="data">Data Analytics</option>
-                    <option value="security">Cybersecurity</option>
-                    <option value="ai">AI & Automation</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors resize-none"
-                    placeholder="Tell us about your project..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full px-4 py-2 bg-foreground text-background text-[10px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
-                >
-                  Send Message
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full px-4 py-2 bg-foreground text-background text-[10px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
