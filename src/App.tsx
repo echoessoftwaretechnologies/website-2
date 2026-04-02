@@ -10,6 +10,8 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import AcceptanceModal from './components/AcceptanceModal';
 
+import SitemapPage from './pages/SitemapPage';
+
 function AppContent() {
   const [showModal, setShowModal] = useState(false);
   const location = useLocation();
@@ -45,6 +47,7 @@ function AppContent() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/sitemap" element={<SitemapPage />} />
       </Routes>
     </>
   );
