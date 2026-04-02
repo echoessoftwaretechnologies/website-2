@@ -90,18 +90,54 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     service: '',
-    budget: '',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Here you would typically send the data to your backend
+    setSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xlgowryg', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message
+        })
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          message: ''
+        });
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Failed to send message. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -230,19 +266,15 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
-                          Budget Range
+                          Phone Number
                         </label>
-                        <select 
-                          value={formData.budget}
-                          onChange={(e) => setFormData({...formData, budget: e.target.value})}
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
                           className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
-                        >
-                          <option value="">Select budget</option>
-                          <option value="10k-25k">$10k - $25k</option>
-                          <option value="25k-50k">$25k - $50k</option>
-                          <option value="50k-100k">$50k - $100k</option>
-                          <option value="100k+">$100k+</option>
-                        </select>
+                          placeholder="+91 98765 43210"
+                        />
                       </div>
                     </div>
                     
@@ -262,9 +294,10 @@ export default function ContactPage() {
                     
                     <button
                       type="submit"
-                      className="w-full px-6 py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2"
+                      disabled={submitting}
+                      className="w-full px-6 py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {submitting ? 'Sending...' : 'Send Message'}
                       <Send className="w-4 h-4" />
                     </button>
                   </form>
