@@ -3,10 +3,60 @@ import Layout from '../components/Layout';
 
 const testimonials = [
   {
+    quote: "I wanted to create a professional doctor portfolio website with appointment booking and online consultation features. Echoes Software Technologies understood my requirements clearly and delivered exactly what I needed.",
+    author: "Dr. Sameel Hassan",
+    role: "Doctor",
+    company: "Dr. Sameel Hassan",
+    industry: "Healthcare",
+    rating: 5,
+    project: "Doctor Portfolio",
+    results: "Professional online presence"
+  },
+  {
+    quote: "I approached Echoes Software Technologies to create my business website, and I'm honestly very satisfied with their work. They understood my requirements clearly and delivered exactly what I had in mind. The design looks professional and modern. Highly recommended!",
+    author: "Formann",
+    role: "Business Owner",
+    company: "Formann",
+    industry: "E-commerce",
+    rating: 5,
+    project: "Ecommerce Website",
+    results: "Modern professional website"
+  },
+  {
+    quote: "I approached Echoes Software Technologies for website creation, and I'm very satisfied with their work. They understood my requirements clearly and delivered a modern, professional website that perfectly matched my expectations. Highly recommended!",
+    author: "Arroway",
+    role: "Founder",
+    company: "Arroway",
+    industry: "Technology",
+    rating: 5,
+    project: "Website and Logo",
+    results: "Complete brand identity"
+  },
+  {
+    quote: "I approached Echoes Software Technologies for both website and logo creation for MedZ Pharmacy, and I'm very satisfied with the results. They understood my vision clearly and delivered a professional, modern brand identity. Highly recommended!",
+    author: "MedZ Pharmacy",
+    role: "Owner",
+    company: "MedZ Pharmacy",
+    industry: "Healthcare",
+    rating: 5,
+    project: "Website & Logo",
+    results: "Professional brand identity"
+  },
+  {
+    quote: "I approached Echoes Software Technologies for both website and logo creation for MedZ Diagnostics, and I'm very satisfied with the results. They understood my vision clearly and delivered a professional, modern brand identity. Highly recommended!",
+    author: "MedZ Diagnostics",
+    role: "Owner",
+    company: "MedZ Diagnostics",
+    industry: "Healthcare",
+    rating: 5,
+    project: "Website & Logo",
+    results: "Professional brand identity"
+  },
+  {
     quote: "Echoes Software Technologies transformed our digital infrastructure completely. Their expertise in cloud migration and custom software development is unmatched. The team's dedication to delivering quality solutions on time made them an invaluable partner.",
-    author: "Sarah Chen",
+    author: "Priya Sharma",
     role: "CTO",
-    company: "InnovateCorp",
+    company: "TechStart",
     industry: "Technology",
     rating: 5,
     project: "Enterprise Cloud Migration",
@@ -24,43 +74,13 @@ const testimonials = [
   },
   {
     quote: "The AI and automation solutions implemented by Echoes revolutionized our operations. What used to take days now happens in hours. Their team's understanding of our industry and technical excellence made our project a huge success.",
-    author: "Priya Sharma",
+    author: "Anitha Krishnan",
     role: "Director of Operations",
-    company: "TechStart",
+    company: "HealthPlus",
     industry: "Healthcare",
     rating: 5,
     project: "AI Process Automation",
     results: "85% efficiency improvement"
-  },
-  {
-    quote: "We've worked with many development teams, but Echoes stands out for their communication and transparency. They kept us informed throughout the project and delivered exactly what they promised. A truly reliable partner.",
-    author: "James Wilson",
-    role: "VP of Engineering",
-    company: "BuildRight Construction",
-    industry: "Construction",
-    rating: 5,
-    project: "Custom ERP System",
-    results: "50% faster project delivery"
-  },
-  {
-    quote: "The cybersecurity audit and implementation by Echoes gave us peace of mind. They identified vulnerabilities we didn't know existed and implemented robust security measures. Our data has never been safer.",
-    author: "Emily Thompson",
-    role: "CISO",
-    company: "SecureBank Financial",
-    industry: "Financial Services",
-    rating: 5,
-    project: "Security Infrastructure",
-    results: "Zero security incidents, full compliance"
-  },
-  {
-    quote: "Echoes helped us modernize our legacy systems without disrupting our operations. Their careful planning and phased approach meant zero downtime during the transition. Exceptional technical expertise combined with business understanding.",
-    author: "David Kim",
-    role: "IT Director",
-    company: "Global Logistics Solutions",
-    industry: "Logistics",
-    rating: 5,
-    project: "Legacy Modernization",
-    results: "60% performance improvement"
   }
 ];
 
