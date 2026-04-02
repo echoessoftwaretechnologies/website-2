@@ -18,7 +18,7 @@ export default function InvoicePage() {
         >
           <iframe
             ref={iframeRef}
-            src="/src/pages/workspace/invoice/invoice-generator.html"
+            src="/invoice-generator.html"
             className="w-full h-full border-0"
             style={{ minHeight: '800px' }}
             title="Invoice Generator"
