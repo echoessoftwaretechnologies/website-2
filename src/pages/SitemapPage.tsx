@@ -2,41 +2,32 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 
-const siteLinks = [
-  {
-    title: "Main Pages",
-    links: [
-      { label: "Home", path: "/" },
-      { label: "Services", path: "/services" },
-      { label: "About Us", path: "/about" },
-      { label: "Technology", path: "/technology" },
-      { label: "Testimonials", path: "/testimonials" },
-      { label: "Contact", path: "/contact" }
-    ]
-  },
-  {
-    title: "Services",
-    links: [
-      { label: "Custom Software Development", path: "/services" },
-      { label: "Cloud Solutions", path: "/services" },
-      { label: "Mobile Apps", path: "/services" },
-      { label: "AI & Automation", path: "/services" },
-      { label: "Cybersecurity", path: "/services" },
-      { label: "Data Analytics", path: "/services" },
-      { label: "Digital Marketing", path: "/services" },
-      { label: "Blockchain", path: "/services" },
-      { label: "Graphics Design", path: "/services" },
-      { label: "UI/UX Design", path: "/services" }
-    ]
-  },
-  {
-    title: "Legal & Info",
-    links: [
-      { label: "Privacy Policy", path: "/privacy" },
-      { label: "Terms of Service", path: "/terms" },
-      { label: "Sitemap", path: "/sitemap" }
-    ]
-  }
+const mainLinks = [
+  { label: "Home", path: "/", desc: "Welcome to Echoes" },
+  { label: "Services", path: "/services", desc: "Our Solutions" },
+  { label: "About Us", path: "/about", desc: "Who We Are" },
+  { label: "Technology", path: "/technology", desc: "Tech Stack" },
+  { label: "Testimonials", path: "/testimonials", desc: "Client Stories" },
+  { label: "Contact", path: "/contact", desc: "Get in Touch" }
+];
+
+const serviceLinks = [
+  { label: "Custom Software", path: "/services" },
+  { label: "Cloud Solutions", path: "/services" },
+  { label: "Mobile Apps", path: "/services" },
+  { label: "AI & Automation", path: "/services" },
+  { label: "Cybersecurity", path: "/services" },
+  { label: "Data Analytics", path: "/services" },
+  { label: "Digital Marketing", path: "/services" },
+  { label: "Blockchain", path: "/services" },
+  { label: "Graphics Design", path: "/services" },
+  { label: "UI/UX Design", path: "/services" }
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", path: "/privacy" },
+  { label: "Terms of Service", path: "/terms" },
+  { label: "Sitemap", path: "/sitemap" }
 ];
 
 export default function SitemapPage() {
@@ -68,67 +59,113 @@ export default function SitemapPage() {
       {/* Hero Section */}
       <section className="pt-40 md:pt-52 pb-16 md:pb-24 bg-muted border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-                Site Navigation
-              </span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mb-6">
-              Explore All<br />
-              <span className="text-muted-foreground/40 italic">Navigations</span>
+          <div className="max-w-3xl">
+            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
+              Site Directory
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
+              Navigate Our<br />
+              <span className="text-muted-foreground/40 italic">Digital Ecosystem</span>
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Find your way around our website. Browse all pages, services, and resources available on Echoes Software Technologies.
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              Discover all pages, services, and resources available on our platform. 
+              Quickly find what you're looking for or explore our comprehensive offerings.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Sitemap Content */}
+      {/* Main Navigation Cards */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {siteLinks.map((section, i) => (
-              <div key={i}>
-                <h2 className="text-xl font-display font-medium mb-6 pb-4 border-b border-border">
-                  {section.title}
-                </h2>
-                <ul className="space-y-3">
-                  {section.links.map((link, j) => (
-                    <li key={j}>
-                      <Link 
-                        to={link.path}
-                        className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <ArrowRight className="w-4 h-4 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                        <span>{link.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="flex items-center gap-3 mb-12">
+            <h2 className="text-xl font-display font-medium text-blue-600">Primary Navigation</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {mainLinks.map((link, i) => (
+              <Link
+                key={i}
+                to={link.path}
+                className="group p-6 bg-muted hover:bg-foreground hover:text-background transition-all duration-300"
+              >
+                <p className="font-medium text-sm mb-1">{link.label}</p>
+                <p className="text-xs text-muted-foreground group-hover:text-background/70">{link.desc}</p>
+                <ArrowRight className="w-4 h-4 mt-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact CTA */}
+      {/* Services Directory */}
+      <section className="py-16 md:py-24 bg-muted border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-12">
+            <h2 className="text-xl font-display font-medium text-blue-600">Services Directory</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {serviceLinks.map((link, i) => (
+              <Link
+                key={i}
+                to={link.path}
+                className="group flex items-center justify-between px-4 py-3 bg-white border border-border hover:border-primary hover:shadow-sm transition-all duration-300"
+              >
+                <span className="text-sm">{link.label}</span>
+                <ArrowRight className="w-3 h-3 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Legal & Information */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-12">
+            <h2 className="text-xl font-display font-medium text-blue-600">Legal & Information</h2>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {legalLinks.map((link, i) => (
+              <Link
+                key={i}
+                to={link.path}
+                className="group flex items-center gap-2 px-6 py-3 border border-border hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+              >
+                <span className="text-sm font-medium">{link.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Contact */}
       <section className="py-16 md:py-24 bg-foreground text-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-medium tracking-tighter mb-4">
-            Can't Find What You're Looking For?
-          </h2>
-          <p className="text-background/70 leading-relaxed mb-8 max-w-2xl mx-auto">
-            If you need assistance navigating our website or have specific questions, our team is here to help.
-          </p>
-          <Link 
-            to="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-background text-foreground text-sm tracking-widest uppercase font-semibold hover:bg-primary hover:text-white transition-all duration-300"
-          >
-            Contact Us
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-display font-medium tracking-tighter mb-4">
+                Need Assistance?
+              </h2>
+              <p className="text-background/70 leading-relaxed">
+                Our team is ready to help you navigate our services and find the perfect solution for your business needs.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-start md:justify-end">
+              <Link 
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-background text-foreground text-sm tracking-widest uppercase font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+              >
+                Contact Us
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a 
+                href="mailto:connect@echoess.in"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-background/30 text-sm tracking-widest uppercase font-semibold hover:bg-background hover:text-foreground transition-all duration-300"
+              >
+                Email Us
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
