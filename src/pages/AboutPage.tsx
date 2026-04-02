@@ -128,13 +128,12 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row items-center gap-16 md:gap-24">
             
             {/* Image - Right on mobile, Left on desktop */}
-            <div className="flex-shrink-0 w-full max-w-[360px] order-2 md:order-1">
-              <div className="relative w-full aspect-[3/4] max-w-[360px] mx-auto">
-                <div className="absolute inset-0 bg-muted"></div>
+            <div className="flex-shrink-0 w-full max-w-[400px] order-2 md:order-1">
+              <div className="relative w-full mx-auto">
                 <img 
-                  src="/founder.jpg" 
+                  src="/ukaasha_founder.png" 
                   alt="Mohamed Ukaasha K"
-                  className="absolute top-4 left-4 sm:top-6 sm:left-6 w-[calc(100%-1rem)] h-[calc(100%-1rem)] sm:w-[calc(100%-1.5rem)] sm:h-[calc(100%-1.5rem)] object-cover"
+                  className="w-full h-auto object-cover"
                 />
               </div>
             </div>
