@@ -153,8 +153,23 @@ export default function TestimonialsPage() {
       <section className="py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="bg-muted aspect-video rounded-2xl flex items-center justify-center">
-              <span className="text-muted-foreground">Case Study Video Placeholder</span>
+            <div className="bg-muted aspect-video rounded-2xl flex items-center justify-center overflow-hidden relative">
+              <video 
+                src="/client_reviews.mp4" 
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover"
+                onError={(e) => console.error('Video failed to load:', e)}
+              >
+                <source src="/client_reviews.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <noscript>
+                <p className="text-muted-foreground">Video requires JavaScript to play</p>
+              </noscript>
             </div>
             <div>
               <span className="text-[11px] tracking-widest uppercase text-primary font-semibold">
