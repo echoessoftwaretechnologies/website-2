@@ -71,7 +71,7 @@ const recentProjects = [
     tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
     year: "2024",
     link: "#",
-    image: "/projects/arroway-logo.png"
+    image: "/arroway.jpeg"
   },
   {
     title: "Formann",
@@ -80,7 +80,7 @@ const recentProjects = [
     tech: ["React", "TypeScript", "Framer Motion", "AWS"],
     year: "2024",
     link: "#",
-    image: "/projects/formann-logo.png"
+    image: "/formann.png"
   },
   {
     title: "Dr. Mohammed Sameel Hassan",
@@ -89,7 +89,7 @@ const recentProjects = [
     tech: ["React", "Node.js", "MongoDB", "Netlify"],
     year: "2023",
     link: "#",
-    image: "/projects/dr-sameel-logo.png"
+    image: "/dr.sameel.png"
   }
 ];
 
@@ -200,12 +200,12 @@ export default function TechnologyPage() {
                 {/* Accent line */}
                 <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                {/* Logo placeholder */}
-                <div className="h-32 bg-muted flex items-center justify-center border-b border-border">
+                {/* Project Image */}
+                <div className="h-48 bg-muted flex items-center justify-center border-b border-border overflow-hidden">
                   <img 
                     src={project.image} 
-                    alt={`${project.title} logo`}
-                    className="w-16 h-16 object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                    alt={`${project.title}`}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                   />
                 </div>
 
