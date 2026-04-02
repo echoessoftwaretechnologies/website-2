@@ -18,7 +18,7 @@ export default function InvoicePage() {
         >
           <iframe
             ref={iframeRef}
-            src="/invoice-generator.html"
+            src="https://admin.echoess.in"
             className="w-full h-full border-0"
             style={{ minHeight: '800px' }}
             title="Invoice Generator"
