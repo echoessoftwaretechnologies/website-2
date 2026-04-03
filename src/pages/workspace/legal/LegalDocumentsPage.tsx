@@ -1,11 +1,11 @@
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
-  FileText, Upload, Search, Filter, Download, Trash2, Edit2, 
+  FileText, Upload, Search, Download, Trash2, 
   X, Plus, File, AlertCircle, CheckCircle2, Clock
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
-interface Document {
+interface LegalDoc {
   id: number;
   title: string;
   description: string;
@@ -27,14 +27,14 @@ interface DocumentType {
 const API_BASE_URL = 'http://localhost:3001/api';
 
 export default function LegalDocumentsPage() {
-  const [documents, setDocuments] = useState<Document[]>([]);
+  const [documents, setDocuments] = useState<LegalDoc[]>([]);
   const [documentTypes, setDocumentTypes] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
+  const [selectedDocument, setSelectedDocument] = useState<LegalDoc | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadError, setUploadError] = useState('');
   const [uploadSuccess, setUploadSuccess] = useState('');
@@ -132,19 +132,19 @@ export default function LegalDocumentsPage() {
     }
   };
 
-  const handleDownload = async (document: Document) => {
+  const handleDownload = async (doc: LegalDoc) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/documents/${document.id}/download?user=Admin`);
+      const response = await fetch(`${API_BASE_URL}/documents/${doc.id}/download?user=Admin`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = window.document.createElement('a');
         a.href = url;
-        a.download = document.file_name;
-        document.body.appendChild(a);
+        a.download = doc.file_name;
+        window.document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
+        window.document.body.removeChild(a);
       }
     } catch (error) {
       console.error('Error downloading document:', error);
