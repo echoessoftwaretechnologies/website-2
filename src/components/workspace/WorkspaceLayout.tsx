@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, FolderKanban, MessageSquare, 
   Calendar, Settings, Bell, Search, Plus,
-  CheckCircle2, Menu, X, Briefcase, LogOut, FileText
+  CheckCircle2, Menu, X, Briefcase, LogOut, FileText, Scale
 } from 'lucide-react';
 
 const sidebarItems = [
@@ -13,6 +13,7 @@ const sidebarItems = [
   { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/workspace/messages', badge: 3 },
   { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/workspace/calendar' },
   { id: 'invoice', label: 'Invoice', icon: FileText, path: '/workspace/invoice' },
+  { id: 'legal', label: 'Legal Docs', icon: Scale, path: '/workspace/legal' },
   { id: 'settings', label: 'Settings', icon: Settings, path: '/workspace/settings' }
 ];
 
