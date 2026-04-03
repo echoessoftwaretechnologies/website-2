@@ -147,7 +147,7 @@ export default function InvoicePage() {
           >
             <iframe
               ref={iframeRef}
-              src="https://invoice.echoess.in"
+              src="https://admin.echoess.in"
               className="w-full h-full border-0"
               title="Invoice Generator"
             />
@@ -534,7 +534,7 @@ export default function InvoicePage() {
               </div>
 
               {/* Customer Info */}
-              <div className="mb-3 bg-blue-50 border-l-2 border-blue-600 p-2">
+              <div className="mb-3 bg-blue-50 p-2">
                 <p className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1">Billed To</p>
                 <p className="text-xs font-medium text-gray-800">{customerName || 'Walk-in Customer'}</p>
                 <p className="text-[10px] text-gray-500">Phone: {customerPhone || '-'}</p>
@@ -601,11 +601,11 @@ export default function InvoicePage() {
                 {/* Status Stamp */}
                 <div className="relative">
                   {paymentStatus === 'paid' ? (
-                    <div className="border-2 border-green-600 text-green-600 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
+                    <div className="border border-green-600 text-green-600 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
                       PAID
                     </div>
                   ) : (
-                    <div className="border-2 border-orange-500 text-orange-500 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
+                    <div className="border border-orange-500 text-orange-500 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
                       PENDING
                     </div>
                   )}
