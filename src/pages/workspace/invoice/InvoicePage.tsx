@@ -591,6 +591,9 @@ export default function InvoicePage() {
                     <span className="font-semibold">Payment Mode:</span>{' '}
                     <span className="uppercase font-bold text-blue-600">{paymentMethod === 'cash' ? 'Cash' : 'UPI'}</span>
                   </p>
+                  <p className="text-[10px] text-gray-500 mt-2 leading-relaxed">
+                    Payments once made are non-refundable after service or software delivery. Any additional features, changes, or support beyond the agreed scope will be billed separately.
+                  </p>
                   {paymentMethod === 'upi' && (
                     <>
                       <p className="text-[10px] text-gray-500 font-mono mb-2">Txn ID: UPI{Date.now().toString().slice(-8)}</p>
@@ -599,7 +602,7 @@ export default function InvoicePage() {
                   )}
                 </div>
                 {/* Status Stamp */}
-                <div className="relative">
+                <div className="relative flex flex-col items-center gap-2">
                   {paymentStatus === 'paid' ? (
                     <div className="border border-green-300 text-green-600 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-60">
                       PAID
@@ -609,6 +612,8 @@ export default function InvoicePage() {
                       PENDING
                     </div>
                   )}
+                  <img src="/seal_nos2.png" alt="Company Seal" className="w-14 h-14 object-contain opacity-70" />
+                  <img src="/sireg.png" alt="Sireg" className="w-24 h-12 object-contain opacity-70 mt-1" />
                 </div>
               </div>
 
@@ -616,7 +621,7 @@ export default function InvoicePage() {
               <div className="text-center border-t border-blue-100 pt-3">
                 <p className="text-xs font-semibold text-blue-700 mb-1">Thank you for your business!</p>
                 <p className="text-[10px] text-gray-500">This is a computer generated receipt</p>
-                <p className="text-[10px] text-gray-400">support@echoess.in | www.echoess.in</p>
+                <p className="text-[10px] text-gray-400">connect@echoess.in | www.echoess.in</p>
               </div>
 
               {/* Signature & Stamp Area */}
@@ -626,7 +631,8 @@ export default function InvoicePage() {
                   <p className="text-[10px] text-gray-500 mt-1">Authorized Signature</p>
                 </div>
                 <div className="text-right">
-                  <img src="/seal_nos2.png" alt="Company Seal" className="w-16 h-16 object-contain opacity-80" />
+                  <div className="w-24 h-12 border-b border-gray-300 mb-0"></div>
+                  <p className="text-[10px] text-gray-500 mt-1">Client Signature</p>
                 </div>
               </div>
             </div>
