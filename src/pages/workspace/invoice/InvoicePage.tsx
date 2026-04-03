@@ -512,7 +512,7 @@ export default function InvoicePage() {
               />
               
               {/* Header Section */}
-              <div className="border-b border-blue-600 pb-3 mb-3 relative">
+              <div className="border-b border-blue-200 pb-3 mb-3 relative">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
@@ -543,7 +543,7 @@ export default function InvoicePage() {
               {/* Items Table */}
               <table className="w-full mb-3 border-collapse">
                 <thead>
-                  <tr className="border-b border-blue-600 bg-blue-50">
+                  <tr className="border-b border-gray-100 bg-blue-50/50">
                     <th className="text-left py-1.5 px-1 text-[10px] font-bold uppercase tracking-wider text-blue-700">Description</th>
                     <th className="text-center py-1.5 px-1 text-[10px] font-bold uppercase w-8 text-blue-700">Qty</th>
                     <th className="text-right py-1.5 px-1 text-[10px] font-bold uppercase text-blue-700">Rate</th>
@@ -552,7 +552,7 @@ export default function InvoicePage() {
                 </thead>
                 <tbody>
                   {cart.map((item, index) => (
-                    <tr key={index} className="border-b border-gray-200">
+                    <tr key={index} className="border-b border-gray-100">
                       <td className="py-1.5 px-1 text-xs text-gray-800">{item.name}</td>
                       <td className="py-1.5 px-1 text-xs text-center font-medium">{item.quantity}</td>
                       <td className="py-1.5 px-1 text-xs text-right text-gray-600">₹{item.price.toLocaleString()}</td>
@@ -577,7 +577,7 @@ export default function InvoicePage() {
                     <span>SGST @ 9%</span>
                     <span>₹{(tax / 2).toLocaleString()}</span>
                   </div>
-                  <div className="border-t border-blue-600 pt-2 mt-2 flex justify-between">
+                  <div className="border-t border-gray-100 pt-2 mt-2 flex justify-between">
                     <span className="text-sm font-bold text-blue-700">TOTAL AMOUNT</span>
                     <span className="text-sm font-bold text-blue-700">₹{total.toLocaleString()}</span>
                   </div>
@@ -594,18 +594,18 @@ export default function InvoicePage() {
                   {paymentMethod === 'upi' && (
                     <>
                       <p className="text-[10px] text-gray-500 font-mono mb-2">Txn ID: UPI{Date.now().toString().slice(-8)}</p>
-                      <img src="/upi.jpeg" alt="UPI QR Code" className="w-20 h-20 border border-gray-300 object-contain" />
+                      <img src="/upi.jpeg" alt="UPI QR Code" className="w-20 h-20 border border-gray-100 object-contain" />
                     </>
                   )}
                 </div>
                 {/* Status Stamp */}
                 <div className="relative">
                   {paymentStatus === 'paid' ? (
-                    <div className="border border-green-600 text-green-600 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
+                    <div className="border border-green-300 text-green-600 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-60">
                       PAID
                     </div>
                   ) : (
-                    <div className="border border-orange-500 text-orange-500 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-80">
+                    <div className="border border-orange-300 text-orange-500 font-bold text-lg px-3 py-1 transform -rotate-12 opacity-60">
                       PENDING
                     </div>
                   )}
@@ -613,7 +613,7 @@ export default function InvoicePage() {
               </div>
 
               {/* Footer */}
-              <div className="text-center border-t border-blue-200 pt-3">
+              <div className="text-center border-t border-blue-100 pt-3">
                 <p className="text-xs font-semibold text-blue-700 mb-1">Thank you for your business!</p>
                 <p className="text-[10px] text-gray-500">This is a computer generated receipt</p>
                 <p className="text-[10px] text-gray-400">support@echoess.in | www.echoess.in</p>
