@@ -1,7 +1,7 @@
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
   Briefcase, Users, CheckCircle2, Clock, 
-  TrendingUp, ArrowRight, Filter, Download
+  TrendingUp, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -87,16 +87,12 @@ export default function OverviewPage() {
         <div className="xl:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-display font-medium">Active Projects</h2>
-            <div className="flex items-center gap-2">
-              <button className="p-2 hover:bg-muted transition-colors"><Filter className="w-4 h-4" /></button>
-              <button className="p-2 hover:bg-muted transition-colors"><Download className="w-4 h-4" /></button>
-              <Link to="/workspace/projects" className="inline-flex items-center gap-1 px-3 py-1.5 bg-foreground text-background text-[10px] tracking-widest uppercase font-semibold hover:bg-primary transition-all">
-                View All <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
+            <Link to="/workspace/projects" className="inline-flex items-center gap-1 px-3 py-1.5 bg-foreground text-background text-[10px] tracking-widest uppercase font-semibold hover:bg-primary transition-all">
+              View All <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {recentProjects.map((project) => (
               <div key={project.id} className="bg-white border border-border hover:border-primary transition-all duration-300 p-5">
                 <div className="flex items-start justify-between mb-4">
