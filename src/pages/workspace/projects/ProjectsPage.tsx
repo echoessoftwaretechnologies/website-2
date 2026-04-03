@@ -1,6 +1,6 @@
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
-  Plus, Search, Filter, Grid3X3, List, MoreHorizontal, X, Briefcase,
+  Plus, Search, Filter, Grid3X3, MoreHorizontal, X, Briefcase,
   Clock, CheckCircle2, AlertCircle, Calendar, Users
 } from 'lucide-react';
 import { useState } from 'react';
@@ -22,7 +22,6 @@ const projectStats = [
 ];
 
 export default function ProjectsPage() {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [filter, setFilter] = useState('all');
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -101,20 +100,6 @@ export default function ProjectsPage() {
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex border border-border">
-            <button 
-              onClick={() => setViewMode('grid')}
-              className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-white' : 'bg-white hover:bg-muted'}`}
-            >
-              <Grid3X3 className="w-4 h-4" />
-            </button>
-            <button 
-              onClick={() => setViewMode('list')}
-              className={`p-2 ${viewMode === 'list' ? 'bg-primary text-white' : 'bg-white hover:bg-muted'}`}
-            >
-              <List className="w-4 h-4" />
-            </button>
-          </div>
           <button 
             onClick={() => setShowModal(true)}
             className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background text-sm font-semibold hover:bg-primary transition-all"
@@ -125,8 +110,8 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Projects List/Grid */}
-      <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' : 'space-y-4'}>
+      {/* Projects Grid */}
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {filteredProjects.map((project) => (
           <div key={project.id} className="bg-white border border-border hover:border-primary transition-all p-5">
             <div className="flex items-start justify-between mb-4">
