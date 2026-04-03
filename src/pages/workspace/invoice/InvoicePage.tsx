@@ -147,7 +147,7 @@ export default function InvoicePage() {
           >
             <iframe
               ref={iframeRef}
-              src="https://invoice.echoess.in"
+              src="https://admin.echoess.in"
               className="w-full h-full border-0"
               title="Invoice Generator"
             />
@@ -460,19 +460,8 @@ export default function InvoicePage() {
                   {/* UPI QR Code Scanner - Compact */}
                   {paymentMethod === 'upi' && (
                     <div className="text-center p-2 bg-muted/30 border border-dashed border-border">
-                      <div className="w-32 h-32 bg-white mx-auto border border-border flex items-center justify-center">
-                        <div className="w-24 h-24 bg-black p-1.5">
-                          <div className="w-full h-full bg-white grid grid-cols-5 grid-rows-5 gap-px">
-                            {[...Array(25)].map((_, i) => (
-                              <div 
-                                key={i} 
-                                className={`${Math.random() > 0.5 ? 'bg-black' : 'bg-white'}`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-[10px] text-muted-foreground mt-1">echoess@upi</p>
+                      <img src="/upi.jpeg" alt="UPI QR Code" className="w-32 h-32 mx-auto border border-border object-contain" />
+                      <p className="text-[10px] text-muted-foreground mt-1">razorpay.me/@echoessoftwaretechnologies</p>
                     </div>
                   )}
 
@@ -603,7 +592,10 @@ export default function InvoicePage() {
                     <span className="uppercase font-bold text-blue-600">{paymentMethod === 'cash' ? 'Cash' : 'UPI'}</span>
                   </p>
                   {paymentMethod === 'upi' && (
-                    <p className="text-[10px] text-gray-500 font-mono">Txn ID: UPI{Date.now().toString().slice(-8)}</p>
+                    <>
+                      <p className="text-[10px] text-gray-500 font-mono mb-2">Txn ID: UPI{Date.now().toString().slice(-8)}</p>
+                      <img src="/upi.jpeg" alt="UPI QR Code" className="w-20 h-20 border border-gray-300 object-contain" />
+                    </>
                   )}
                 </div>
                 {/* Status Stamp */}
@@ -630,8 +622,8 @@ export default function InvoicePage() {
               {/* Signature & Stamp Area */}
               <div className="mt-4 flex justify-between items-end">
                 <div className="text-center">
-                  <img src="/founder_signature.png" alt="Authorized Signature" className="w-24 h-12 object-contain mb-1" />
-                  <p className="text-[10px] text-gray-500">Authorized Signature</p>
+                  <img src="/founder_signature.png" alt="Authorized Signature" className="w-24 h-12 object-contain mb-0" />
+                  <p className="text-[10px] text-gray-500 mt-1">Authorized Signature</p>
                 </div>
                 <div className="text-right">
                   <img src="/seal_nos2.png" alt="Company Seal" className="w-16 h-16 object-contain opacity-80" />
