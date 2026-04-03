@@ -9,7 +9,6 @@ interface LegalDoc {
   id: number;
   title: string;
   description: string;
-  document_type: string;
   file_name: string;
   file_size: number;
   uploaded_by: string;
@@ -18,20 +17,12 @@ interface LegalDoc {
   status: 'active' | 'archived' | 'draft';
 }
 
-interface DocumentType {
-  id: number;
-  type_name: string;
-  description: string;
-}
-
 const API_BASE_URL = 'http://localhost:3001/api';
 
 export default function LegalDocumentsPage() {
   const [documents, setDocuments] = useState<LegalDoc[]>([]);
-  const [documentTypes, setDocumentTypes] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState('all');
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<LegalDoc | null>(null);
@@ -44,15 +35,13 @@ export default function LegalDocumentsPage() {
   const [uploadForm, setUploadForm] = useState({
     title: '',
     description: '',
-    document_type: 'Contract',
     tags: '',
     file: null as File | null
   });
 
-  // Fetch documents and document types
+  // Fetch documents
   useEffect(() => {
     fetchDocuments();
-    fetchDocumentTypes();
   }, []);
 
   const fetchDocuments = async () => {
@@ -67,18 +56,6 @@ export default function LegalDocumentsPage() {
       console.error('Error fetching documents:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchDocumentTypes = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/document-types`);
-      if (response.ok) {
-        const data = await response.json();
-        setDocumentTypes(data);
-      }
-    } catch (error) {
-      console.error('Error fetching document types:', error);
     }
   };
 
@@ -100,7 +77,7 @@ export default function LegalDocumentsPage() {
     formData.append('file', uploadForm.file);
     formData.append('title', uploadForm.title);
     formData.append('description', uploadForm.description);
-    formData.append('document_type', uploadForm.document_type);
+    formData.append('document_type', 'Legal Document');
     formData.append('tags', uploadForm.tags);
     formData.append('uploaded_by', 'Admin');
 
@@ -116,7 +93,7 @@ export default function LegalDocumentsPage() {
         setUploadProgress(100);
         setTimeout(() => {
           setShowUploadModal(false);
-          setUploadForm({ title: '', description: '', document_type: 'Contract', tags: '', file: null });
+          setUploadForm({ title: '', description: '', tags: '', file: null });
           setUploadProgress(0);
           setUploadSuccess('');
           fetchDocuments();
@@ -207,8 +184,7 @@ export default function LegalDocumentsPage() {
     const matchesSearch = doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          doc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          (doc.tags && doc.tags.toLowerCase().includes(searchQuery.toLowerCase()));
-    const matchesType = filterType === 'all' || doc.document_type === filterType;
-    return matchesSearch && matchesType;
+    return matchesSearch;
   });
 
   return (
@@ -255,14 +231,14 @@ export default function LegalDocumentsPage() {
               <File className="w-5 h-5 text-blue-600" />
             </div>
             <p className="text-2xl font-display font-medium">
-              {documentTypes.length}
+              {documents.filter(d => d.status === 'archived').length}
             </p>
           </div>
-          <p className="text-sm text-muted-foreground">Document Types</p>
+          <p className="text-sm text-muted-foreground">Archived</p>
         </div>
       </div>
 
-      {/* Search and Filters */}
+      {/* Search */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -275,16 +251,6 @@ export default function LegalDocumentsPage() {
               className="pl-10 pr-4 py-2 w-full sm:w-64 bg-muted border border-border text-sm focus:outline-none focus:border-primary"
             />
           </div>
-          <select 
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-            className="px-4 py-2 bg-muted border border-border text-sm focus:outline-none focus:border-primary"
-          >
-            <option value="all">All Types</option>
-            {documentTypes.map(type => (
-              <option key={type.id} value={type.type_name}>{type.type_name}</option>
-            ))}
-          </select>
         </div>
         <button 
           onClick={() => setShowUploadModal(true)}
@@ -306,11 +272,11 @@ export default function LegalDocumentsPage() {
           <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
           <p className="text-lg font-medium mb-2">No documents found</p>
           <p className="text-sm text-muted-foreground mb-4">
-            {searchQuery || filterType !== 'all' 
-              ? 'Try adjusting your search or filters'
+            {searchQuery
+              ? 'Try adjusting your search'
               : 'Upload your first legal document to get started'}
           </p>
-          {!searchQuery && filterType === 'all' && (
+          {!searchQuery && (
             <button 
               onClick={() => setShowUploadModal(true)}
               className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-all"
@@ -330,7 +296,6 @@ export default function LegalDocumentsPage() {
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs text-muted-foreground">{doc.document_type}</span>
                     <h3 className="font-medium text-sm mt-0.5 line-clamp-1" title={doc.title}>{doc.title}</h3>
                   </div>
                 </div>
@@ -431,21 +396,6 @@ export default function LegalDocumentsPage() {
                   required
                   disabled={uploadProgress > 0}
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Document Type *</label>
-                <select
-                  value={uploadForm.document_type}
-                  onChange={(e) => setUploadForm({ ...uploadForm, document_type: e.target.value })}
-                  className="w-full px-3 py-2 bg-muted border border-border text-sm focus:outline-none focus:border-primary"
-                  required
-                  disabled={uploadProgress > 0}
-                >
-                  {documentTypes.map(type => (
-                    <option key={type.id} value={type.type_name}>{type.type_name}</option>
-                  ))}
-                </select>
               </div>
 
               <div>
