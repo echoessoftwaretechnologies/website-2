@@ -263,8 +263,8 @@ export default function InvoicePage() {
             </div>
 
             {/* Totals & Actions */}
-            <div className="p-3 border-t border-border bg-muted/30 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-6">
+            <div className="p-3 border-t border-border bg-muted/30 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
                 <div>
                   <span className="text-sm text-muted-foreground">Subtotal: </span>
                   <span className="font-medium">₹{subtotal.toLocaleString()}</span>
@@ -273,7 +273,7 @@ export default function InvoicePage() {
                   <span className="text-sm text-muted-foreground">GST (18%): </span>
                   <span className="font-medium">₹{tax.toLocaleString()}</span>
                 </div>
-                <div className="text-lg font-bold text-primary">
+                <div className="text-base sm:text-lg font-bold text-primary">
                   <span>Total: ₹{total.toLocaleString()}</span>
                 </div>
               </div>
@@ -282,14 +282,14 @@ export default function InvoicePage() {
                 <button
                   onClick={clearCart}
                   disabled={cart.length === 0}
-                  className="px-4 py-2 border border-border text-sm font-medium hover:bg-muted transition-colors disabled:opacity-50"
+                  className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border border-border text-sm font-medium hover:bg-muted transition-colors disabled:opacity-50"
                 >
                   Clear Cart
                 </button>
                 <button
                   onClick={() => setShowPaymentModal(true)}
                   disabled={cart.length === 0}
-                  className="px-6 py-2 bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center gap-2"
+                  className="flex-1 sm:flex-none px-4 sm:px-6 py-2 bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   <CreditCard className="w-4 h-4" />
                   Pay Now
