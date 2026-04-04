@@ -801,7 +801,6 @@ export default function LandingPage() {
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
-              <Link to="/exclusive-deals" className="hover:text-foreground transition-colors">Deals</Link>
               <Link to="/sitemap" className="hover:text-foreground transition-colors">Sitemap</Link>
             </div>
           </div>
