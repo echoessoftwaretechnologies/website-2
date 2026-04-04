@@ -1,0 +1,707 @@
+import { Link, useLocation } from 'react-router-dom';
+import { CheckCircle, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+
+const contentPackages = [
+  {
+    title: "Basic Plan",
+    description: "Perfect for small businesses starting their digital journey",
+    originalPrice: "₹5,999",
+    dealPrice: "₹3,999",
+    discount: "33% OFF",
+    features: [
+      "12 Videos Per Month",
+      "12 Flyers / Posters",
+      "Basic Content Creation",
+      "Basic Level Video Editing",
+      "Monthly Delivery"
+    ],
+    tag: "Starter",
+    validUntil: "Per Month"
+  },
+  {
+    title: "Pro Plan",
+    description: "Complete social media management for growing businesses",
+    originalPrice: "₹7,999",
+    dealPrice: "₹5,499",
+    discount: "31% OFF",
+    features: [
+      "20 Videos Per Month",
+      "20 Social Media Posters",
+      "Social Media Handling",
+      "Pro Level Video Editing",
+      "Market Analysis Support"
+    ],
+    tag: "Most Popular",
+    validUntil: "Per Month"
+  },
+  {
+    title: "Premium Plan",
+    description: "Comprehensive content solution for established brands",
+    originalPrice: "₹9,999",
+    dealPrice: "₹6,999",
+    discount: "30% OFF",
+    features: [
+      "60 Videos for 2 Months",
+      "60 Social Media Flyers",
+      "Premium Video Editing",
+      "Social Media Handling",
+      "Unlimited Revisions",
+      "Professional Content Planning"
+    ],
+    tag: "Best Value",
+    validUntil: "Per 2 Months"
+  }
+];
+
+const businessBundles = [
+  {
+    title: "Business Starter Kit",
+    description: "Complete starter solution for new businesses",
+    originalPrice: "₹7,999",
+    dealPrice: "₹5,499",
+    discount: "31% OFF",
+    features: [
+      "Static Website 4 Pages (One Time)",
+      "Branding (One Time)",
+      "Logo Design (One Time)",
+      "Domain + Hosting (Yearly Renewal)",
+      "Marketing Analysis Support (One Time)"
+    ],
+    tag: "Starter",
+    validUntil: "Limited Offer"
+  },
+  {
+    title: "Business Pro Kit",
+    description: "Advanced solution for growing businesses",
+    originalPrice: "₹9,999",
+    dealPrice: "₹6,799",
+    discount: "32% OFF",
+    features: [
+      "Static Website 5 Pages (One Time)",
+      "Logo + Branding (One Time)",
+      "Domain + Hosting (Yearly Renewal)",
+      "Basic SEO (One Time)",
+      "Social Media Handling (One Time)",
+      "Flyer/Poster Creation upto 10/month (One Time)",
+      "Animated Videos upto 3/month (One Time)",
+      "Basic Level Marketing Guidance (One Time)"
+    ],
+    tag: "Most Popular",
+    validUntil: "Limited Offer"
+  },
+  {
+    title: "Business Premium Kit",
+    description: "Complete e-commerce and marketing solution",
+    originalPrice: "₹18,999",
+    dealPrice: "₹12,999",
+    discount: "32% OFF",
+    features: [
+      "Static E-Commerce Site with WhatsApp Order (One Time)",
+      "Advanced SEO (One Time)",
+      "Flyer/Poster upto 30/month (One Time)",
+      "Professional Marketing Guidance (One Time)",
+      "Domain + Hosting (Yearly Renewal)",
+      "Lifetime Support for Future Upgrades",
+      "Unlimited Revision",
+      "Marketing Analysis Support (One Time)",
+      "Content Creation + Video Editing upto 10/month (One Time)",
+      "Social Media Page Handling (One Time)"
+    ],
+    tag: "Best Value",
+    validUntil: "Limited Offer"
+  }
+];
+
+const addOns = [
+  { title: "Extra Website Page", price: "₹999", original: "₹1,500" },
+  { title: "Advanced SEO Package", price: "₹2,499", original: "₹3,999" },
+  { title: "Extra Flyers (10)", price: "₹499", original: "₹799" },
+  { title: "Priority Support", price: "₹999/mo", original: "₹1,499/mo" }
+];
+
+export default function ExclusiveDealsPage() {
+  const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [timeLeft, setTimeLeft] = useState({ days: 30, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
+  // Countdown timer - 1 month from now
+  useEffect(() => {
+    // Set target date to 1 month from now
+    const targetDate = new Date();
+    targetDate.setMonth(targetDate.getMonth() + 1);
+
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+
+      if (distance > 0) {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const toggleService = (service: string) => {
+    setSelectedServices(prev => 
+      prev.includes(service) 
+        ? prev.filter(s => s !== service)
+        : [...prev, service]
+    );
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formPayload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      selectedServices: selectedServices.join(', ')
+    };
+
+    try {
+      const response = await fetch('https://formspree.io/f/mjgpadbl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formPayload),
+      });
+
+      if (response.ok) {
+        alert('Thank you! Your custom pricing request has been submitted. We will get back to you within 24 hours.');
+        setIsModalOpen(false);
+        setSelectedServices([]);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        alert('Something went wrong. Please try again later.');
+      }
+    } catch (error) {
+      alert('Failed to submit. Please check your connection and try again.');
+    }
+  };
+
+  const websiteServices = [
+    "Static Website (One Time)",
+    "Dynamic Website (One Time)",
+    "E-Commerce Website (One Time)",
+    "Extra Website Page (One Time)",
+    "Website Maintenance (Monthly)",
+    "Domain + Hosting (Yearly Renewal)"
+  ];
+
+  const contentServices = [
+    "Content Creation (Monthly)",
+    "Video Editing Services (Monthly)",
+    "Flyer/Poster Design (Per Design)",
+    "Animated Videos (Per Video)",
+    "Social Media Handling (Monthly)",
+    "Social Media Page Handling (One Time)",
+    "Professional Marketing Guidance (One Time)",
+    "Basic Level Marketing Guidance (One Time)"
+  ];
+
+  const brandingServices = [
+    "Logo Design (One Time)",
+    "Branding Package (One Time)",
+    "Logo + Branding Combo (One Time)",
+    "Basic SEO (One Time)",
+    "Advanced SEO (One Time)",
+    "Marketing Analysis Support (One Time)",
+    "Lifetime Support for Future Upgrades"
+  ];
+
+  return (
+    <Layout>
+      <div className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <section className="pt-32 md:pt-40 pb-16 md:pb-24 bg-muted border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
+                  Limited Time Offers
+                </span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mb-6">
+                Exclusive Pricing<br />
+                <span className="text-muted-foreground/40 italic">& Special Deals</span>
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                Take advantage of our curated bundle deals designed to accelerate your business growth. 
+                Save up to 34% on comprehensive technology solutions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Don't Miss It - Minimalist Section */}
+        <section className="py-12 md:py-20 bg-white border-y border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+              {/* Left: Text Content */}
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-['Montserrat'] font-bold tracking-tight mb-3">
+                  <span className="text-primary">Don't</span> Miss It
+                </h2>
+                <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto md:mx-0">
+                  Limited time exclusive deals. Get your custom quote before the timer expires.
+                </p>
+              </div>
+
+              {/* Right: Clean Timer */}
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.days).padStart(2, '0')}</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Days</div>
+                </div>
+                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.hours).padStart(2, '0')}</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Hrs</div>
+                </div>
+                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Min</div>
+                </div>
+                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Sec</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Content Creation Packages */}
+        <section className="py-20 md:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-16">
+              <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary mb-4 block">
+                Content Services
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-medium tracking-tight">
+                Content Creation Packages
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {contentPackages.map((deal, index) => (
+                <div 
+                  key={index} 
+                  className="group relative bg-white border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
+                >
+                  {/* Tag Badge */}
+                  <div className="absolute -top-3 left-6">
+                    <span className="inline-block px-3 py-1 bg-primary text-white text-[10px] font-semibold uppercase tracking-wider">
+                      {deal.tag}
+                    </span>
+                  </div>
+
+                  <div className="p-8 pt-10">
+                    {/* Header */}
+                    <div className="mb-6">
+                      <h3 className="text-lg font-display font-medium mb-2">{deal.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{deal.description}</p>
+                    </div>
+
+                    {/* Price */}
+                    <div className="mb-8 pb-8 border-b border-border">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-3xl font-display font-medium text-primary">{deal.dealPrice}</span>
+                        <span className="text-base text-muted-foreground line-through">{deal.originalPrice}</span>
+                      </div>
+                      <span className="inline-block mt-2 px-2 py-1 bg-green-50 text-green-600 text-xs font-bold">
+                        {deal.discount}
+                      </span>
+                    </div>
+
+                    {/* Features */}
+                    <ul className="space-y-3 mb-8">
+                      {deal.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    <Link 
+                      to="/contact"
+                      className="block w-full py-2.5 bg-foreground text-background text-sm font-medium text-center hover:bg-primary transition-colors duration-300"
+                    >
+                      Get Started
+                    </Link>
+                    <p className="text-center text-[10px] text-muted-foreground mt-3">
+                      {deal.validUntil}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Business Bundles */}
+        <section className="py-20 md:py-28 bg-muted border-y border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-16">
+              <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary mb-4 block">
+                Business Solutions
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-medium tracking-tight">
+                Business Bundles
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {businessBundles.map((deal, index) => (
+                <div 
+                  key={index} 
+                  className="group relative bg-white border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
+                >
+                  {/* Tag Badge */}
+                  <div className="absolute -top-3 left-6">
+                    <span className="inline-block px-3 py-1 bg-blue-500 text-white text-[10px] font-semibold uppercase tracking-wider">
+                      {deal.tag}
+                    </span>
+                  </div>
+
+                  <div className="p-8 pt-10">
+                    {/* Header */}
+                    <div className="mb-6">
+                      <h3 className="text-lg font-display font-medium mb-2">{deal.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{deal.description}</p>
+                    </div>
+
+                    {/* Price */}
+                    <div className="mb-8 pb-8 border-b border-border">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-3xl font-display font-medium text-primary">{deal.dealPrice}</span>
+                        <span className="text-base text-muted-foreground line-through">{deal.originalPrice}</span>
+                      </div>
+                      <span className="inline-block mt-2 px-2 py-1 bg-green-50 text-green-600 text-xs font-bold">
+                        {deal.discount}
+                      </span>
+                    </div>
+
+                    {/* Features */}
+                    <ul className="space-y-3 mb-8">
+                      {deal.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    <Link 
+                      to="/contact"
+                      className="block w-full py-2.5 bg-foreground text-background text-sm font-medium text-center hover:bg-primary transition-colors duration-300"
+                    >
+                      Get Started
+                    </Link>
+                    <p className="text-center text-[10px] text-muted-foreground mt-3">
+                      {deal.validUntil}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Add-ons Section */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-3 mb-12">
+              <h2 className="text-xl font-display font-medium">Discounted Add-ons</h2>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {addOns.map((addon, index) => (
+                <div 
+                  key={index} 
+                  className="p-4 bg-muted border border-border hover:border-primary transition-all duration-300"
+                >
+                  <h4 className="font-medium text-sm mb-2">{addon.title}</h4>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-lg font-medium text-primary">{addon.price}</span>
+                    <span className="text-sm text-muted-foreground line-through">{addon.original}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Customize Your Package Section */}
+        <section className="py-20 md:py-28 bg-white border-y border-border">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-16 text-center">
+              <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary mb-4 block">
+                Build Your Own
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-medium tracking-tight mb-4">
+                Customize Your Package
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Select the services you need and we'll create a custom quote tailored to your requirements.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Website Services */}
+              <div className="bg-muted p-6 border border-border">
+                <h3 className="text-lg font-display font-medium mb-4 pb-4 border-b border-border">
+                  Website Services
+                </h3>
+                <div className="space-y-3">
+                  {websiteServices.map((item, i) => (
+                    <label key={i} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 border-border rounded accent-primary"
+                        checked={selectedServices.includes(item)}
+                        onChange={() => toggleService(item)}
+                      />
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Content & Marketing */}
+              <div className="bg-muted p-6 border border-border">
+                <h3 className="text-lg font-display font-medium mb-4 pb-4 border-b border-border">
+                  Content & Marketing
+                </h3>
+                <div className="space-y-3">
+                  {contentServices.map((item, i) => (
+                    <label key={i} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 border-border rounded accent-primary"
+                        checked={selectedServices.includes(item)}
+                        onChange={() => toggleService(item)}
+                      />
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Branding & SEO */}
+              <div className="bg-muted p-6 border border-border">
+                <h3 className="text-lg font-display font-medium mb-4 pb-4 border-b border-border">
+                  Branding & SEO
+                </h3>
+                <div className="space-y-3">
+                  {brandingServices.map((item, i) => (
+                    <label key={i} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 border-border rounded accent-primary"
+                        checked={selectedServices.includes(item)}
+                        onChange={() => toggleService(item)}
+                      />
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{item}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Request Quote Section */}
+            <div className="mt-8 md:mt-12 p-4 md:p-6 bg-background border border-border text-center">
+              <h3 className="text-lg md:text-xl font-display font-medium mb-2 text-foreground">
+                Request Custom Pricing
+              </h3>
+              <p className="text-muted-foreground text-xs md:text-sm mb-4 max-w-lg mx-auto">
+                {selectedServices.length > 0 
+                  ? `You have selected ${selectedServices.length} service(s). Fill out the form to get your custom quote.`
+                  : 'Select your desired services above and click below to send us your requirements. We will get back to you with a personalized quote within 24 hours.'
+                }
+              </p>
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-foreground text-background text-xs tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
+              >
+                Request Pricing
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+            <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-border">
+                <h3 className="text-xl font-display font-medium">Request Custom Pricing</h3>
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="p-2 hover:bg-muted transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                {/* Selected Services Summary */}
+                {selectedServices.length > 0 && (
+                  <div className="bg-muted p-4 border border-border">
+                    <h4 className="font-medium text-sm mb-3">Selected Services ({selectedServices.length})</h4>
+                    <ul className="space-y-1 max-h-32 overflow-y-auto">
+                      {selectedServices.map((service, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <CheckCircle className="w-3 h-3 text-green-500" />
+                          {service}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Form Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Full Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Additional Requirements</label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary resize-none"
+                    placeholder="Tell us more about your project requirements..."
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="flex gap-4 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="flex-1 py-2.5 border border-border text-sm font-medium hover:bg-muted transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 py-2.5 bg-foreground text-background text-sm font-medium hover:bg-primary transition-colors"
+                  >
+                    Submit Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* CTA Section */}
+        <section className="py-16 md:py-24 bg-foreground text-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-display font-medium tracking-tighter mb-4">
+                  Need a Custom Deal?
+                </h2>
+                <p className="text-background/70 leading-relaxed">
+                  We can create tailored packages based on your specific requirements. 
+                  Contact us to discuss custom pricing for your project.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-start md:justify-end">
+                <Link 
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-background text-foreground text-sm tracking-widest uppercase font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+                >
+                  Contact Us
+                </Link>
+                <Link 
+                  to="/services"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-background/30 text-sm tracking-widest uppercase font-semibold hover:bg-background hover:text-foreground transition-all duration-300"
+                >
+                  View Services
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </Layout>
+  );
+}
