@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import ImagePopup from '../components/ImagePopup';
 
 const contentPackages = [
   {
