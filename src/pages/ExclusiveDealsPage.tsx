@@ -118,7 +118,15 @@ const addOns = [
   { title: "Extra Website Page", price: "₹999", original: "₹1,500" },
   { title: "Advanced SEO Package", price: "₹2,499", original: "₹3,999" },
   { title: "Extra Flyers (10)", price: "₹499", original: "₹799" },
-  { title: "Priority Support", price: "₹999/mo", original: "₹1,499/mo" }
+  { title: "Priority Support", price: "₹999/mo", original: "₹1,499/mo" },
+  { title: "Social Media Post (10)", price: "₹1,499", original: "₹2,499" },
+  { title: "Video Editing (5 videos)", price: "₹2,999", original: "₹4,499" },
+  { title: "Logo Redesign", price: "₹1,999", original: "₹2,999" },
+  { title: "Business Card Design", price: "₹499", original: "₹799" },
+  { title: "Email Marketing Setup", price: "₹1,499", original: "₹2,499" },
+  { title: "Google My Business Setup", price: "₹999", original: "₹1,499" },
+  { title: "WhatsApp Business API", price: "₹1,999", original: "₹2,999" },
+  { title: "Payment Gateway Integration", price: "₹2,499", original: "₹3,499" }
 ];
 
 export default function ExclusiveDealsPage() {
@@ -446,20 +454,20 @@ export default function ExclusiveDealsPage() {
         {/* Add-ons Section */}
         <section className="py-16 md:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-3 mb-12">
-              <h2 className="text-xl font-display font-medium">Discounted Add-ons</h2>
+            <div className="flex items-center gap-3 mb-8 md:mb-12">
+              <h2 className="text-lg md:text-xl font-display font-medium">Discounted Add-ons</h2>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 md:gap-4">
               {addOns.map((addon, index) => (
                 <div 
                   key={index} 
-                  className="p-4 bg-muted border border-border hover:border-primary transition-all duration-300"
+                  className="p-3 md:p-4 bg-muted border border-border hover:border-primary transition-all duration-300"
                 >
-                  <h4 className="font-medium text-sm mb-2">{addon.title}</h4>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-lg font-medium text-primary">{addon.price}</span>
-                    <span className="text-sm text-muted-foreground line-through">{addon.original}</span>
+                  <h4 className="font-medium text-xs md:text-sm mb-1 md:mb-2 leading-tight">{addon.title}</h4>
+                  <div className="flex items-baseline gap-1 md:gap-2 flex-wrap">
+                    <span className="text-base md:text-lg font-medium text-primary">{addon.price}</span>
+                    <span className="text-xs md:text-sm text-muted-foreground line-through">{addon.original}</span>
                   </div>
                 </div>
               ))}
