@@ -285,26 +285,18 @@ export default function ExclusiveDealsPage() {
                 </p>
               </div>
 
-              {/* Right: Clean Timer */}
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.days).padStart(2, '0')}</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Days</div>
+              {/* Right: Value Propositions */}
+              <div className="flex flex-col items-center md:items-end gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex -space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-medium text-primary">24/7</div>
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-[10px] font-medium text-green-600">100%</div>
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-medium text-blue-600">FREE</div>
+                  </div>
                 </div>
-                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.hours).padStart(2, '0')}</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Hrs</div>
-                </div>
-                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Min</div>
-                </div>
-                <div className="text-2xl md:text-3xl text-muted-foreground font-light pb-4">:</div>
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-mono font-light text-foreground">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wider mt-1">Sec</div>
+                <div className="text-center md:text-right">
+                  <div className="text-lg sm:text-xl font-medium text-foreground">Free Consultation</div>
+                  <div className="text-xs text-muted-foreground">24/7 Support • Lifetime Upgrades • No Hidden Fees</div>
                 </div>
               </div>
             </div>
