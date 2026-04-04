@@ -10,6 +10,7 @@ export default function ImagePopup({ images, intervalMinutes = 5 }: ImagePopupPr
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isAccepted, setIsAccepted] = useState(false);
 
   const openPopup = useCallback(() => {
     setIsOpen(true);
@@ -33,11 +34,42 @@ export default function ImagePopup({ images, intervalMinutes = 5 }: ImagePopupPr
   }, [images.length]);
 
   useEffect(() => {
-    // Show immediately on page load
+    // Check if acceptance is already completed
+    const checkAcceptance = () => {
+      const acceptance = localStorage.getItem('echoes_acceptance');
+      if (acceptance === 'accepted') {
+        setIsAccepted(true);
+      }
+    };
+    
+    checkAcceptance();
+
+    // Listen for storage changes (when user accepts in another tab/component)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'echoes_acceptance' && e.newValue === 'accepted') {
+        setIsAccepted(true);
+      }
+    };
+
+    // Also check periodically for same-tab updates
+    const interval = setInterval(checkAcceptance, 1000);
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isAccepted) return;
+
+    const intervalMs = intervalMinutes * 60 * 1000;
+
+    // Show immediately after acceptance
     openPopup();
 
     // Set up 5-minute interval for subsequent popups
-    const intervalMs = intervalMinutes * 60 * 1000;
     const interval = setInterval(() => {
       openPopup();
     }, intervalMs);
@@ -45,7 +77,7 @@ export default function ImagePopup({ images, intervalMinutes = 5 }: ImagePopupPr
     return () => {
       clearInterval(interval);
     };
-  }, [intervalMinutes, openPopup]);
+  }, [isAccepted, intervalMinutes, openPopup]);
 
   // Handle keyboard navigation
   useEffect(() => {
