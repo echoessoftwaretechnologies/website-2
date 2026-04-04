@@ -139,37 +139,10 @@ export default function ExclusiveDealsPage() {
     phone: '',
     message: ''
   });
-  const [timeLeft, setTimeLeft] = useState({ days: 30, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
-
-  // Countdown timer - 1 month from now
-  useEffect(() => {
-    // Set target date to 1 month from now
-    const targetDate = new Date();
-    targetDate.setMonth(targetDate.getMonth() + 1);
-
-    const calculateTimeLeft = () => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
-
-      if (distance > 0) {
-        setTimeLeft({
-          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((distance % (1000 * 60)) / 1000)
-        });
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   const toggleService = (service: string) => {
     setSelectedServices(prev => 
