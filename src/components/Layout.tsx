@@ -143,6 +143,7 @@ export default function Layout({ children }: LayoutProps) {
                 <li><Link to="/about" className="hover:text-foreground transition-colors">About Us</Link></li>
                 <li><Link to="/technology" className="hover:text-foreground transition-colors">Technology</Link></li>
                 <li><Link to="/testimonials" className="hover:text-foreground transition-colors">Testimonials</Link></li>
+                <li><Link to="/exclusive-deals" className="hover:text-foreground transition-colors">Exclusive Deals</Link></li>
                 <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link></li>
               </ul>
             </div>
