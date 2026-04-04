@@ -133,6 +133,7 @@ export default function ExclusiveDealsPage() {
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedPackage, setSelectedPackage] = useState<string>('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -165,7 +166,8 @@ export default function ExclusiveDealsPage() {
       email: formData.email,
       phone: formData.phone,
       message: formData.message,
-      selectedServices: selectedServices.join(', ')
+      selectedPackage: selectedPackage || 'Custom Package',
+      selectedServices: selectedServices.join(', ') || 'None selected'
     };
 
     try {
@@ -181,6 +183,7 @@ export default function ExclusiveDealsPage() {
         alert('Thank you! Your custom pricing request has been submitted. We will get back to you within 24 hours.');
         setIsModalOpen(false);
         setSelectedServices([]);
+        setSelectedPackage('');
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
         alert('Something went wrong. Please try again later.');
@@ -330,12 +333,15 @@ export default function ExclusiveDealsPage() {
                     </ul>
 
                     {/* CTA */}
-                    <Link 
-                      to="/contact"
+                    <button 
+                      onClick={() => {
+                        setSelectedPackage(deal.title);
+                        setIsModalOpen(true);
+                      }}
                       className="block w-full py-2.5 bg-foreground text-background text-sm font-medium text-center hover:bg-primary transition-colors duration-300"
                     >
                       Get Started
-                    </Link>
+                    </button>
                     <p className="text-center text-[10px] text-muted-foreground mt-3">
                       {deal.validUntil}
                     </p>
@@ -400,12 +406,15 @@ export default function ExclusiveDealsPage() {
                     </ul>
 
                     {/* CTA */}
-                    <Link 
-                      to="/contact"
+                    <button 
+                      onClick={() => {
+                        setSelectedPackage(deal.title);
+                        setIsModalOpen(true);
+                      }}
                       className="block w-full py-2.5 bg-foreground text-background text-sm font-medium text-center hover:bg-primary transition-colors duration-300"
                     >
                       Get Started
-                    </Link>
+                    </button>
                     <p className="text-center text-[10px] text-muted-foreground mt-3">
                       {deal.validUntil}
                     </p>
@@ -541,27 +550,35 @@ export default function ExclusiveDealsPage() {
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-            <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white">
+            <div className="relative w-full max-w-lg max-h-[85vh] overflow-y-auto bg-white">
               {/* Modal Header */}
-              <div className="flex items-center justify-between p-6 border-b border-border">
-                <h3 className="text-xl font-display font-medium">Request Custom Pricing</h3>
+              <div className="flex items-center justify-between p-4 border-b border-border">
+                <h3 className="text-lg font-display font-medium">Request Pricing</h3>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="p-2 hover:bg-muted transition-colors"
+                  className="p-1.5 hover:bg-muted transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Modal Body */}
-              <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <form onSubmit={handleSubmit} className="p-4 space-y-4">
+                {/* Selected Package Summary */}
+                {selectedPackage && (
+                  <div className="bg-primary/10 p-3 border border-primary/20">
+                    <h4 className="font-medium text-xs text-primary/70 mb-1">Selected Package</h4>
+                    <p className="text-primary font-semibold text-sm">{selectedPackage}</p>
+                  </div>
+                )}
+
                 {/* Selected Services Summary */}
                 {selectedServices.length > 0 && (
-                  <div className="bg-muted p-4 border border-border">
-                    <h4 className="font-medium text-sm mb-3">Selected Services ({selectedServices.length})</h4>
-                    <ul className="space-y-1 max-h-32 overflow-y-auto">
+                  <div className="bg-muted p-3 border border-border">
+                    <h4 className="font-medium text-xs text-muted-foreground mb-2">Selected Services ({selectedServices.length})</h4>
+                    <ul className="space-y-1 max-h-24 overflow-y-auto">
                       {selectedServices.map((service, i) => (
-                        <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
+                        <li key={i} className="text-xs text-muted-foreground flex items-center gap-2">
                           <CheckCircle className="w-3 h-3 text-green-500" />
                           {service}
                         </li>
@@ -571,72 +588,72 @@ export default function ExclusiveDealsPage() {
                 )}
 
                 {/* Form Fields */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Full Name *</label>
+                    <label className="block text-xs font-medium mb-1.5">Full Name *</label>
                     <input
                       type="text"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
-                      placeholder="Enter your name"
+                      className="w-full px-3 py-2 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                      placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <label className="block text-xs font-medium mb-1.5">Email *</label>
                     <input
                       type="email"
                       name="email"
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
-                      placeholder="Enter your email"
+                      className="w-full px-3 py-2 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                      placeholder="Your email"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                  <label className="block text-xs font-medium mb-1.5">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary"
-                    placeholder="Enter your phone number"
+                    className="w-full px-3 py-2 border border-border bg-white text-sm focus:outline-none focus:border-primary"
+                    placeholder="Your phone number"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Additional Requirements</label>
+                  <label className="block text-xs font-medium mb-1.5">Requirements</label>
                   <textarea
                     name="message"
-                    rows={4}
+                    rows={3}
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary resize-none"
-                    placeholder="Tell us more about your project requirements..."
+                    className="w-full px-3 py-2 border border-border bg-white text-sm focus:outline-none focus:border-primary resize-none"
+                    placeholder="Any specific requirements..."
                   />
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex gap-4 pt-4">
+                <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-2.5 border border-border text-sm font-medium hover:bg-muted transition-colors"
+                    className="flex-1 py-2 border border-border text-sm font-medium hover:bg-muted transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 bg-foreground text-background text-sm font-medium hover:bg-primary transition-colors"
+                    className="flex-1 py-2 bg-foreground text-background text-sm font-medium hover:bg-primary transition-colors"
                   >
-                    Submit Request
+                    Submit
                   </button>
                 </div>
               </form>
