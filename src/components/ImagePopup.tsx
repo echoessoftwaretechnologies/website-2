@@ -64,14 +64,23 @@ export default function ImagePopup({ images, intervalMinutes = 5 }: ImagePopupPr
   useEffect(() => {
     if (!isAccepted) return;
 
+    // Don't show on workspace or login pages
+    const path = window.location.pathname;
+    const isBlockedPage = path.startsWith('/workspace') || path === '/login';
+    if (isBlockedPage) return;
+
     const intervalMs = intervalMinutes * 60 * 1000;
 
-    // Show immediately after acceptance
+    // Show immediately after acceptance (on allowed pages)
     openPopup();
 
     // Set up 5-minute interval for subsequent popups
     const interval = setInterval(() => {
-      openPopup();
+      // Check again before each popup
+      const currentPath = window.location.pathname;
+      if (!currentPath.startsWith('/workspace') && currentPath !== '/login') {
+        openPopup();
+      }
     }, intervalMs);
 
     return () => {
