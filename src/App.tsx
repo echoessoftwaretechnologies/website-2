@@ -10,13 +10,14 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import AcceptanceModal from './components/AcceptanceModal';
 import LoginPage from './pages/LoginPage';
+import ImagePopup from './components/ImagePopup';
 
 import SitemapPage from './pages/SitemapPage';
 import ExclusiveDealsPage from './pages/ExclusiveDealsPage';
 import OverviewPage from './pages/workspace/overview/OverviewPage';
 import ProjectsPage from './pages/workspace/projects/ProjectsPage';
 import TeamPage from './pages/workspace/team/TeamPage';
-import MessagesPage from './pages/workspace/messages/MessagesPage';
+import MessagesPage from '@/pages/workspace/messages/MessagesPage';
 import CalendarPage from './pages/workspace/calendar/CalendarPage';
 import SettingsPage from './pages/workspace/settings/SettingsPage';
 import InvoicePage from './pages/workspace/invoice/InvoicePage';
@@ -83,6 +84,12 @@ function AppContent() {
         <Route path="/workspace/invoice" element={<ProtectedRoute><InvoicePage /></ProtectedRoute>} />
         <Route path="/workspace/legal" element={<ProtectedRoute><LegalDocumentsPage /></ProtectedRoute>} />
       </Routes>
+
+      {/* Image Popup - Shows immediately and every 5 minutes on all pages */}
+      <ImagePopup 
+        images={['/3.png', '/21.png', '/1.png']} 
+        intervalMinutes={5} 
+      />
     </>
   );
 }
