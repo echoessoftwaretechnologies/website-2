@@ -12,10 +12,11 @@ import AcceptanceModal from './components/AcceptanceModal';
 import LoginPage from './pages/LoginPage';
 
 import SitemapPage from './pages/SitemapPage';
+import ExclusiveDealsPage from './pages/ExclusiveDealsPage';
 import OverviewPage from './pages/workspace/overview/OverviewPage';
 import ProjectsPage from './pages/workspace/projects/ProjectsPage';
 import TeamPage from './pages/workspace/team/TeamPage';
-import MessagesPage from './pages/workspace/messages/MessagesPage';
+import MessagesPage from '@/pages/workspace/messages/MessagesPage';
 import CalendarPage from './pages/workspace/calendar/CalendarPage';
 import SettingsPage from './pages/workspace/settings/SettingsPage';
 import InvoicePage from './pages/workspace/invoice/InvoicePage';
@@ -69,6 +70,7 @@ function AppContent() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/sitemap" element={<SitemapPage />} />
+        <Route path="/exclusive-deals" element={<ExclusiveDealsPage />} />
         <Route path="/login" element={<LoginPage />} />
         
         {/* Protected Workspace Routes */}
