@@ -253,7 +253,7 @@ export default function ExclusiveDealsPage() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
               {/* Left: Text Content */}
               <div className="flex-1 text-center md:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-['Montserrat'] font-bold tracking-tight mb-3">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-['Space_Grotesk'] font-bold tracking-tight mb-3">
                   <span className="text-primary">Don't</span> Miss It
                 </h2>
                 <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto md:mx-0">
