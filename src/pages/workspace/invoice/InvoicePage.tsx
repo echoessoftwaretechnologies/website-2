@@ -38,8 +38,10 @@ export default function InvoicePage() {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'upi'>('cash');
   const [showPriceModal, setShowPriceModal] = useState(false);
+  const [showCustomItemModal, setShowCustomItemModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [customPrice, setCustomPrice] = useState('');
+  const [customItemName, setCustomItemName] = useState('');
   const [transactionComplete, setTransactionComplete] = useState(false);
 
   const categories = ['All', 'Services', 'Products', 'Custom'];
@@ -51,9 +53,15 @@ export default function InvoicePage() {
   });
 
   const openPriceModal = (product: Product) => {
-    setSelectedProduct(product);
-    setCustomPrice('');
-    setShowPriceModal(true);
+    if (product.category === 'Custom') {
+      setCustomItemName('');
+      setCustomPrice('');
+      setShowCustomItemModal(true);
+    } else {
+      setSelectedProduct(product);
+      setCustomPrice('');
+      setShowPriceModal(true);
+    }
   };
 
   const addToCartWithPrice = () => {
@@ -73,6 +81,25 @@ export default function InvoicePage() {
       setShowPriceModal(false);
       setCustomPrice('');
       setSelectedProduct(null);
+    }
+  };
+
+  const addCustomItemToCart = () => {
+    const price = parseFloat(customPrice);
+    const name = customItemName.trim();
+    if (name && price > 0) {
+      const customProduct: CartItem = {
+        id: `custom-${Date.now()}`,
+        name: name,
+        category: 'Custom',
+        stock: 999,
+        quantity: 1,
+        price: price
+      };
+      setCart(prev => [...prev, customProduct]);
+      setShowCustomItemModal(false);
+      setCustomItemName('');
+      setCustomPrice('');
     }
   };
 
@@ -345,6 +372,61 @@ export default function InvoicePage() {
         </div>
       )}
 
+      {/* Custom Item Modal */}
+      {showCustomItemModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+          <div className="bg-white w-full max-w-sm border border-border shadow-lg">
+            <div className="flex items-center justify-between p-4 border-b border-border">
+              <h3 className="font-semibold">Add Custom Item</h3>
+              <button 
+                onClick={() => {
+                  setShowCustomItemModal(false);
+                  setCustomItemName('');
+                  setCustomPrice('');
+                }}
+                className="p-1 hover:bg-muted"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-1.5">Product Name</label>
+                <input
+                  type="text"
+                  value={customItemName}
+                  onChange={(e) => setCustomItemName(e.target.value)}
+                  placeholder="Enter product name"
+                  className="w-full px-3 py-3 bg-muted border border-border text-lg focus:outline-none focus:border-primary"
+                  autoFocus
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1.5">Price (₹)</label>
+                <input
+                  type="number"
+                  value={customPrice}
+                  onChange={(e) => setCustomPrice(e.target.value)}
+                  placeholder="Enter amount"
+                  className="w-full px-3 py-3 bg-muted border border-border text-lg focus:outline-none focus:border-primary text-center"
+                />
+              </div>
+            </div>
+
+            <div className="p-4 border-t border-border bg-muted/20">
+              <button
+                onClick={addCustomItemToCart}
+                disabled={!customItemName.trim() || !customPrice || parseFloat(customPrice) <= 0}
+                className="w-full py-3 bg-primary text-white font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Payment Modal */}
       {showPaymentModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
@@ -519,7 +601,7 @@ export default function InvoicePage() {
                       <img src="/2.png" alt="Echoess Software" className="h-10 w-auto" />
                     </div>
                     <p className="text-[10px] text-gray-500 mt-1">Echoes Software Technologies</p>
-                    <p className="text-[10px] text-gray-500">GSTIN: 33AABCU9603R1ZX</p>
+                    <p className="text-[10px] text-gray-500">Karur, Tamilnadu, India 639001</p>
                   </div>
                   <div className="text-right">
                     <p className="text-[11px] font-mono font-semibold text-blue-700">{receiptNumber}</p>
@@ -570,12 +652,8 @@ export default function InvoicePage() {
                     <span className="font-medium">₹{subtotal.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>CGST @ 9%</span>
-                    <span>₹{(tax / 2).toLocaleString()}</span>
-                  </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>SGST @ 9%</span>
-                    <span>₹{(tax / 2).toLocaleString()}</span>
+                    <span>GST (18%)</span>
+                    <span>₹{tax.toLocaleString()}</span>
                   </div>
                   <div className="border-t border-gray-100 pt-2 mt-2 flex justify-between">
                     <span className="text-sm font-bold text-blue-700">TOTAL AMOUNT</span>
