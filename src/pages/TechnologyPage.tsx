@@ -65,13 +65,13 @@ const whyModernStack = [
 
 const recentProjects = [
   {
-    title: "Arroway",
+    title: "DigiCraft Lab Digital Dynamics",
     category: "Website",
-    description: "A modern, responsive corporate website designed for Arroway with seamless user experience and contemporary design aesthetics.",
+    description: "A modern, responsive corporate website designed for DigiCraft Lab with seamless user experience and contemporary design aesthetics.",
     tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
     year: "2024",
     link: "#",
-    image: "/arroway.jpeg"
+    image: "/digicraftlab.png"
   },
   {
     title: "Formann",
