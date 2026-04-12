@@ -1,9 +1,15 @@
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
   FileText, Upload, Search, Download, Trash2, 
-  X, Plus, File, AlertCircle, CheckCircle2, Clock
+  X, Plus, File, AlertCircle, CheckCircle2, Clock, Lock, Eye, EyeOff
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+
+// Simple random string generator for session
+
+// Session key
+const SESSION_KEY = 'legal_doc_auth';
+const AUTH_DURATION = 30 * 60 * 1000; // 30 minutes
 
 interface LegalDoc {
   id: number;
@@ -30,7 +36,109 @@ export default function LegalDocumentsPage() {
   const [uploadError, setUploadError] = useState('');
   const [uploadSuccess, setUploadSuccess] = useState('');
   
+  // Password verification state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState('');
+  const [authAttempts, setAuthAttempts] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
+  const [lockTimer, setLockTimer] = useState(0);
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const lockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Check session authentication on mount
+  useEffect(() => {
+    // Check existing session
+    const sessionData = sessionStorage.getItem(SESSION_KEY);
+    if (sessionData) {
+      try {
+        const { timestamp } = JSON.parse(sessionData);
+        if (Date.now() - timestamp < AUTH_DURATION) {
+          setIsAuthenticated(true);
+          return;
+        }
+        sessionStorage.removeItem(SESSION_KEY);
+      } catch (e) {
+        sessionStorage.removeItem(SESSION_KEY);
+      }
+    }
+    // Reset states
+    setIsAuthenticated(false);
+    setIsLocked(false);
+    setLockTimer(0);
+    setAuthAttempts(0);
+    setAuthError('');
+    setPassword('');
+  }, []);
+
+  // Handle lock timer
+  useEffect(() => {
+    if (isLocked && lockTimer > 0) {
+      lockTimeoutRef.current = setTimeout(() => {
+        setLockTimer(prev => prev - 1);
+      }, 1000);
+    } else if (isLocked && lockTimer === 0) {
+      setIsLocked(false);
+      setAuthAttempts(0);
+    }
+    
+    return () => {
+      if (lockTimeoutRef.current) {
+        clearTimeout(lockTimeoutRef.current);
+      }
+    };
+  }, [isLocked, lockTimer]);
+
+  // Simple password check
+  const verifyPassword = (inputPassword: string): boolean => {
+    return inputPassword === 'EchoesLegal2024!@#';
+  };
+
+  const handleAuth = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (isLocked) return;
+    
+    setAuthError('');
+    
+    if (!password.trim()) {
+      setAuthError('Please enter the password');
+      return;
+    }
+    
+    const isValid = verifyPassword(password);
+    console.log('Password entered:', password, '| Valid:', isValid);
+    
+    if (isValid) {
+      // Simple session without crypto
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify({ timestamp: Date.now() }));
+      setIsAuthenticated(true);
+      setPassword('');
+      setAuthAttempts(0);
+    } else {
+      const newAttempts = authAttempts + 1;
+      setAuthAttempts(newAttempts);
+      
+      if (newAttempts >= 3) {
+        setIsLocked(true);
+        setLockTimer(60);
+        setAuthError('Too many failed attempts. Locked for 60 seconds.');
+      } else {
+        setAuthError(`Invalid password. ${3 - newAttempts} attempts remaining.`);
+      }
+      setPassword('');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    setIsAuthenticated(false);
+    setPassword('');
+    setAuthError('');
+    setAuthAttempts(0);
+  };
   
   const [uploadForm, setUploadForm] = useState({
     title: '',
@@ -187,11 +295,109 @@ export default function LegalDocumentsPage() {
     return matchesSearch;
   });
 
+  // Password verification screen
+  if (!isAuthenticated) {
+    return (
+      <WorkspaceLayout 
+        title="Legal Documents" 
+        subtitle="Secure document storage - Authentication required"
+      >
+        <div className="min-h-[50vh] flex items-center justify-center p-4">
+          <div className="w-full max-w-sm bg-white border border-border shadow-lg p-4 sm:p-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Lock className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+              </div>
+              <h2 className="text-xl sm:text-2xl font-display font-medium mb-1">Secure Access</h2>
+              <p className="text-xs sm:text-sm text-muted-foreground px-2">
+                Enter password to access legal documents
+              </p>
+            </div>
+
+            {authError && (
+              <div className="mb-4 p-2.5 bg-red-50 border border-red-200 text-red-600 text-xs sm:text-sm flex items-center gap-2 rounded">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                {authError}
+              </div>
+            )}
+
+            <form onSubmit={handleAuth} className="space-y-3">
+              <div>
+                <label className="block text-xs sm:text-sm font-medium mb-1.5">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={isLocked}
+                    className="w-full px-3 py-2.5 bg-muted border border-border text-sm focus:outline-none focus:border-primary pr-10 rounded"
+                    placeholder="Enter password"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLocked}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-muted rounded"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4 text-muted-foreground" />
+                    ) : (
+                      <Eye className="w-4 h-4 text-muted-foreground" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {isLocked && (
+                <div className="text-center text-xs sm:text-sm text-orange-600 py-1">
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
+                  Locked {lockTimer}s
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLocked || !password.trim()}
+                className="w-full py-2.5 bg-foreground text-background text-sm font-medium hover:bg-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded"
+              >
+                {isLocked ? 'Locked' : 'Access'}
+              </button>
+            </form>
+
+            <div className="mt-4 pt-4 border-t border-border">
+              <div className="flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                <span>Encrypted</span>
+                <span className="mx-0.5">•</span>
+                <span>Secure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </WorkspaceLayout>
+    );
+  }
+
   return (
     <WorkspaceLayout 
       title="Legal Documents" 
       subtitle="Store and manage all legal documents securely."
     >
+      {/* Security Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mb-4 sm:mb-6 p-2 sm:p-3 bg-green-50 border border-green-200 rounded">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-green-700">
+          <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
+          <span>Secure • Encrypted</span>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 border border-green-300 text-green-700 hover:bg-green-100 transition-colors rounded"
+        >
+          Logout
+        </button>
+      </div>
+
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="bg-muted p-5 border border-border hover:border-primary transition-all">
