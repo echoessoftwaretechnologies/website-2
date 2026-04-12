@@ -17,7 +17,7 @@ import ExclusiveDealsPage from './pages/ExclusiveDealsPage';
 import OverviewPage from './pages/workspace/overview/OverviewPage';
 import ProjectsPage from './pages/workspace/projects/ProjectsPage';
 import TeamPage from './pages/workspace/team/TeamPage';
-import MessagesPage from '@/pages/workspace/messages/MessagesPage';
+import MessagesPage from './pages/workspace/messages/MessagesPage';
 import CalendarPage from './pages/workspace/calendar/CalendarPage';
 import SettingsPage from './pages/workspace/settings/SettingsPage';
 import InvoicePage from './pages/workspace/invoice/InvoicePage';
