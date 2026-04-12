@@ -16,7 +16,7 @@ interface Notification {
   details?: string;
 }
 
-const NOTIFICATIONS_KEY = 'echoes_notifications';
+const API_URL = 'http://localhost:3001/api';
 
 const getTypeIcon = (type: string) => {
   switch (type) {
@@ -43,14 +43,33 @@ const getTypeColor = (type: string) => {
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [filter, setFilter] = useState<'all' | 'unread' | 'read'>('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // Load from localStorage on mount
+  // Load from backend API on mount
   useEffect(() => {
-    const stored = localStorage.getItem(NOTIFICATIONS_KEY);
-    if (stored) {
-      setNotifications(JSON.parse(stored));
-    }
+    fetchNotifications();
   }, []);
+
+  const fetchNotifications = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/notifications`);
+      if (!response.ok) throw new Error('Failed to fetch notifications');
+      const data = await response.json();
+      // Map backend fields to frontend fields
+      const mapped = data.map((n: any) => ({
+        ...n,
+        read: n.is_read,
+        time: n.time_display || 'Just now'
+      }));
+      setNotifications(mapped);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
@@ -67,33 +86,53 @@ export default function NotificationsPage() {
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  const markAsRead = (id: number) => {
-    const updated = notifications.map(n => 
-      n.id === id ? { ...n, read: true } : n
-    );
-    setNotifications(updated);
-    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(updated));
-  };
-
-  const markAllAsRead = () => {
-    const updated = notifications.map(n => ({ ...n, read: true }));
-    setNotifications(updated);
-    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(updated));
-  };
-
-  const deleteNotification = (id: number) => {
-    const updated = notifications.filter(n => n.id !== id);
-    setNotifications(updated);
-    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(updated));
-    if (selectedNotification?.id === id) {
-      setSelectedNotification(null);
+  const markAsRead = async (id: number) => {
+    try {
+      const response = await fetch(`${API_URL}/notifications/${id}/read`, { method: 'PATCH' });
+      if (!response.ok) throw new Error('Failed to mark as read');
+      const updated = notifications.map(n => 
+        n.id === id ? { ...n, read: true } : n
+      );
+      setNotifications(updated);
+    } catch (err: any) {
+      console.error(err.message);
     }
   };
 
-  const clearAll = () => {
-    setNotifications([]);
-    localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify([]));
-    setSelectedNotification(null);
+  const markAllAsRead = async () => {
+    try {
+      const response = await fetch(`${API_URL}/notifications/read-all`, { method: 'PATCH' });
+      if (!response.ok) throw new Error('Failed to mark all as read');
+      const updated = notifications.map(n => ({ ...n, read: true }));
+      setNotifications(updated);
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const deleteNotification = async (id: number) => {
+    try {
+      const response = await fetch(`${API_URL}/notifications/${id}`, { method: 'DELETE' });
+      if (!response.ok) throw new Error('Failed to delete');
+      const updated = notifications.filter(n => n.id !== id);
+      setNotifications(updated);
+      if (selectedNotification?.id === id) {
+        setSelectedNotification(null);
+      }
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const clearAll = async () => {
+    try {
+      const response = await fetch(`${API_URL}/notifications`, { method: 'DELETE' });
+      if (!response.ok) throw new Error('Failed to clear');
+      setNotifications([]);
+      setSelectedNotification(null);
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -101,6 +140,21 @@ export default function NotificationsPage() {
       title="Notifications" 
       subtitle={`You have ${unreadCount} unread notification${unreadCount !== 1 ? 's' : ''}`}
     >
+      {/* Error Display */}
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
+          Error: {error}. Please ensure the backend server is running.
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading ? (
+        <div className="text-center py-16">
+          <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading notifications...</p>
+        </div>
+      ) : (
+        <>
       {/* Stats & Actions */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-6">
         <div className="flex items-center gap-2 sm:gap-4">
@@ -324,6 +378,8 @@ export default function NotificationsPage() {
             </div>
           </div>
         </div>
+      )}
+        </>
       )}
     </WorkspaceLayout>
   );
