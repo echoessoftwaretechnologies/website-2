@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
   Plus, Edit2, Trash2, Bell, Search, Filter,
-  CheckCircle, X, Calendar, User, Folder, AlertCircle,
-  MessageSquare, Clock
-} from 'lucide-react';
+  CheckCircle, X, Calendar, User, Folder, AlertCircle} from 'lucide-react';
 
 interface Notification {
   id: number;
