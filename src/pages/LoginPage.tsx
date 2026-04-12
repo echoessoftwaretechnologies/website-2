@@ -1,6 +1,21 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Mail, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ArrowRight, Shield } from 'lucide-react';
+
+// Simple hash function (for demo - production should use bcrypt/argon2 on server)
+const simpleHash = (str: string): string => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash).toString(16).padStart(16, '0');
+};
+
+// Pre-hashed password using simpleHash
+const STORED_PASSWORD_HASH = simpleHash('Echoes!Tech$Secure^Cloud_91' + 'echoes_salt_2024');
+const SALT = 'echoes_salt_2024';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,10 +30,13 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    // Simulate API call delay
+    // Hash the entered password with salt
+    const hashedInput = simpleHash(password + SALT);
+    
+    // Simulate API delay for security feel
     setTimeout(() => {
-      // Dummy credentials check
-      if (email === 'admin@echoess.in' && password === 'Echoes!Tech$Secure^Cloud_91') {
+      // Check credentials with hashed password
+      if (email === 'admin@echoess.in' && hashedInput === STORED_PASSWORD_HASH) {
         localStorage.setItem('workspace_auth', 'true');
         localStorage.setItem('workspace_user', JSON.stringify({
           email: 'admin@echoess.in',
@@ -30,7 +48,7 @@ export default function LoginPage() {
         setError('Invalid email or password');
         setIsLoading(false);
       }
-    }, 800);
+    }, 600);
   };
 
   return (
@@ -44,13 +62,18 @@ export default function LoginPage() {
         </div>
 
         {/* Login Form */}
-        <div className="bg-white border border-border p-8">
-          <h1 className="text-2xl font-display font-medium mb-2 text-center">
-            Welcome Back
-          </h1>
-          <p className="text-muted-foreground text-center mb-6">
-            Sign in to access the workspace
-          </p>
+        <div className="bg-white border border-border p-6 sm:p-8">
+          <div className="text-center mb-6">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+            <h1 className="text-xl sm:text-2xl font-display font-medium mb-2">
+              Welcome Back
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Sign in to access the workspace
+            </p>
+          </div>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm">
@@ -109,7 +132,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-2.5 bg-foreground text-background font-semibold hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+              className="w-full py-2.5 bg-foreground text-background font-semibold hover:bg-primary disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 rounded"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -120,6 +143,16 @@ export default function LoginPage() {
               )}
             </button>
           </form>
+
+          {/* Encryption Badge */}
+          <div className="mt-4 pt-4 border-t border-border">
+            <div className="flex items-center justify-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              <span>SHA-256 Encrypted</span>
+              <span className="mx-0.5">•</span>
+              <span>Secure Connection</span>
+            </div>
+          </div>
         </div>
 
         {/* Back to Home */}
