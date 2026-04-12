@@ -268,6 +268,136 @@ app.get('/api/documents/search', async (req, res) => {
   }
 });
 
+// ==================== NOTIFICATIONS API ====================
+
+// Get all notifications
+app.get('/api/notifications', async (req, res) => {
+  try {
+    const [rows] = await pool.execute(
+      'SELECT * FROM notifications ORDER BY created_at DESC'
+    );
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get single notification
+app.get('/api/notifications/:id', async (req, res) => {
+  try {
+    const [rows] = await pool.execute(
+      'SELECT * FROM notifications WHERE id = ?',
+      [req.params.id]
+    );
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+    res.json(rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Create notification
+app.post('/api/notifications', async (req, res) => {
+  try {
+    const { title, message, type, details, time_display } = req.body;
+    
+    const [result] = await pool.execute(
+      'INSERT INTO notifications (title, message, type, details, time_display, is_read) VALUES (?, ?, ?, ?, ?, false)',
+      [title, message, type, details || null, time_display || 'Just now']
+    );
+    
+    res.status(201).json({ 
+      id: result.insertId, 
+      title, 
+      message, 
+      type, 
+      details, 
+      time_display,
+      is_read: false 
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Update notification
+app.put('/api/notifications/:id', async (req, res) => {
+  try {
+    const { title, message, type, details, time_display } = req.body;
+    
+    const [result] = await pool.execute(
+      'UPDATE notifications SET title = ?, message = ?, type = ?, details = ?, time_display = ? WHERE id = ?',
+      [title, message, type, details || null, time_display || 'Just now', req.params.id]
+    );
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+    
+    res.json({ message: 'Notification updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Mark notification as read
+app.patch('/api/notifications/:id/read', async (req, res) => {
+  try {
+    const [result] = await pool.execute(
+      'UPDATE notifications SET is_read = true WHERE id = ?',
+      [req.params.id]
+    );
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+    
+    res.json({ message: 'Notification marked as read' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Mark all notifications as read
+app.patch('/api/notifications/read-all', async (req, res) => {
+  try {
+    await pool.execute('UPDATE notifications SET is_read = true');
+    res.json({ message: 'All notifications marked as read' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete notification
+app.delete('/api/notifications/:id', async (req, res) => {
+  try {
+    const [result] = await pool.execute(
+      'DELETE FROM notifications WHERE id = ?',
+      [req.params.id]
+    );
+    
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+    
+    res.json({ message: 'Notification deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Clear all notifications
+app.delete('/api/notifications', async (req, res) => {
+  try {
+    await pool.execute('DELETE FROM notifications');
+    res.json({ message: 'All notifications cleared' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Error handling
 app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {
