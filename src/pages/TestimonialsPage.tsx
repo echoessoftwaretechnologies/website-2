@@ -24,9 +24,9 @@ const testimonials = [
   },
   {
     quote: "I approached Echoes Software Technologies for website creation, and I'm very satisfied with their work. They understood my requirements clearly and delivered a modern, professional website that perfectly matched my expectations. Highly recommended!",
-    author: "Arroway",
+    author: "DigiCraft Lab",
     role: "Founder",
-    company: "Arroway",
+    company: "DigiCraft Lab",
     industry: "Technology",
     rating: 5,
     project: "Website and Logo",
