@@ -2,58 +2,22 @@ import { useState, useEffect } from 'react';
 import WorkspaceLayout from '../../../components/workspace/WorkspaceLayout';
 import { 
   Plus, Edit2, Trash2, Bell, Search, Filter,
-  CheckCircle, X, Calendar, User, Folder, AlertCircle} from 'lucide-react';
+  CheckCircle, X, Calendar, User, Folder, AlertCircle
+} from 'lucide-react';
 
 interface Notification {
   id: number;
   title: string;
   message: string;
   time: string;
+  time_display?: string;
   read: boolean;
+  is_read?: boolean;
   type: 'project' | 'task' | 'meeting' | 'team' | 'system';
   details?: string;
 }
 
-const NOTIFICATIONS_KEY = 'echoes_notifications';
-
-const defaultNotifications: Notification[] = [
-  { 
-    id: 1, 
-    title: "New project assigned", 
-    message: "You have been assigned to Debpto POS System", 
-    time: "2 min ago", 
-    read: false,
-    type: 'project',
-    details: "Project ID: PRJ-2024-001\nClient: Debpto Enterprises\nDeadline: Dec 31, 2024"
-  },
-  { 
-    id: 2, 
-    title: "Task completed", 
-    message: "Alex Kumar completed API Integration task", 
-    time: "15 min ago", 
-    read: false,
-    type: 'task',
-    details: "Task: API Integration\nProject: E-Commerce Platform"
-  },
-  { 
-    id: 3, 
-    title: "Meeting reminder", 
-    message: "Design Review Meeting starts in 30 minutes", 
-    time: "1 hour ago", 
-    read: true,
-    type: 'meeting',
-    details: "Meeting: Design Review\nTime: Today, 3:00 PM\nLocation: Conference Room A"
-  },
-  { 
-    id: 4, 
-    title: "New team member", 
-    message: "Sneha Reddy joined the Engineering team", 
-    time: "3 hours ago", 
-    read: true,
-    type: 'team',
-    details: "Name: Sneha Reddy\nRole: Senior Developer\nDepartment: Engineering"
-  },
-];
+const API_URL = 'http://localhost:3001/api';
 
 const getTypeIcon = (type: string) => {
   switch (type) {
@@ -83,6 +47,8 @@ export default function NotificationManager() {
   const [editingNotification, setEditingNotification] = useState<Notification | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<string>('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -92,23 +58,30 @@ export default function NotificationManager() {
     time: 'Just now'
   });
 
-  // Load from localStorage on mount
+  // Load from backend API on mount
   useEffect(() => {
-    const stored = localStorage.getItem(NOTIFICATIONS_KEY);
-    if (stored) {
-      setNotifications(JSON.parse(stored));
-    } else {
-      setNotifications(defaultNotifications);
-      localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(defaultNotifications));
-    }
+    fetchNotifications();
   }, []);
 
-  // Save to localStorage whenever notifications change
-  useEffect(() => {
-    if (notifications.length > 0) {
-      localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(notifications));
+  const fetchNotifications = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/notifications`);
+      if (!response.ok) throw new Error('Failed to fetch notifications');
+      const data = await response.json();
+      // Map backend fields to frontend fields
+      const mapped = data.map((n: any) => ({
+        ...n,
+        read: n.is_read,
+        time: n.time_display || 'Just now'
+      }));
+      setNotifications(mapped);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-  }, [notifications]);
+  };
 
   const filteredNotifications = notifications.filter(n => {
     const matchesSearch = n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -141,47 +114,98 @@ export default function NotificationManager() {
     setShowModal(true);
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('Are you sure you want to delete this notification?')) {
+  const handleDelete = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this notification?')) return;
+    try {
+      const response = await fetch(`${API_URL}/notifications/${id}`, { method: 'DELETE' });
+      if (!response.ok) throw new Error('Failed to delete');
       setNotifications(prev => prev.filter(n => n.id !== id));
+    } catch (err: any) {
+      alert('Error: ' + err.message);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (editingNotification) {
-      // Update existing
-      setNotifications(prev => prev.map(n => 
-        n.id === editingNotification.id 
-          ? { ...n, ...formData, details: formData.details || undefined }
-          : n
-      ));
-    } else {
-      // Add new
-      const newNotification: Notification = {
-        id: Date.now(),
-        ...formData,
-        read: false,
-        details: formData.details || undefined
-      };
-      setNotifications(prev => [newNotification, ...prev]);
+    try {
+      if (editingNotification) {
+        // Update existing
+        const response = await fetch(`${API_URL}/notifications/${editingNotification.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: formData.title,
+            message: formData.message,
+            type: formData.type,
+            details: formData.details || null,
+            time_display: formData.time
+          })
+        });
+        if (!response.ok) throw new Error('Failed to update');
+        
+        setNotifications(prev => prev.map(n => 
+          n.id === editingNotification.id 
+            ? { ...n, ...formData, details: formData.details || undefined, time: formData.time }
+            : n
+        ));
+      } else {
+        // Add new
+        const response = await fetch(`${API_URL}/notifications`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: formData.title,
+            message: formData.message,
+            type: formData.type,
+            details: formData.details || null,
+            time_display: formData.time
+          })
+        });
+        if (!response.ok) throw new Error('Failed to create');
+        const newNotif = await response.json();
+        setNotifications(prev => [{ ...newNotif, read: false, time: newNotif.time_display }, ...prev]);
+      }
+      
+      setShowModal(false);
+    } catch (err: any) {
+      alert('Error: ' + err.message);
     }
-    
-    setShowModal(false);
   };
 
-  const resetToDefault = () => {
-    if (confirm('Reset all notifications to default?')) {
-      setNotifications(defaultNotifications);
-      localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(defaultNotifications));
+  const resetToDefault = async () => {
+    if (!confirm('Reset all notifications to default?')) return;
+    const defaults = [
+      { title: "New project assigned", message: "You have been assigned to Debpto POS System", type: "project", details: "Project ID: PRJ-2024-001\nClient: Debpto Enterprises\nDeadline: Dec 31, 2024", time_display: "2 min ago" },
+      { title: "Task completed", message: "Alex Kumar completed API Integration task", type: "task", details: "Task: API Integration\nProject: E-Commerce Platform", time_display: "15 min ago" },
+      { title: "Meeting reminder", message: "Design Review Meeting starts in 30 minutes", type: "meeting", details: "Meeting: Design Review\nTime: Today, 3:00 PM\nLocation: Conference Room A", time_display: "1 hour ago" },
+      { title: "New team member", message: "Sneha Reddy joined the Engineering team", type: "team", details: "Name: Sneha Reddy\nRole: Senior Developer\nDepartment: Engineering", time_display: "3 hours ago" },
+    ];
+    try {
+      // Clear all first
+      await fetch(`${API_URL}/notifications`, { method: 'DELETE' });
+      // Add defaults
+      for (const n of defaults) {
+        await fetch(`${API_URL}/notifications`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(n)
+        });
+      }
+      fetchNotifications();
+    } catch (err: any) {
+      alert('Error: ' + err.message);
     }
   };
 
-  const clearAll = () => {
-    if (confirm('Delete all notifications?')) {
+  const clearAll = async () => {
+    if (!confirm('Delete all notifications?')) return;
+    try {
+      const response = await fetch(`${API_URL}/notifications`, { method: 'DELETE' });
+      if (!response.ok) throw new Error('Failed to clear');
       setNotifications([]);
-      localStorage.removeItem(NOTIFICATIONS_KEY);
+    } catch (err: any) {
+      alert('Error: ' + err.message);
     }
   };
 
@@ -190,6 +214,21 @@ export default function NotificationManager() {
       title="Notification Manager" 
       subtitle="Create, edit and manage system notifications"
     >
+      {/* Error Display */}
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded">
+          Error: {error}. Please ensure the backend server is running.
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading ? (
+        <div className="text-center py-16">
+          <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading notifications...</p>
+        </div>
+      ) : (
+        <>
       {/* Stats & Actions */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div className="flex items-center gap-2 sm:gap-4">
@@ -447,6 +486,8 @@ export default function NotificationManager() {
             </form>
           </div>
         </div>
+      )}
+        </>
       )}
     </WorkspaceLayout>
   );
