@@ -14,6 +14,8 @@ const sidebarItems = [
   { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/workspace/calendar' },
   { id: 'invoice', label: 'Invoice', icon: FileText, path: '/workspace/invoice' },
   { id: 'legal', label: 'Legal Docs', icon: Scale, path: '/workspace/legal' },
+  { id: 'notifications', label: 'Notifications', icon: Bell, path: '/workspace/notifications', badge: 4 },
+  { id: 'notifications-manage', label: 'Manage Notif.', icon: Plus, path: '/workspace/notifications/manage' },
   { id: 'settings', label: 'Settings', icon: Settings, path: '/workspace/settings' }
 ];
 
