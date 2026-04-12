@@ -90,6 +90,42 @@ const recentProjects = [
     year: "2023",
     link: "#",
     image: "/dr.sameel.png"
+  },
+  {
+    title: "MedZ Pharmacy",
+    category: "E-Commerce",
+    description: "A comprehensive online pharmacy platform with inventory management, prescription uploads, and seamless medicine ordering.",
+    tech: ["React", "Node.js", "MongoDB", "Stripe"],
+    year: "2024",
+    link: "#",
+    image: "/new-projects/medz-1.png"
+  },
+  {
+    title: "MedZ Diagnostics",
+    category: "Healthcare",
+    description: "Advanced diagnostic center management system with appointment booking, test reports, and patient history tracking.",
+    tech: ["Next.js", "TypeScript", "PostgreSQL", "AWS"],
+    year: "2024",
+    link: "#",
+    image: "/new-projects/medz-2.png"
+  },
+  {
+    title: "TRACK CARR AUTOMOTIVE",
+    category: "Automotive",
+    description: "Fleet management and vehicle tracking solution for automotive businesses with real-time analytics and maintenance alerts.",
+    tech: ["React", "Python", "Django", "Google Maps API"],
+    year: "2024",
+    link: "#",
+    image: "/new-projects/tca.png"
+  },
+  {
+    title: "SkynZo Cosmetics",
+    category: "E-Commerce",
+    description: "Premium cosmetics and skincare e-commerce platform with virtual try-on features and personalized product recommendations.",
+    tech: ["Next.js", "Shopify API", "Tailwind CSS", "Vercel"],
+    year: "2025",
+    link: "#",
+    image: "/new-projects/skynzo.png"
   }
 ];
 
