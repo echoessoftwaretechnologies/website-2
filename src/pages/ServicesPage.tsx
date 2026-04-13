@@ -1,5 +1,6 @@
 import { ArrowUpRight, Check, ArrowRight } from 'lucide-react';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 const services = [
   {
@@ -77,24 +78,13 @@ const services = [
 export default function ServicesPage() {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              Our Services
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Comprehensive<br />
-              <span className="text-muted-foreground/40 italic">Digital Solutions</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              From custom software development to cutting-edge AI solutions, we offer a full spectrum 
-              of technology services designed to help your business thrive in the digital age.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Our Services"
+        title="Comprehensive"
+        highlight="Digital Solutions"
+        description="From custom software development to cutting-edge AI solutions, we offer a full spectrum of technology services designed to help your business thrive in the digital age."
+        backgroundImage="/hero-background/6.png"
+      />
 
       {/* Services Grid - Same style as homepage What We Do */}
       <section className="py-24 md:py-32 bg-white">
