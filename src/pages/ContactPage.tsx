@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, Check, MessageSquare, Users, Calendar } from 'lucide-react';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 const contactInfo = [
   {
@@ -142,24 +143,13 @@ export default function ContactPage() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              Get In Touch
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Let's Build<br />
-              <span className="text-muted-foreground/40 italic">Something Great</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Have a project in mind? We'd love to hear about it. Send us a message and 
-              our team will get back to you within 24 hours.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Get In Touch"
+        title="Let's Build"
+        highlight="Something Great"
+        description="Have a project in mind? We'd love to hear about it. Send us a message and our team will get back to you within 24 hours."
+        backgroundImage="/hero-background/21.png"
+      />
 
       {/* Contact Info Cards */}
       <section className="py-24 md:py-32 bg-white">
