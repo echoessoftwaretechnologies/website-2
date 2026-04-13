@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
+import PageHero from '../components/PageHero';
 
 const mainLinks = [
   { label: "Home", path: "/", desc: "Welcome to Echoes" },
@@ -8,6 +9,7 @@ const mainLinks = [
   { label: "About Us", path: "/about", desc: "Who We Are" },
   { label: "Technology", path: "/technology", desc: "Tech Stack" },
   { label: "Testimonials", path: "/testimonials", desc: "Client Stories" },
+  { label: "Exclusive Deals", path: "/exclusive-deals", desc: "Special Pricing" },
   { label: "Contact", path: "/contact", desc: "Get in Touch" }
 ];
 
@@ -27,6 +29,7 @@ const serviceLinks = [
 const legalLinks = [
   { label: "Privacy Policy", path: "/privacy" },
   { label: "Terms of Service", path: "/terms" },
+  { label: "Exclusive Deals", path: "/exclusive-deals" },
   { label: "Sitemap", path: "/sitemap" }
 ];
 
@@ -56,24 +59,15 @@ export default function SitemapPage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-40 md:pt-52 pb-16 md:pb-24 bg-muted border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              Site Directory
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Navigate Our<br />
-              <span className="text-muted-foreground/40 italic">Digital Ecosystem</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Discover all pages, services, and resources available on our platform. 
-              Quickly find what you're looking for or explore our comprehensive offerings.
-            </p>
-          </div>
-        </div>
-      </section>
+      <div className="pt-20 md:pt-24">
+        <PageHero
+          label="Site Directory"
+          title="Navigate Our"
+          highlight="Digital Ecosystem"
+          description="Discover all pages, services, and resources available on our platform. Quickly find what you're looking for or explore our comprehensive offerings."
+          backgroundImage="/hero-background/16.png"
+        />
+      </div>
 
       {/* Main Navigation Cards */}
       <section className="py-16 md:py-24 bg-white">
