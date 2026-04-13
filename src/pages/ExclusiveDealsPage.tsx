@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { CheckCircle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import ImagePopup from '../components/ImagePopup';
+import PageHero from '../components/PageHero';
 
 const contentPackages = [
   {
@@ -227,26 +227,13 @@ export default function ExclusiveDealsPage() {
   return (
     <Layout>
       <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section className="pt-32 md:pt-40 pb-16 md:pb-24 bg-muted border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-                  Limited Time Offers
-                </span>
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mb-6">
-                Exclusive Pricing<br />
-                <span className="text-muted-foreground/40 italic">& Special Deals</span>
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                Take advantage of our curated bundle deals designed to accelerate your business growth. 
-                Save up to 34% on comprehensive technology solutions.
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero
+          label="Limited Time Offers"
+          title="Exclusive Pricing"
+          highlight="& Special Deals"
+          description="Take advantage of our curated bundle deals designed to accelerate your business growth. Save up to 34% on comprehensive technology solutions."
+          backgroundImage="/hero-background/3.png"
+        />
 
         {/* Don't Miss It - Minimalist Section */}
         <section className="py-12 md:py-20 bg-white border-y border-border">
