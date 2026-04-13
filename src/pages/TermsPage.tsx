@@ -1,22 +1,16 @@
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 export default function TermsPage() {
   return (
     <Layout>
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary">
-            Legal
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-medium tracking-tighter mt-6 mb-6">
-            Terms of Service
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Last updated: April 1, 2026
-          </p>
-        </div>
-      </section>
+      <PageHero
+        label="Legal"
+        title="Terms of Service"
+        description="Last updated: April 1, 2026"
+        backgroundImage="/hero-background/5.png"
+      />
 
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
