@@ -1,5 +1,6 @@
 import { Star, Quote, ArrowRight } from 'lucide-react';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 const testimonials = [
   {
@@ -94,24 +95,13 @@ const stats = [
 export default function TestimonialsPage() {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              Testimonials
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Trusted by<br />
-              <span className="text-muted-foreground/40 italic">Industry Leaders</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Don't just take our word for it. Here's what our clients have to say about 
-              working with us and the results we've helped them achieve.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Testimonials"
+        title="Trusted by"
+        highlight="Industry Leaders"
+        description="Don't just take our word for it. Here's what our clients have to say about working with us and the results we've helped them achieve."
+        backgroundImage="/hero-background/2.png"
+      />
 
       {/* Stats Bar */}
       <section className="py-16 bg-white border-y border-border">
