@@ -1,5 +1,6 @@
 import { ArrowRight, Users, Target, Award, Globe } from 'lucide-react';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 const stats = [
   { value: "250+", label: "Projects Delivered" },
@@ -52,26 +53,13 @@ const team = [
 export default function AboutPage() {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              About Us
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Building Digital<br />
-              <span className="text-muted-foreground/40 italic">Excellence</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Echoes Software Technologies is a forward-thinking technology company dedicated to 
-              transforming businesses through innovative digital solutions. Founded with a vision to 
-              bridge the gap between complex technology and real-world business needs, we've grown 
-              into a trusted partner for organizations worldwide.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="About Us"
+        title="Building Digital"
+        highlight="Excellence"
+        description="Echoes Software Technologies is a forward-thinking technology company dedicated to transforming businesses through innovative digital solutions. Founded with a vision to bridge the gap between complex technology and real-world business needs, we've grown into a trusted partner for organizations worldwide."
+        backgroundImage="/hero-background/5.png"
+      />
 
       {/* Stats Section */}
       <section className="py-16 md:py-20 bg-white border-y border-border">
