@@ -58,7 +58,7 @@ export default function AboutPage() {
         title="Building Digital"
         highlight="Excellence"
         description="Echoes Software Technologies is a forward-thinking technology company dedicated to transforming businesses through innovative digital solutions. Founded with a vision to bridge the gap between complex technology and real-world business needs, we've grown into a trusted partner for organizations worldwide."
-        backgroundImage="public/hero-background/5.png"
+        backgroundImage="/hero-background/5.png"
       />
 
       {/* Stats Section */}
