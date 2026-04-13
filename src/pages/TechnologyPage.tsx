@@ -1,5 +1,6 @@
 import { ArrowRight, Check } from 'lucide-react';
 import Layout from '../components/Layout';
+import PageHero from '../components/PageHero';
 
 const techCategories = [
   {
@@ -71,7 +72,7 @@ const recentProjects = [
     tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
     year: "2024",
     link: "#",
-    image: "/digicraftlab.png"
+    image: "./public/hero-background/22.png"
   },
   {
     title: "Formann",
@@ -132,25 +133,13 @@ const recentProjects = [
 export default function TechnologyPage() {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
-              Tech Stack
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium tracking-tighter mt-6 mb-6">
-              Modern<br />
-              <span className="text-muted-foreground/40 italic">Technologies</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              We leverage industry-leading technologies and frameworks to build scalable, 
-              secure, and high-performance applications that stand the test of time. Our 
-              technology choices are driven by your business needs, not trends.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Tech Stack"
+        title="Modern"
+        highlight="Technologies"
+        description="We leverage industry-leading technologies and frameworks to build scalable, secure, and high-performance applications that stand the test of time. Our technology choices are driven by your business needs, not trends."
+        backgroundImage="/hero-background/22.png"
+      />
 
       {/* Tech Categories Grid */}
       <section className="py-24 md:py-32 bg-white">
