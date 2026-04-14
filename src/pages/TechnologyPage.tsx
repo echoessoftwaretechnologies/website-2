@@ -64,69 +64,48 @@ const whyModernStack = [
   }
 ];
 
-const recentProjects = [
+const techSolutions = [
   {
-    title: "DigiCraft Lab Digital Dynamics",
-    category: "Website",
-    description: "A modern, responsive corporate website designed for DigiCraft Lab with seamless user experience and contemporary design aesthetics.",
-    tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-    year: "2024",
-    link: "#",
-    image: "./public/hero-background/22.png"
+    title: "Cloud Infrastructure Solutions",
+    category: "Cloud",
+    description: "Scalable cloud architectures leveraging AWS, Azure, and GCP for enterprise-grade deployments with auto-scaling and cost optimization.",
+    tech: ["AWS", "Azure", "GCP", "Kubernetes", "Terraform"],
+    link: "/services"
   },
   {
-    title: "Formann",
-    category: "Website",
-    description: "Professional business website for Formann featuring clean design, smooth animations, and optimized performance.",
-    tech: ["React", "TypeScript", "Framer Motion", "AWS"],
-    year: "2024",
-    link: "#",
-    image: "/formann.png"
+    title: "AI & Machine Learning",
+    category: "AI",
+    description: "Custom ML models and AI solutions for predictive analytics, natural language processing, and computer vision applications.",
+    tech: ["Python", "TensorFlow", "PyTorch", "OpenAI", "HuggingFace"],
+    link: "/services"
   },
   {
-    title: "Dr. Mohammed Sameel Hassan",
-    category: "Doctor Portfolio",
-    description: "Elegant medical portfolio website showcasing expertise, services, and patient information with a professional aesthetic.",
-    tech: ["React", "Node.js", "MongoDB", "Netlify"],
-    year: "2023",
-    link: "#",
-    image: "/dr.sameel.png"
+    title: "Microservices Architecture",
+    category: "Backend",
+    description: "Distributed systems design with containerization, service mesh, and API gateway implementations for resilient applications.",
+    tech: ["Docker", "Kubernetes", "Node.js", "Go", "GraphQL"],
+    link: "/services"
   },
   {
-    title: "MedZ Pharmacy",
-    category: "E-Commerce",
-    description: "A comprehensive online pharmacy platform with inventory management, prescription uploads, and seamless medicine ordering.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe"],
-    year: "2024",
-    link: "#",
-    image: "/new-projects/medz-1.png"
+    title: "Cybersecurity & Compliance",
+    category: "Security",
+    description: "End-to-end security solutions including penetration testing, vulnerability assessment, and compliance automation (SOC2, ISO 27001).",
+    tech: ["OWASP", "SIEM", "Zero Trust", "Encryption", "IAM"],
+    link: "/services"
   },
   {
-    title: "MedZ Diagnostics",
-    category: "Healthcare",
-    description: "Advanced diagnostic center management system with appointment booking, test reports, and patient history tracking.",
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "AWS"],
-    year: "2024",
-    link: "#",
-    image: "/new-projects/medz-2.png"
+    title: "Data Engineering & Analytics",
+    category: "Data",
+    description: "Modern data pipelines, data lakes, and real-time analytics platforms for actionable business intelligence.",
+    tech: ["Apache Spark", "Snowflake", "dbt", "Airflow", "Tableau"],
+    link: "/services"
   },
   {
-    title: "TRACK CARR AUTOMOTIVE",
-    category: "Automotive",
-    description: "Fleet management and vehicle tracking solution for automotive businesses with real-time analytics and maintenance alerts.",
-    tech: ["React", "Python", "Django", "Google Maps API"],
-    year: "2024",
-    link: "#",
-    image: "/new-projects/tca.png"
-  },
-  {
-    title: "SkynZo Cosmetics",
-    category: "E-Commerce",
-    description: "Premium cosmetics and skincare e-commerce platform with virtual try-on features and personalized product recommendations.",
-    tech: ["Next.js", "Shopify API", "Tailwind CSS", "Vercel"],
-    year: "2025",
-    link: "#",
-    image: "/new-projects/skynzo.png"
+    title: "Mobile & Cross-Platform",
+    category: "Mobile",
+    description: "Native iOS/Android and cross-platform applications with offline capabilities and seamless user experiences.",
+    tech: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
+    link: "/services"
   }
 ];
 
@@ -204,66 +183,50 @@ export default function TechnologyPage() {
         </div>
       </section>
 
-      {/* Recent Projects */}
+      {/* Technology Solutions */}
       <section className="py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-medium tracking-tighter mb-4">
-              Our Recent <span className="text-muted-foreground/40 italic">Projects</span>
+              Technology <span className="text-muted-foreground/40 italic">Solutions</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Featured work showcasing our technical expertise and innovation
+              Cutting-edge technology capabilities and solutions that drive digital transformation
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recentProjects.map((project, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {techSolutions.map((solution, i) => (
               <div 
                 key={i} 
-                className="group bg-white border border-border hover:border-foreground/20 hover:shadow-[0_2px_20px_rgba(0,0,0,0.04)] transition-all duration-300 relative flex flex-col overflow-hidden"
+                className="group bg-white p-6 sm:p-8 rounded-lg border border-border hover:border-foreground/20 hover:shadow-[0_2px_20px_rgba(0,0,0,0.04)] transition-all duration-300 relative flex flex-col"
               >
                 {/* Accent line */}
-                <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
-                {/* Project Image */}
-                <div className="h-48 bg-muted flex items-center justify-center border-b border-border overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={`${project.title}`}
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                  />
+                {/* Category badge */}
+                <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-semibold mb-3">
+                  {solution.category}
+                </span>
+                
+                <h3 className="text-lg sm:text-xl font-display font-medium mb-3">{solution.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">{solution.description}</p>
+                
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-4 border-t border-border/50 mb-4">
+                  {solution.tech?.map((t, j) => (
+                    <span key={j} className="text-[10px] px-2 py-1 bg-muted text-muted-foreground rounded">
+                      {t}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="p-8 flex flex-col flex-grow">
-                  {/* Year badge */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-primary font-semibold">
-                      {project.category}
-                    </span>
-                    <span className="text-[10px] text-muted-foreground/60">
-                      {project.year}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-display font-medium mb-3">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-grow">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50 mb-6">
-                    {project.tech.map((t, j) => (
-                      <span key={j} className="text-[10px] px-2 py-1 bg-muted text-muted-foreground">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a 
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-[11px] tracking-widest uppercase font-semibold text-foreground hover:text-primary transition-colors"
-                  >
-                    Visit Project
-                    <ArrowRight className="w-3 h-3" />
-                  </a>
-                </div>
+                <a 
+                  href={solution.link}
+                  className="inline-flex items-center gap-2 text-[11px] tracking-widest uppercase font-semibold text-foreground hover:text-primary transition-colors"
+                >
+                  Explore Solution
+                  <ArrowRight className="w-3 h-3" />
+                </a>
               </div>
             ))}
           </div>
