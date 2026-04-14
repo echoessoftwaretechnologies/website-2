@@ -1,4 +1,5 @@
-import { ArrowRight, Users, Target, Award, Globe } from 'lucide-react';
+import { ArrowRight, Users, Target, Award, Globe, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
 import Layout from '../components/Layout';
 import PageHero from '../components/PageHero';
 
@@ -84,6 +85,35 @@ const officeGalleryImages = [
 ];
 
 export default function AboutPage() {
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xjgjkvjv', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        form.reset();
+      } else {
+        setFormStatus('error');
+      }
+    } catch {
+      setFormStatus('error');
+    }
+  };
+
   return (
     <Layout>
       <PageHero
@@ -279,16 +309,152 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Status Indicator */}
-          <div className="mt-16 pt-8 border-t border-border">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-                <span className="text-sm text-muted-foreground">Construction in Progress</span>
-              </div>
-              <p className="text-xs text-muted-foreground/60 tracking-wider uppercase">
-                Est. Completion: Q4 2026
+        </div>
+      </section>
+
+      {/* Feedback Section - Featured */}
+      <section className="py-16 sm:py-20 md:py-32 bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-blue-100 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-blue-100 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
+            {/* Left Content */}
+            <div className="text-left">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tighter mb-4 sm:mb-6">
+                Tell About Your<br className="hidden sm:block" />
+                <span className="text-blue-600">Valuable Feedback</span>
+              </h2>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 sm:mb-8 max-w-lg">
+                Your insights help us grow and serve you better. Share your experience, suggestions, or thoughts about our services. Every feedback matters to us.
               </p>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-6 sm:gap-8">
+                <div className="text-left">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-display font-medium text-foreground">500+</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Feedbacks Received</p>
+                </div>
+                <div className="text-left">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-display font-medium text-foreground">4.9</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Average Rating</p>
+                </div>
+                <div className="text-left">
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-display font-medium text-foreground">98%</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Response Rate</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Feedback Form Card */}
+            <div className="bg-white p-6 sm:p-8 lg:p-12 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl border border-blue-100">
+              <h3 className="text-xl sm:text-2xl font-display font-medium mb-2">Share Your Thoughts</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm mb-6 sm:mb-8">
+                Help us improve by sharing your experience
+              </p>
+
+              {formStatus === 'success' ? (
+                /* Success Message */
+                <div className="text-center py-8 sm:py-12">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                    <CheckCircle className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-display font-medium mb-2 text-foreground">Thank You!</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base mb-6">
+                    Your feedback has been received successfully. We appreciate your time and input.
+                  </p>
+                  <button 
+                    onClick={() => setFormStatus('idle')}
+                    className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-all"
+                  >
+                    Send Another Feedback
+                  </button>
+                </div>
+              ) : (
+                /* Form */
+                <form 
+                  onSubmit={handleSubmit}
+                  className="space-y-4 sm:space-y-6"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Your Name</label>
+                      <input 
+                        type="text" 
+                        name="name"
+                        placeholder="John Doe"
+                        required
+                        disabled={formStatus === 'submitting'}
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Email</label>
+                      <input 
+                        type="email" 
+                        name="email"
+                        placeholder="john@example.com"
+                        required
+                        disabled={formStatus === 'submitting'}
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Feedback Type</label>
+                    <select 
+                      name="feedback_type" 
+                      disabled={formStatus === 'submitting'}
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <option value="General Feedback">General Feedback</option>
+                      <option value="Service Experience">Service Experience</option>
+                      <option value="Product Suggestion">Product Suggestion</option>
+                      <option value="Bug Report">Bug Report</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Your Message</label>
+                    <textarea 
+                      name="message"
+                      rows={3}
+                      placeholder="Tell us what you think..."
+                      required
+                      disabled={formStatus === 'submitting'}
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                  </div>
+
+                  {formStatus === 'error' && (
+                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-600 text-sm">
+                        Something went wrong. Please try again.
+                      </p>
+                    </div>
+                  )}
+
+                  <button 
+                    type="submit"
+                    disabled={formStatus === 'submitting'}
+                    className="w-full py-3 sm:py-4 bg-blue-600 text-white font-semibold tracking-wider uppercase text-xs sm:text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {formStatus === 'submitting' ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Submit Feedback'
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
