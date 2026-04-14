@@ -155,7 +155,7 @@ export default function TechnologyPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {techCategories.map((category, i) => (
-              <div key={i} className="group bg-white border border-border hover:border-primary hover:shadow-lg transition-all duration-300 p-6">
+              <div key={i} className="group bg-white border border-border rounded-lg hover:border-primary hover:shadow-lg transition-all duration-300 p-6">
                 <h3 className="text-xl font-display font-medium mb-2">{category.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{category.description}</p>
                 <div className="flex flex-wrap gap-2">
@@ -190,7 +190,7 @@ export default function TechnologyPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {whyModernStack.map((item, i) => (
-              <div key={i} className="flex gap-4 p-6 bg-white border border-border hover:border-primary transition-all duration-300">
+              <div key={i} className="flex gap-4 p-6 bg-white border border-border rounded-lg hover:border-primary transition-all duration-300">
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
                   <Check className="w-5 h-5 text-white" />
                 </div>
