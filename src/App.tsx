@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
