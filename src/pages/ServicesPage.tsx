@@ -102,7 +102,7 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <div 
                 key={i} 
-                className="group bg-white border border-border hover:border-primary hover:shadow-xl transition-all duration-300 overflow-hidden"
+                className="group bg-white border border-border rounded-lg hover:border-primary hover:shadow-xl transition-all duration-300 overflow-hidden"
               >
                 <div className="relative h-48 overflow-hidden bg-muted">
                   <img 
