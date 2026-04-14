@@ -1,5 +1,5 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { CheckCircle, X, CreditCard, Shield, Clock, ArrowRight } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { CheckCircle, X, CreditCard, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import PageHero from '../components/PageHero';
@@ -124,15 +124,8 @@ const premiumBundles = [
   }
 ];
 
-const trustBadges = [
-  { icon: Shield, text: "Secure Payment" },
-  { icon: Clock, text: "Instant Activation" },
-  { icon: CheckCircle, text: "Money Back Guarantee" }
-];
-
 export default function PremiumBundlesPage() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [selectedBundle, setSelectedBundle] = useState<typeof premiumBundles[0] | null>(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [paymentStep, setPaymentStep] = useState<'details' | 'processing' | 'success'>('details');
@@ -145,6 +138,7 @@ export default function PremiumBundlesPage() {
   const [paymentMethod] = useState<'upi'>('upi');
   const [googleFormClicked, setGoogleFormClicked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -156,6 +150,7 @@ export default function PremiumBundlesPage() {
     setPaymentStep('details');
     setCustomerDetails({ name: '', email: '', phone: '', company: '' });
     setGoogleFormClicked(false);
+    setTermsAccepted(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -233,25 +228,8 @@ export default function PremiumBundlesPage() {
         title="Ready-to-Deploy"
         highlight="Solutions"
         description="Skip the inquiry process and get instant access to our premium bundles. Complete your purchase now and start your project immediately."
-        backgroundImage="/hero-background/5.png"
+        backgroundImage="/hero-background/pb-hero.png"
       />
-
-      {/* Trust Badges */}
-      <section className="py-8 bg-white border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12">
-            {trustBadges.map((badge, i) => {
-              const Icon = badge.icon;
-              return (
-                <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Icon className="w-5 h-5 text-primary" />
-                  <span>{badge.text}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* Content Creation Bundles */}
       <section className="py-16 md:py-24 bg-white">
@@ -274,7 +252,7 @@ export default function PremiumBundlesPage() {
               .map((bundle, i) => (
                 <div 
                   key={i} 
-                  className={`relative bg-white border-2 ${
+                  className={`relative bg-white border-2 rounded-lg ${
                     bundle.tag === 'Most Popular' ? 'border-primary' : 'border-border'
                   } p-6 sm:p-8 flex flex-col`}
                 >
@@ -319,7 +297,7 @@ export default function PremiumBundlesPage() {
 
                   <button
                     onClick={() => handleGetStarted(bundle)}
-                    className="w-full py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full py-2.5 bg-foreground text-background text-[11px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-1.5"
                   >
                     <CreditCard className="w-4 h-4" />
                     Buy Now
@@ -351,7 +329,7 @@ export default function PremiumBundlesPage() {
               .map((bundle, i) => (
                 <div 
                   key={i} 
-                  className={`relative bg-white border-2 ${
+                  className={`relative bg-white border-2 rounded-lg ${
                     bundle.tag === 'Most Popular' ? 'border-primary' : 'border-border'
                   } p-6 sm:p-8 flex flex-col`}
                 >
@@ -396,7 +374,7 @@ export default function PremiumBundlesPage() {
 
                   <button
                     onClick={() => handleGetStarted(bundle)}
-                    className="w-full py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full py-2.5 bg-foreground text-background text-[11px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-1.5"
                   >
                     <CreditCard className="w-4 h-4" />
                     Buy Now
@@ -448,7 +426,7 @@ export default function PremiumBundlesPage() {
           </p>
           <Link 
             to="/contact" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background text-[11px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
           >
             Contact Sales
             <ArrowRight className="w-4 h-4" />
@@ -459,15 +437,15 @@ export default function PremiumBundlesPage() {
       {/* Payment Modal */}
       {isPaymentModalOpen && selectedBundle && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto">
+          <div className="bg-white w-full max-w-lg max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-lg sm:rounded-xl">
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white border-b border-border p-4 sm:p-6 flex items-center justify-between z-10">
+            <div className="sticky top-0 bg-white border-b border-border p-3 sm:p-4 lg:p-6 flex items-center justify-between z-10 rounded-t-lg sm:rounded-t-xl">
               <div>
-                <h3 className="text-lg sm:text-xl font-display font-medium">
+                <h3 className="text-base sm:text-lg lg:text-xl font-display font-medium">
                   {paymentStep === 'success' ? 'Order Confirmed' : 'Complete Your Purchase'}
                 </h3>
                 {paymentStep !== 'success' && (
-                  <p className="text-sm text-muted-foreground">{selectedBundle.title}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground truncate max-w-[200px] sm:max-w-none">{selectedBundle.title}</p>
                 )}
               </div>
               <button 
@@ -479,17 +457,17 @@ export default function PremiumBundlesPage() {
             </div>
 
             {/* Modal Content */}
-            <div className="p-4 sm:p-6">
+            <div className="p-3 sm:p-4 lg:p-6">
               {paymentStep === 'details' && (
-                <form onSubmit={handleConfirmOrder} className="space-y-4">
+                <form onSubmit={handleConfirmOrder} className="space-y-3 sm:space-y-4">
                   {/* Bundle Summary */}
-                  <div className="bg-muted p-4 mb-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <p className="font-medium">{selectedBundle.title}</p>
-                        <p className="text-sm text-muted-foreground">{selectedBundle.category}</p>
+                  <div className="bg-muted p-3 sm:p-4 mb-4 sm:mb-6 rounded-lg">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                      <div className="flex-1">
+                        <p className="font-medium text-sm sm:text-base">{selectedBundle.title}</p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{selectedBundle.category}</p>
                       </div>
-                      <p className="text-lg font-display font-medium">{formatPrice(selectedBundle.dealPrice)}</p>
+                      <p className="text-base sm:text-lg font-display font-medium whitespace-nowrap">{formatPrice(selectedBundle.dealPrice)}</p>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Original Price</span>
@@ -566,22 +544,22 @@ export default function PremiumBundlesPage() {
                   </div>
 
                   {/* UPI Scanner */}
-                    <div className="mt-4 p-4 bg-muted rounded-lg">
-                      <p className="text-sm font-medium mb-3 text-center">Scan to Pay {formatPrice(selectedBundle.dealPrice)}</p>
-                      <div className="bg-white p-3 rounded-lg max-w-[200px] mx-auto">
+                    <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-muted rounded-lg">
+                      <p className="text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-center">Scan to Pay {formatPrice(selectedBundle.dealPrice)}</p>
+                      <div className="bg-white p-2 sm:p-3 rounded-lg max-w-[160px] sm:max-w-[200px] mx-auto">
                         <img 
                           src="/upi.jpeg" 
                           alt="UPI Payment QR Code" 
                           className="w-full h-auto"
                         />
                       </div>
-                      <p className="text-xs text-muted-foreground mt-3 text-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3 text-center">
                         Open any UPI app and scan this QR code to complete payment
                       </p>
                     </div>
                   {/* Screenshot Upload */}
-                  <div className="mt-4">
-                    <label className="block text-xs tracking-widest uppercase font-semibold mb-2">
+                  <div className="mt-3 sm:mt-4">
+                    <label className="block text-[10px] sm:text-xs tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                       Attach Payment Screenshot * {googleFormClicked && <span className="text-green-600">✓ Completed</span>}
                     </label>
                     <button
@@ -590,7 +568,7 @@ export default function PremiumBundlesPage() {
                         setGoogleFormClicked(true);
                         window.open('https://forms.gle/55j862UY8k6m5UpbA', '_blank');
                       }}
-                      className={`w-full block px-4 py-3 border text-sm text-center transition-colors ${
+                      className={`w-full block px-3 sm:px-4 py-2 border text-[11px] sm:text-xs text-center transition-colors rounded ${
                         googleFormClicked 
                           ? 'bg-green-600 text-white border-green-600' 
                           : 'bg-primary text-white border-border hover:bg-primary/90'
@@ -598,23 +576,40 @@ export default function PremiumBundlesPage() {
                     >
                       {googleFormClicked ? '✓ Screenshot Submitted - Click to Reopen' : 'Upload Screenshot on Google Form'}
                     </button>
-                    <p className="text-xs text-muted-foreground mt-2">
+                    <p className="text-[10px] sm:text-xs text-muted-foreground mt-1.5 sm:mt-2">
                       {googleFormClicked 
                         ? 'Thank you! You can click above to reopen if needed.' 
                         : 'Click to open Google Form and upload your payment screenshot'}
                     </p>
                   </div>
 
+                  {/* Terms Checkbox */}
+                  <div className="flex items-start gap-2 mb-4">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      checked={termsAccepted}
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                      className="mt-0.5 w-4 h-4 border border-border rounded cursor-pointer"
+                    />
+                    <label htmlFor="terms" className="text-[11px] sm:text-xs text-muted-foreground cursor-pointer">
+                      I agree to the{' '}
+                      <Link to="/terms" target="_blank" className="text-primary hover:underline">Terms of Service</Link>
+                      {' '}and{' '}
+                      <Link to="/privacy" target="_blank" className="text-primary hover:underline">Privacy Policy</Link>
+                    </label>
+                  </div>
+
                   {/* Total */}
-                  <div className="border-t border-border pt-4 mt-6">
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-lg font-medium">Total Amount</span>
-                      <span className="text-2xl font-display font-medium">{formatPrice(selectedBundle.dealPrice)}</span>
+                  <div className="border-t border-border pt-3 sm:pt-4 mt-4 sm:mt-6">
+                    <div className="flex justify-between items-center mb-3 sm:mb-4">
+                      <span className="text-sm sm:text-lg font-medium">Total Amount</span>
+                      <span className="text-xl sm:text-2xl font-display font-medium">{formatPrice(selectedBundle.dealPrice)}</span>
                     </div>
                     <button
                       type="submit"
-                      disabled={submitting || !googleFormClicked}
-                      className="w-full py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={submitting || !googleFormClicked || !termsAccepted}
+                      className="w-full py-2 bg-foreground text-background text-[11px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed rounded"
                     >
                       {submitting ? (
                         <>
@@ -637,19 +632,19 @@ export default function PremiumBundlesPage() {
               )}
 
               {paymentStep === 'processing' && (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-                  <h3 className="text-xl font-display font-medium mb-2">Submitting Order...</h3>
-                  <p className="text-muted-foreground">Please do not close this window</p>
+                <div className="text-center py-8 sm:py-12">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-3 sm:mb-4" />
+                  <h3 className="text-lg sm:text-xl font-display font-medium mb-2">Submitting Order...</h3>
+                  <p className="text-xs sm:text-base text-muted-foreground">Please do not close this window</p>
                 </div>
               )}
 
               {paymentStep === 'success' && (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-600" />
+                <div className="text-center py-6 sm:py-8">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-display font-medium mb-2">Payment Successful!</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-display font-medium mb-2">Payment Successful!</h3>
                   <p className="text-muted-foreground mb-6">
                     Thank you for your purchase. A confirmation email has been sent to {customerDetails.email}
                   </p>
@@ -660,19 +655,15 @@ export default function PremiumBundlesPage() {
                     <p className="text-lg font-display font-medium mt-1">{formatPrice(selectedBundle.dealPrice)}</p>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <button
-                      onClick={() => navigate('/contact')}
-                      className="flex-1 py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
+                  <div className="flex justify-center">
+                    <a
+                      href="https://wa.me/918148549511?text=Hi!%20I%20have%20just%20completed%20my%20payment%20on%20your%20website.%20Please%20verify%20and%20confirm%20my%20order."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-5 bg-green-600 text-white text-[11px] tracking-widest font-semibold hover:bg-green-700 transition-all duration-300 rounded"
                     >
-                      Contact Support
-                    </button>
-                    <button
-                      onClick={closeModal}
-                      className="flex-1 py-3 border border-foreground text-sm tracking-widest uppercase font-semibold hover:bg-muted transition-all duration-300"
-                    >
-                      Close
-                    </button>
+                      Contact us on whatsapp
+                    </a>
                   </div>
                 </div>
               )}
