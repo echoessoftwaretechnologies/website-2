@@ -68,6 +68,17 @@ export default function TermsPage() {
                 </Link>
               .
             </p>
+
+            {/* Founder Signature */}
+            <div className="mt-12 pt-8 border-t border-border">
+              <p className="text-sm text-muted-foreground mb-4">Sincerely,</p>
+              <img 
+                src="/founder_signature.png" 
+                alt="Founder Signature" 
+                className="h-16 w-auto object-contain"
+              />
+              <p className="text-sm font-medium text-foreground mt-2">Founder, Echoes Software Technologies</p>
+            </div>
           </div>
         </div>
       </section>
