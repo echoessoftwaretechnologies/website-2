@@ -9,7 +9,7 @@ export default function TermsPage() {
         label="Legal"
         title="Terms of Service"
         description="Last updated: April 1, 2026"
-        backgroundImage="/hero-background/5.png"
+        backgroundImage="/hero-background/4.png"
       />
 
       <section className="py-16 md:py-24 bg-white">
