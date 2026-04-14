@@ -31,11 +31,11 @@ import NotificationManager from './pages/workspace/notifications/NotificationMan
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = localStorage.getItem('workspace_auth') === 'true';
   const location = useLocation();
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
+
   return <>{children}</>;
 }
 
@@ -81,7 +81,7 @@ function AppContent() {
         <Route path="/exclusive-deals" element={<ExclusiveDealsPage />} />
         <Route path="/premium-bundles" element={<PremiumBundlesPage />} />
         <Route path="/login" element={<LoginPage />} />
-        
+
         {/* Protected Workspace Routes */}
         <Route path="/workspace" element={<ProtectedRoute><OverviewPage /></ProtectedRoute>} />
         <Route path="/workspace/projects" element={<ProtectedRoute><ProjectsPage /></ProtectedRoute>} />
@@ -96,9 +96,9 @@ function AppContent() {
       </Routes>
 
       {/* Image Popup - Shows immediately and every 5 minutes on all pages */}
-      <ImagePopup 
-        images={['/3.png', '/21.png', '/1.png']} 
-        intervalMinutes={5} 
+      <ImagePopup
+        images={['/3.png', '/21.png', '/1.png']}
+        intervalMinutes={5}
       />
     </>
   );
