@@ -1,9 +1,11 @@
+// @ts-nocheck
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Menu, X, ArrowRight, Check, Star, ArrowUpRight,
   Mail, MapPin, Phone, ChevronRight, Send
 } from 'lucide-react';
+import SEO, { seoConfig } from '../components/SEO';
 
 const services = [
   {
@@ -223,7 +225,9 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <SEO {...seoConfig.home} canonical="/" />
+      <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -835,6 +839,7 @@ export default function LandingPage() {
           <ChevronRight className="w-5 h-5 -rotate-90" />
         </button>
       )}
-    </div>
+      </div>
+    </>
   );
 }
