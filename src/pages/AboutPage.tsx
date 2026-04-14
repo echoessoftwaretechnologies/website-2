@@ -50,6 +50,39 @@ const team = [
   }
 ];
 
+// Office Gallery Images - all from public/office-gallery
+const officeGalleryImages = [
+  { src: "/office-gallery/0584590650.png", title: "Interior Plan" },
+  { src: "/office-gallery/1.png", title: "Interior Plan" },
+  { src: "/office-gallery/12.png", title: "Interior Plan" },
+  { src: "/office-gallery/14.png", title: "Interior Plan" },
+  { src: "/office-gallery/15.png", title: "Interior Plan" },
+  { src: "/office-gallery/16.png", title: "Interior Plan" },
+  { src: "/office-gallery/161.png", title: "Exterior Plan" },
+  { src: "/office-gallery/2.png", title: "Interior Plan" },
+  { src: "/office-gallery/2026-echoes-mockup1.png", title: "Interior Plan" },
+  { src: "/office-gallery/2026-mockup1-echoes.png", title: "Interior Plan" },
+  { src: "/office-gallery/202608048.png", title: "Interior Plan" },
+  { src: "/office-gallery/202684.png", title: "Interior Plan" },
+  { src: "/office-gallery/21.png", title: "Interior Plan" },
+  { src: "/office-gallery/212.png", title: "Interior Plan" },
+  { src: "/office-gallery/22.png", title: "Interior Plan" },
+  { src: "/office-gallery/23.png", title: "Interior Plan" },
+  { src: "/office-gallery/24.png", title: "Interior Plan" },
+  { src: "/office-gallery/3.png", title: "Interior Plan" },
+  { src: "/office-gallery/4.png", title: "Interior Plan" },
+  { src: "/office-gallery/41.png", title: "Interior Plan" },
+  { src: "/office-gallery/5.png", title: "Interior Plan" },
+  { src: "/office-gallery/61.png", title: "Interior Plan" },
+  { src: "/office-gallery/612.png", title: "Interior Plan" },
+  { src: "/office-gallery/613.png", title: "Interior Plan" },
+  { src: "/office-gallery/8046.png", title: "Interior Plan" },
+  { src: "/office-gallery/81.png", title: "Interior Plan" },
+  { src: "/office-gallery/echoes-2026-mockup.png", title: "Interior Plan" },
+  { src: "/office-gallery/echoes2026-mockup.png", title: "Interior Plan" },
+  { src: "/office-gallery/echoes212.png", title: "Interior Plan" }
+];
+
 export default function AboutPage() {
   return (
     <Layout>
@@ -206,6 +239,57 @@ export default function AboutPage() {
                 <p className="text-muted-foreground leading-relaxed">{member.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Office Construction - Architecture Gallery */}
+      <section className="py-24 md:py-40 bg-white border-y border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header - Minimalist */}
+          <div className="max-w-2xl mb-16 md:mb-24">
+            <span className="text-[11px] md:text-[12px] tracking-[0.3em] font-semibold uppercase text-primary">
+              Growth
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-medium tracking-tighter mt-6">
+              Our New Office<br /><span className="text-muted-foreground/40 italic">Coming Soon</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mt-6">
+              Construction in progress. A space designed for innovation, collaboration, and the future of technology.
+            </p>
+          </div>
+
+          {/* Architecture Gallery - Minimalist Masonry Grid */}
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6">
+            {officeGalleryImages.map((image, i) => (
+              <div key={i} className="break-inside-avoid group">
+                <div className="relative bg-muted overflow-hidden">
+                  <img 
+                    src={image.src} 
+                    alt={image.title}
+                    className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-white text-sm font-medium">{image.title}</p>
+                    <p className="text-white/70 text-xs mt-1">{i + 1} / {officeGalleryImages.length}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Status Indicator */}
+          <div className="mt-16 pt-8 border-t border-border">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
+                <span className="text-sm text-muted-foreground">Construction in Progress</span>
+              </div>
+              <p className="text-xs text-muted-foreground/60 tracking-wider uppercase">
+                Est. Completion: Q4 2026
+              </p>
+            </div>
           </div>
         </div>
       </section>
