@@ -80,7 +80,7 @@ export default function SitemapPage() {
               <Link
                 key={i}
                 to={link.path}
-                className="group p-6 bg-muted hover:bg-foreground hover:text-background transition-all duration-300"
+                className="group p-6 bg-muted rounded-lg hover:bg-foreground hover:text-background transition-all duration-300"
               >
                 <p className="font-medium text-sm mb-1">{link.label}</p>
                 <p className="text-xs text-muted-foreground group-hover:text-background/70">{link.desc}</p>
@@ -102,7 +102,7 @@ export default function SitemapPage() {
               <Link
                 key={i}
                 to={link.path}
-                className="group flex items-center justify-between px-4 py-3 bg-white border border-border hover:border-primary hover:shadow-sm transition-all duration-300"
+                className="group flex items-center justify-between px-4 py-3 bg-white border border-border rounded hover:border-primary hover:shadow-sm transition-all duration-300"
               >
                 <span className="text-sm">{link.label}</span>
                 <ArrowRight className="w-3 h-3 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -123,7 +123,7 @@ export default function SitemapPage() {
               <Link
                 key={i}
                 to={link.path}
-                className="group flex items-center gap-2 px-6 py-3 border border-border hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
+                className="group flex items-center gap-2 px-6 py-3 border border-border rounded hover:border-primary hover:bg-primary hover:text-white transition-all duration-300"
               >
                 <span className="text-sm font-medium">{link.label}</span>
               </Link>
