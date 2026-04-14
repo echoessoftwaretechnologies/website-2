@@ -209,7 +209,7 @@ export default function ContactPage() {
             {contactInfo.map((info, i) => {
               const Icon = info.icon;
               return (
-                <div key={i} className="bg-muted p-6 border border-border hover:border-primary transition-colors duration-300">
+                <div key={i} className="bg-muted p-6 border border-border rounded-lg hover:border-primary transition-colors duration-300">
                   <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-primary" />
                   </div>
@@ -228,7 +228,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
             {/* Contact Form */}
-            <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-10 border border-border">
+            <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-border">
               {submitted ? (
                 <div className="text-center py-8 sm:py-10 md:py-12">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
@@ -336,7 +336,7 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full px-4 sm:px-6 py-3 sm:py-3.5 bg-foreground text-background text-xs sm:text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full py-2.5 bg-foreground text-background text-[11px] tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed rounded"
                     >
                       {submitting ? (
                         <>
@@ -364,7 +364,7 @@ export default function ContactPage() {
               
               <div className="space-y-4">
                 {faqs.map((faq, i) => (
-                  <div key={i} className="bg-white border border-border">
+                  <div key={i} className="bg-white border border-border rounded-lg overflow-hidden">
                     <button
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
                       className="w-full px-6 py-4 text-left flex items-center justify-between"
