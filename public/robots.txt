@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://echoess.in/sitemap.xml
+
+# Crawl rate optimization
+Crawl-delay: 1
+
+# Block specific paths if needed (uncomment if required)
+# Disallow: /admin/
+# Disallow: /workspace/
+# Disallow: /login
+
+# Allow search engines to index everything else
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Optimize for image search
+User-agent: Googlebot-Image
+Allow: /
+
+# Optimize for mobile search
+User-agent: Googlebot-Mobile
+Allow: /
