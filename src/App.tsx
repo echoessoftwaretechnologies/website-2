@@ -11,6 +11,7 @@ import TermsPage from './pages/TermsPage';
 import AcceptanceModal from './components/AcceptanceModal';
 import LoginPage from './pages/LoginPage';
 import ImagePopup from './components/ImagePopup';
+import Preloader from './components/Preloader';
 
 import SitemapPage from './pages/SitemapPage';
 import ExclusiveDealsPage from './pages/ExclusiveDealsPage';
@@ -60,6 +61,9 @@ function AppContent() {
 
   return (
     <>
+      {/* Preloader - shows on page load and route changes */}
+      <Preloader />
+
       {showModal && !isPolicyPage && (
         <AcceptanceModal onAccept={handleAccept} onReject={handleReject} />
       )}
