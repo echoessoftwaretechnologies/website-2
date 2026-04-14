@@ -100,6 +100,17 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  // Franchise form state
+  const [franchiseFormData, setFranchiseFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    message: ''
+  });
+  const [franchiseSubmitted, setFranchiseSubmitted] = useState(false);
+  const [franchiseSubmitting, setFranchiseSubmitting] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -138,6 +149,46 @@ export default function ContactPage() {
       alert('Failed to send message. Please check your connection and try again.');
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleFranchiseSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFranchiseSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xojyvvjl', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: franchiseFormData.name,
+          email: franchiseFormData.email,
+          phone: franchiseFormData.phone,
+          city: franchiseFormData.city,
+          message: franchiseFormData.message,
+          form_type: 'franchise_inquiry'
+        })
+      });
+      
+      if (response.ok) {
+        setFranchiseSubmitted(true);
+        setFranchiseFormData({
+          name: '',
+          email: '',
+          phone: '',
+          city: '',
+          message: ''
+        });
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Failed to send inquiry. Please check your connection and try again.');
+    } finally {
+      setFranchiseSubmitting(false);
     }
   };
 
@@ -372,6 +423,180 @@ export default function ContactPage() {
               referrerPolicy="no-referrer-when-downgrade"
               title="Office Location"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Franchise Section */}
+      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+        {/* Background Pattern - Mobile Optimized */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-100 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-100 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-start">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-blue-600">
+                Business Opportunity
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-medium tracking-tighter mt-4 mb-4 md:mb-6">
+                Franchise<br className="hidden sm:block" />
+                <span className="text-blue-600">Available</span>
+              </h2>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
+                Join our growing network and become a part of Echoes Software Technologies. Partner with us to bring innovative technology solutions to your region.
+              </p>
+
+              {/* Franchise Benefits */}
+              <div className="space-y-3 sm:space-y-4 text-left">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  </div>
+                  <p className="text-sm sm:text-base font-medium pt-1.5">Established Brand Recognition</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  </div>
+                  <p className="text-sm sm:text-base font-medium pt-1.5">Comprehensive Training & Support</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  </div>
+                  <p className="text-sm sm:text-base font-medium pt-1.5">Marketing & Lead Generation Assistance</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+                  </div>
+                  <p className="text-sm sm:text-base font-medium pt-1.5">Exclusive Territory Rights</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Franchise Form Card */}
+            <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-10 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-blue-100">
+              {franchiseSubmitted ? (
+                /* Success Message */
+                <div className="text-center py-8 sm:py-10">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
+                    <Check className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-display font-medium mb-2 text-foreground">Thank You!</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base mb-5 sm:mb-6">
+                    Your franchise inquiry has been received. Our team will contact you within 24 hours.
+                  </p>
+                  <button 
+                    onClick={() => setFranchiseSubmitted(false)}
+                    className="px-5 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-all"
+                  >
+                    Send Another Inquiry
+                  </button>
+                </div>
+              ) : (
+                /* Form */
+                <>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-display font-medium mb-2">Get in Touch for Franchise Inquiry</h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm mb-5 sm:mb-6 md:mb-8">
+                    Fill out the form below and our franchise team will contact you shortly.
+                  </p>
+
+                  <form 
+                    onSubmit={handleFranchiseSubmit}
+                    className="space-y-4 sm:space-y-5"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div>
+                        <label className="block text-xs font-medium mb-1.5">Full Name</label>
+                        <input 
+                          type="text" 
+                          value={franchiseFormData.name}
+                          onChange={(e) => setFranchiseFormData({...franchiseFormData, name: e.target.value})}
+                          placeholder="John Doe"
+                          required
+                          disabled={franchiseSubmitting}
+                          className="w-full px-3 py-2.5 text-sm border border-border rounded-md sm:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium mb-1.5">Email</label>
+                        <input 
+                          type="email" 
+                          value={franchiseFormData.email}
+                          onChange={(e) => setFranchiseFormData({...franchiseFormData, email: e.target.value})}
+                          placeholder="john@example.com"
+                          required
+                          disabled={franchiseSubmitting}
+                          className="w-full px-3 py-2.5 text-sm border border-border rounded-md sm:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div>
+                        <label className="block text-xs font-medium mb-1.5">Phone Number</label>
+                        <input 
+                          type="tel" 
+                          value={franchiseFormData.phone}
+                          onChange={(e) => setFranchiseFormData({...franchiseFormData, phone: e.target.value})}
+                          placeholder="+91 98765 43210"
+                          required
+                          disabled={franchiseSubmitting}
+                          className="w-full px-3 py-2.5 text-sm border border-border rounded-md sm:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium mb-1.5">City/Region</label>
+                        <input 
+                          type="text" 
+                          value={franchiseFormData.city}
+                          onChange={(e) => setFranchiseFormData({...franchiseFormData, city: e.target.value})}
+                          placeholder="Your city"
+                          required
+                          disabled={franchiseSubmitting}
+                          className="w-full px-3 py-2.5 text-sm border border-border rounded-md sm:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium mb-1.5">Your Message</label>
+                      <textarea 
+                        value={franchiseFormData.message}
+                        onChange={(e) => setFranchiseFormData({...franchiseFormData, message: e.target.value})}
+                        rows={3}
+                        placeholder="Tell us about your business experience and why you're interested..."
+                        disabled={franchiseSubmitting}
+                        className="w-full px-3 py-2.5 text-sm border border-border rounded-md sm:rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </div>
+
+                    <button 
+                      type="submit"
+                      disabled={franchiseSubmitting}
+                      className="w-full py-3 sm:py-3.5 md:py-4 bg-blue-600 text-white font-semibold tracking-wider uppercase text-xs rounded-md sm:rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-md sm:shadow-lg shadow-blue-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {franchiseSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Submit Inquiry
+                          <Send className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </section>
