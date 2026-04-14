@@ -283,7 +283,7 @@ export default function ExclusiveDealsPage() {
               {contentPackages.map((deal, index) => (
                 <div 
                   key={index} 
-                  className="group relative bg-white border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
+                  className="group relative bg-white border border-border rounded-lg hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
                 >
                   {/* Tag Badge */}
                   <div className="absolute -top-3 left-6">
@@ -356,7 +356,7 @@ export default function ExclusiveDealsPage() {
               {businessBundles.map((deal, index) => (
                 <div 
                   key={index} 
-                  className="group relative bg-white border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
+                  className="group relative bg-white border border-border rounded-lg hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5"
                 >
                   {/* Tag Badge */}
                   <div className="absolute -top-3 left-6">
@@ -424,7 +424,7 @@ export default function ExclusiveDealsPage() {
               {addOns.map((addon, index) => (
                 <div 
                   key={index} 
-                  className="p-3 md:p-4 bg-muted border border-border hover:border-primary transition-all duration-300"
+                  className="p-3 md:p-4 bg-muted border border-border rounded hover:border-primary transition-all duration-300"
                 >
                   <h4 className="font-medium text-xs md:text-sm mb-1 md:mb-2 leading-tight">{addon.title}</h4>
                   <div className="flex items-baseline gap-1 md:gap-2 flex-wrap">
