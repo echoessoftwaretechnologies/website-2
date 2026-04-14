@@ -224,32 +224,32 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form & FAQ */}
-      <section className="py-24 md:py-32 bg-muted">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
             {/* Contact Form */}
-            <div className="bg-white p-8 md:p-12 border border-border">
+            <div className="bg-white p-5 sm:p-6 md:p-8 lg:p-10 border border-border">
               {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-8 h-8 text-green-600" />
+                <div className="text-center py-8 sm:py-10 md:py-12">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <Check className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-display font-medium mb-2">Message Sent!</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-xl sm:text-2xl font-display font-medium mb-2">Message Sent!</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base">
                     Thank you for reaching out. We'll get back to you within 24 hours.
                   </p>
                 </div>
               ) : (
                 <>
-                  <h2 className="text-2xl font-display font-medium mb-2">Send us a Message</h2>
-                  <p className="text-muted-foreground mb-8">
+                  <h2 className="text-xl sm:text-2xl font-display font-medium mb-2">Send us a Message</h2>
+                  <p className="text-muted-foreground text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
                     Fill out the form below and we'll get back to you shortly.
                   </p>
                   
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                       <div>
-                        <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                           Name *
                         </label>
                         <input
@@ -257,12 +257,12 @@ export default function ContactPage() {
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
                           placeholder="Your name"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                           Email *
                         </label>
                         <input
@@ -270,34 +270,34 @@ export default function ContactPage() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
                           placeholder="your@email.com"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                      <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                         Company
                       </label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({...formData, company: e.target.value})}
-                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
                         placeholder="Your company"
                       />
                     </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                       <div>
-                        <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                           Service Interest
                         </label>
                         <select 
                           value={formData.service}
                           onChange={(e) => setFormData({...formData, service: e.target.value})}
-                          className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
                         >
                           <option value="">Select a service</option>
                           {services.map((service, i) => (
@@ -306,29 +306,29 @@ export default function ContactPage() {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                        <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                           Phone Number
                         </label>
                         <input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                          className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
+                          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors"
                           placeholder="+91 98765 43210"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-[11px] tracking-widest uppercase font-semibold mb-2">
+                      <label className="block text-[10px] sm:text-[11px] tracking-widest uppercase font-semibold mb-1.5 sm:mb-2">
                         Project Details *
                       </label>
                       <textarea
-                        rows={5}
+                        rows={4}
                         required
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-border bg-white text-sm focus:outline-none focus:border-primary transition-colors resize-none"
                         placeholder="Tell us about your project..."
                       />
                     </div>
@@ -336,10 +336,19 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full px-6 py-3 bg-foreground text-background text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-3.5 bg-foreground text-background text-xs sm:text-sm tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {submitting ? 'Sending...' : 'Send Message'}
-                      <Send className="w-4 h-4" />
+                      {submitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <Send className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   </form>
                 </>
