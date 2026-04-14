@@ -15,6 +15,7 @@ import Preloader from './components/Preloader';
 
 import SitemapPage from './pages/SitemapPage';
 import ExclusiveDealsPage from './pages/ExclusiveDealsPage';
+import PremiumBundlesPage from './pages/PremiumBundlesPage';
 import OverviewPage from './pages/workspace/overview/OverviewPage';
 import ProjectsPage from './pages/workspace/projects/ProjectsPage';
 import TeamPage from './pages/workspace/team/TeamPage';
@@ -78,6 +79,7 @@ function AppContent() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/sitemap" element={<SitemapPage />} />
         <Route path="/exclusive-deals" element={<ExclusiveDealsPage />} />
+        <Route path="/premium-bundles" element={<PremiumBundlesPage />} />
         <Route path="/login" element={<LoginPage />} />
         
         {/* Protected Workspace Routes */}
