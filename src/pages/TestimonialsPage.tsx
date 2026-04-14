@@ -124,7 +124,7 @@ export default function TestimonialsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="bg-muted p-8 border border-border hover:border-primary hover:shadow-lg transition-all duration-300">
+              <div key={i} className="bg-muted p-8 border border-border rounded-lg hover:border-primary hover:shadow-lg transition-all duration-300">
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, j) => (
                     <Star key={j} className="w-5 h-5 fill-primary text-primary" />
