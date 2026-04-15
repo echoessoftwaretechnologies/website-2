@@ -235,42 +235,10 @@ export default function ExclusiveDealsPage() {
           backgroundImage="/hero-background/3.png"
         />
 
-        {/* Don't Miss It - Minimalist Section */}
-        <section className="py-12 md:py-20 bg-white border-y border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-              {/* Left: Text Content */}
-              <div className="flex-1 text-center md:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-['Space_Grotesk'] font-bold tracking-tight mb-3">
-                  <span className="text-primary">Don't</span> Miss It
-                </h2>
-                <p className="text-muted-foreground text-sm md:text-base max-w-md mx-auto md:mx-0">
-                  Limited time exclusive deals. Get your custom quote before the timer expires.
-                </p>
-              </div>
-
-              {/* Right: Value Propositions */}
-              <div className="flex flex-col items-center md:items-end gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-medium text-primary">24/7</div>
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-[10px] font-medium text-green-600">100%</div>
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-medium text-blue-600">FREE</div>
-                  </div>
-                </div>
-                <div className="text-center md:text-right">
-                  <div className="text-lg sm:text-xl font-medium text-foreground">Free Consultation</div>
-                  <div className="text-xs text-muted-foreground">24/7 Support • Lifetime Upgrades • No Hidden Fees</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Content Creation Packages */}
         <section className="py-20 md:py-28 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-16">
+            <div className="mb-16 text-center">
               <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary mb-4 block">
                 Content Services
               </span>
@@ -343,7 +311,7 @@ export default function ExclusiveDealsPage() {
         {/* Business Bundles */}
         <section className="py-20 md:py-28 bg-muted border-y border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-16">
+            <div className="mb-16 text-center">
               <span className="text-[11px] tracking-[0.3em] font-semibold uppercase text-primary mb-4 block">
                 Business Solutions
               </span>
@@ -515,22 +483,38 @@ export default function ExclusiveDealsPage() {
             </div>
 
             {/* Request Quote Section */}
-            <div className="mt-8 md:mt-12 p-4 md:p-6 bg-background border border-border text-center">
-              <h3 className="text-lg md:text-xl font-display font-medium mb-2 text-foreground">
-                Request Custom Pricing
-              </h3>
-              <p className="text-muted-foreground text-xs md:text-sm mb-4 max-w-lg mx-auto">
-                {selectedServices.length > 0 
-                  ? `You have selected ${selectedServices.length} service(s). Fill out the form to get your custom quote.`
-                  : 'Select your desired services above and click below to send us your requirements. We will get back to you with a personalized quote within 24 hours.'
-                }
-              </p>
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-foreground text-background text-xs tracking-widest uppercase font-semibold hover:bg-primary transition-all duration-300"
-              >
-                Request Pricing
-              </button>
+            <div className="mt-8 md:mt-12 p-4 sm:p-6 bg-background border border-border rounded-lg">
+              <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6">
+                {/* Left: Request Custom Pricing */}
+                <div className="text-center md:text-left w-full md:w-auto">
+                  <h3 className="text-lg md:text-xl font-display font-medium mb-2 text-foreground">
+                    Request Custom Pricing
+                  </h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm mb-4 max-w-md mx-auto md:mx-0">
+                    {selectedServices.length > 0 
+                      ? `You have selected ${selectedServices.length} service(s). Fill out the form to get your custom quote.`
+                      : 'Select your desired services above and click below to send us your requirements. We will get back to you with a personalized quote within 24 hours.'
+                    }
+                  </p>
+                  <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-foreground text-background text-[11px] font-semibold hover:bg-primary transition-all duration-300 w-full sm:w-auto rounded"
+                  >
+                    Request Pricing
+                  </button>
+                </div>
+                
+                {/* Right: Value Propositions */}
+                <div className="text-center md:text-right w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-border">
+                  <div className="flex items-center justify-center md:justify-end gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-medium text-primary">24/7</div>
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-[10px] font-medium text-green-600">100%</div>
+                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-medium text-blue-600">FREE</div>
+                  </div>
+                  <div className="text-base sm:text-lg md:text-xl font-medium text-foreground">Free Consultation</div>
+                  <div className="text-xs text-muted-foreground">24/7 Support • Lifetime Upgrades • No Hidden Fees</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
