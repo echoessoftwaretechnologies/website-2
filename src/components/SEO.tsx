@@ -90,42 +90,42 @@ export const seoConfig = {
   home: {
     title: 'Custom Software Development & Digital Solutions',
     description: 'Leading software development company in Karur, Tamil Nadu. We build custom software, mobile apps, cloud solutions, and AI-powered applications. Get enterprise-grade technology solutions for your business.',
-    keywords: 'software development, custom software, mobile app development, cloud solutions, AI development, web development, Karur, Tamil Nadu, India, Echoes Software, enterprise software, digital transformation',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   services: {
     title: 'Our Services',
     description: 'Explore our comprehensive software development services including custom software, mobile apps, cloud solutions, AI & machine learning, and digital transformation consulting.',
-    keywords: 'software services, custom development, mobile apps, cloud solutions, AI services, consulting, Karur software company',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   about: {
     title: 'About Us',
     description: 'Learn about Echoes Software Technologies - a leading software development company in Karur, Tamil Nadu. Our mission, vision, and commitment to delivering innovative technology solutions.',
-    keywords: 'about Echoes Software, software company Karur, IT company Tamil Nadu, software development team',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   technology: {
     title: 'Technology Stack',
     description: 'Discover the cutting-edge technologies we use at Echoes Software Technologies. React, Node.js, Python, AWS, AI/ML, and more enterprise-grade technology solutions.',
-    keywords: 'technology stack, React, Node.js, Python, AWS, cloud technologies, AI, machine learning, software technologies',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   testimonials: {
     title: 'Client Testimonials',
     description: 'Read what our clients say about Echoes Software Technologies. Real reviews from businesses who have transformed their operations with our software solutions.',
-    keywords: 'client testimonials, customer reviews, software company reviews, Echoes Software feedback',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   contact: {
     title: 'Contact Us',
     description: 'Get in touch with Echoes Software Technologies. Contact us for custom software development, mobile apps, cloud solutions, and digital transformation services in Karur, Tamil Nadu.',
-    keywords: 'contact Echoes Software, software development inquiry, hire developers Karur, software consultation Tamil Nadu',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   premiumBundles: {
     title: 'Premium Software Bundles',
     description: 'Ready-to-deploy software solutions with instant delivery. Premium bundles for businesses looking for quick, professional technology solutions.',
-    keywords: 'software bundles, ready to deploy software, instant software solutions, premium software packages',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   exclusiveDeals: {
     title: 'Exclusive Deals & Offers',
     description: 'Special offers on software development services. Exclusive deals for startups and businesses looking for affordable technology solutions.',
-    keywords: 'software deals, software offers, affordable software development, startup discounts',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
   privacy: {
     title: 'Privacy Policy',
