@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Send, Check, Upload, Briefcase, MapPin, DollarSign } from 'lucide-react';
 import Layout from '../components/Layout';
 import PageHero from '../components/PageHero';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/SEO';
 
 interface FormData {
   fullName: string;
@@ -151,7 +153,7 @@ export default function CareersPage() {
       console.log("Submitting to Formspree...", { resumeUrl, coverUrl });
 
       // Send to Formspree
-      const response = await fetch("https://formspree.io/f/meevaqqe", {
+      const response = await fetch("https://formspree.io/f/mkokodbw", {
         method: "POST",
         body: form,
         headers: {
@@ -217,6 +219,7 @@ export default function CareersPage() {
 
   return (
     <Layout>
+      <SEO {...seoConfig.careers} canonical="/careers" />
       <div className="min-h-screen bg-white">
         <PageHero
           label="Careers"
