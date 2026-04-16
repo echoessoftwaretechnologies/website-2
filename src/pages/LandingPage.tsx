@@ -291,7 +291,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 md:pt-40 pb-32 md:pb-48 bg-white relative min-h-[100vh] flex flex-col justify-center">
+      <section className="pt-20 md:pt-28 pb-32 md:pb-48 bg-white relative min-h-[100vh] flex flex-col justify-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="space-y-8">
