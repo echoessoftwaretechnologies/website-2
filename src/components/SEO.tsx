@@ -127,6 +127,11 @@ export const seoConfig = {
     description: 'Special offers on software development services. Exclusive deals for startups and businesses looking for affordable technology solutions.',
     keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu',
   },
+  careers: {
+    title: 'Careers - Join Our Team',
+    description: 'Join Echoes Software Technologies. We are hiring Marketing Executive and other positions. Apply now for remote, part-time jobs with commission-based salary. Freshers welcome.',
+    keywords: 'software development, custom software development, custom software, software development software, custom software solution, custom software developer, custom development, software development solutions, custom software development solutions, digital software development, it software development, software creation, software development custom, agile development, software technologies, software programmers, software digital, software development technologies, software it solutions, software coders, computer program, software programers, custom solutions, custom software development near me, about software development, No.1 Software Development Company in Karur Tamil Nadu, careers, jobs, hiring, marketing jobs, remote jobs, part time jobs, software jobs, freshers jobs',
+  },
   privacy: {
     title: 'Privacy Policy',
     description: 'Privacy Policy of Echoes Software Technologies. Learn how we collect, use, and protect your personal information.',
