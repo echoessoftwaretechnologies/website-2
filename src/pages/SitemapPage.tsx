@@ -10,6 +10,7 @@ const mainLinks = [
   { label: "Technology", path: "/technology", desc: "Tech Stack" },
   { label: "Testimonials", path: "/testimonials", desc: "Client Stories" },
   { label: "Exclusive Deals", path: "/exclusive-deals", desc: "Special Pricing" },
+  { label: "Careers", path: "/careers", desc: "View Openings" },
   { label: "Contact", path: "/contact", desc: "Get in Touch" }
 ];
 
